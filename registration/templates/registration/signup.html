@@ -3,26 +3,22 @@
 
 <!--Titulo de la pagina o pestaña-->
 {% block title %}
-	Login
+	SignUp
 {% endblock  %}
 
 
 {% block content %}
 	
-	<h1>Login</h1>
+	<h1>SignUp</h1>
 	
-	<div>
-		<h3>el usuario es: </h3>
-		<p>{{usuario}}</p>
-	</div>
+	<div class="container">
+		<form method="POST"> {% csrf_token %}
 
-	<div>
-		<h3>Lista de datos: </h3>
-		<ul>
-			{% for dato in datos_json %}
-			<li>{{dato}}</li>
-			{% endfor %}
-		</ul>
+			{{form.as_p}}
+
+			<button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Registrar</button>
+
+		</form>
 	</div>
 	
 {% endblock content %}

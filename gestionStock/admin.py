@@ -20,7 +20,7 @@ class MedicamentosAdmin(admin.ModelAdmin):
 
 class LotesAdmin(admin.ModelAdmin):
         #columnas que se muestran
-        list_display=("stock","vencimiento","ingreso")
+        list_display=("medicamento","stock", "ubicacion", "ingreso", "vencimiento", "created", "updated" )
         
         # asi se determinan los filtros que se le pueden aplicar a la derecha de los registros
         list_filter=("vencimiento",)

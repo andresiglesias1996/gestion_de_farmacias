@@ -1,0 +1,68 @@
+<!-- Contenido estatico de la pagina -->
+{% extends 'base.html' %} 
+
+<!--Titulo de la pagina o pestaña-->
+{% block title %}
+	Lista de Usuarios
+{% endblock  %}
+
+
+{% block content %}
+	
+	<h1>Lista de Usuarios</h1>
+	
+	<div>
+		<h3>mi usuario es: </h3>
+		<p>{{request.user}}</p>
+	</div>
+
+	<div class="border p-3">
+
+		<h3>Lista de Usuarios</h3>
+	
+
+		<!-- ==============================-->
+		<!-- Tabla con los Usuarios activos -->
+		<!-- ==============================-->
+		{% if object_list  %}
+			<table class="table table-hover">
+                                
+				<thead>
+                                        <tr>
+                                                <th>C.i.</th>
+                                                <th>Rol</th>
+                                                <th>Usuario</th>
+						<th>Nombre</th>
+						<th>Apellido</th>
+						<th>Telefono</th>
+						<th>...</th>
+                                        </tr>
+                                </thead>
+                                
+                                <tbody>
+					{% for usuario in object_list %}
+                                                <tr>
+                                                        <td>{{ usuario.cedula_de_identidad }}</td>
+                                                        <td>{{ usuario.rol }}</td>
+                                                        <td>{{ usuario.usuario }}</td>
+                                                        <td>{{ usuario.nombre }}</td>
+                                                        <td>{{ usuario.apellido }}</td>
+							<td>{{ usuario.telefono }}</td>
+							<td><a class="btn btn-sm btn-primary" href="/editar_usuario/{{ usuario.cedula_de_identidad }}">Editar</a></td>
+                                                </tr>
+                                        {% endfor %}
+				</tbody>
+
+                        </table>
+		{% endif %}
+
+	</div>
+
+
+
+
+	
+{% endblock content %}
+
+
+	

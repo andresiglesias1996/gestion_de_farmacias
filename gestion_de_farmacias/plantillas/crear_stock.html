@@ -1,0 +1,47 @@
+<!-- Contenido estatico de la pagina -->
+{% extends 'base.html' %} 
+
+<!--Titulo de la pagina o pestaña-->
+{% block title %}
+	Stock
+{% endblock  %}
+
+
+{% block content %}
+	
+	<h1>Stock</h1>
+	
+	<div>
+		<h3>el usuario es: </h3>
+		<p>{{usuario}}</p>
+	</div>
+
+	<div>
+
+		<h3>Crear registro de stock</h3>
+	
+		{% if formulario_nuevo_stock.errors %}
+			<p style="color:red;">Por favor revisa este campo</p>
+		{% endif %}
+
+		<form action="" method="POST">{% csrf_token %}
+		
+			<table>
+				{{formulario_nuevo_stock.as_table}}
+			</table>
+
+			<input type="submit" value="enviar">
+
+		</form>
+
+
+	</div>
+
+
+
+
+	
+{% endblock content %}
+
+
+	

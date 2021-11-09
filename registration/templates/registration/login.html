@@ -1,0 +1,40 @@
+<!-- Cabecera del html, incluye la etiqueta <body> -->
+{% extends 'base.html' %} 
+
+<!--Titulo de la pagina o pestaña-->
+{% block title %}
+	Login
+{% endblock  %}
+
+
+{% block content %}
+	
+	<h1>Login</h1>
+	
+
+	{% if 'registrado' in request.GET %}
+		<div class="alert alert-success">
+  			<strong>Exito!</strong> Usuario creado correctamente.
+		</div>
+	{% endif %}
+
+
+	<div class="container">
+		<form method="POST"> {% csrf_token %}
+
+			<div class="form-group">
+				<label>Nombre de usuario</label>
+				<input type="text" class="form-control" name="username">
+			</div>
+			<div class="form-group">
+				<label>Contraseña</label>
+				<input type="password" class="form-control" name="password">
+			</div>
+
+			<button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Iniciar sesion</button>
+
+		</form>
+	</div>
+	
+{% endblock content %}
+

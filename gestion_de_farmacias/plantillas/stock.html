@@ -16,33 +16,39 @@
 		<p>{{usuario}}</p>
 	</div>
 
-	<div>
-
-		<h3>Crear registro de stock</h3>
+	<div class="">
 	
 		{% if formulario_nuevo_stock.errors %}
 			<p style="color:red;">Por favor revisa este campo</p>
 		{% endif %}
 
-		<form action="" method="POST">{% csrf_token %}
+		<div class="card">
+			<div class="card-header">
+				<h3>Registrar stock</h3>
+			</div>
 		
-			<table>
-				{{formulario_nuevo_stock.as_table}}
-			</table>
-
-			<input type="submit" value="enviar">
-
-		</form>
+			<form method="POST">{% csrf_token %}
+				<div class="card-body">
+					{{formulario_nuevo_stock.as_p}}
+				</div>
+				<div class="card-footer">
+					<input class="btn btn-primary" type="submit" value="Registrar">
+				</div>
+			</form>
+		</div>
 
 
 	</div>
 
 
+	<hr>
 
 
 	<div>
-
-		{% if object_list  %}
+		<!-- ==============================-->
+		<!-- Tabla con los registros de stock -->
+		<!-- ==============================-->
+		{% if lotes_list  %}
 			<table class="table table-hover">
                                 
 				<thead>
@@ -50,15 +56,19 @@
                                                 <th>Stock</th>
                                                 <th>Medicamento</th>
                                                 <th>Ubicacion</th>
+						<th>Vencimiento</th>
+						<th>...</th>
                                         </tr>
                                 </thead>
                                 
                                 <tbody>
-					{% for registro in lotes_list %}
+					{% for lote in lotes_list %}
                                                 <tr>
-                                                        <td>{{ registro.stock }}</td>
-                                                        <td>{{ registro.medicamento }}</td>
-                                                        <td>{{ registro.ubicacion }}</td>
+                                                        <td>{{ lote.stock }}</td>
+                                                        <td>{{ lote.medicamento }}</td>
+                                                        <td>{{ lote.ubicacion }}</td>
+							<td>{{ lote.vencimiento }}</td>
+							<td><a class="btn btn-sm btn-danger" href="/editar_stock/{{ lote.id }}">Editar</a></td>
                                                 </tr>
                                         {% endfor %}
 				</tbody>

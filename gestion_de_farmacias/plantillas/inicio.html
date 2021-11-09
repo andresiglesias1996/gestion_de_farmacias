@@ -11,19 +11,74 @@
 	
 	<h1>Inicio</h1>
 	
-	<div>
-		<h3>el usuario es: </h3>
-		<p>{{usuario}}</p>
-	</div>
+<div class="alert alert-success">
+{% if  user.usuario_activo %}
+
+	<p>el usuario SI es activo</p>
+{% else %}
+	<p>el usuario NOOOO es activo</p>
+{% endif %}
+</div>
+
+<div class="alert alert-success">
+
+<!--
+el user.rol trae un objeto de la clase Roles, 
+por lo tanto hay que hacer la verificacion  -> if user.rol.nombre == "medico" 
+user.rol.nombre hace referencia a la propiedad "nombre" de los objetos de la clase Roles
+-->
+{% if user.is_authenticated%}
+
+	{% if  user.rol == "medico"  %}
+		<p>el user.rol == "medico"</p>
+	{% else %}
+		<p>el user.rol != "medico"</p>
+	{% endif %}
+
+
+	{% if  user.rol == "farmacia"  %}
+		<p>el user.rol == "farmacia"</p>
+	{% else %}
+		<p>el user.rol != "farmacia"</p>
+	{% endif %}
+
+
+	{% if  user.rol == "usuario"  %}
+		<p>el user.rol == "usuario"</p>
+	{% else %}
+		<p>el user.rol != "usuario"</p>
+	{% endif %}
+
+	{% if  user.rol == "stock"  %}
+		<p>el user.rol == "stock"</p>
+	{% else %}
+		<p>el user.rol != "stock"</p>
+	{% endif %}
+
+{% endif %}
+
+</div>
 
 	<div>
-		<h3>Lista de datos: </h3>
-		<ul>
-			{% for dato in datos_json %}
-			<li>{{dato}}</li>
-			{% endfor %}
-		</ul>
+		<p>user.rol: {{user.rol}}</p>
+		<p>user: {{user}}</p>
+		<p>user.group: {{user.group }}</p>
+		<p>user.is_authenticated: {{user.is_authenticated }}</p>
+		<br>
+		<p>user.rol: {{user.rol }}</p>
+		<p>user.usuario | length: {{user.usuario | length }}</p>
+		<p>user.usuario: {{user.usuario }}</p>
+		<p>*****user.rol.nombre: {{user.rol.nombre }} *****</p>
+		<p>*****user.rol.nombre: {{user.rol.nombre }} *****</p>
+		<p>user.nombre: {{user.nombre | upper}}</p>
+		<p>user.apellido: {{user.apellido }}</p>
+		<p>user.usuario_activo: {{user.usuario_activo }}</p>
+		<p>request.user.username: {{request.user.username | upper}}</p>
+		<p>request.user.nombre: {{request.user.nombre }}</p>
+		<p>request.user: {{request.user }}</p>
+		<p>request: {{request }}</p>
 	</div>
+
 	
 {% endblock content %}
 

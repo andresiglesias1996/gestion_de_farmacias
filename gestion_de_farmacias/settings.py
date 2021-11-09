@@ -14,6 +14,8 @@ from pathlib import Path
 
 import os
 
+from django.urls.base import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -34,13 +36,15 @@ ALLOWED_HOSTS = ['localhost','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'gestionStock'
+    'gestionStock',
+    'gestionUsuarios',
 ]
 
 MIDDLEWARE = [
@@ -121,6 +125,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+AUTH_USER_MODEL = 'gestionUsuarios.Usuarios'
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -135,10 +142,17 @@ USE_L10N = True
 USE_TZ = True
 
 
+#auth redirects
+LOGIN_REDIRECT_URL= reverse_lazy('inicio')
+LOGOUT_REDIRECT_URL= 'inicio'
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+#STATIC_ROOT = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'gestion_de_farmacias/static'),)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -155,5 +169,5 @@ EMAIL_USE_TLS=True
 EMAIL_PORT=587
 EMAIL_HOST_USER="pandorasoftware0000@gmail.com"
 EMAIL_HOST_PASSWORD=""
-# comandosend_mail('el asunto aca','holis, soy un mensaje', 'sorete@pedo.com',['rafaelburg@gmail.com'],fail_silently=False)
+# comandosend_mail('asunto','mensaje', 'algo@algo.com',['rafaelburg@gmail.com'],fail_silently=False)
 
