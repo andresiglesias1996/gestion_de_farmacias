@@ -1,88 +1,80 @@
 <!-- Contenido estatico de la pagina -->
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 <!--Titulo de la pagina o pestaña-->
-{% block title %}
-	Stock
-{% endblock  %}
+{% block title %} Stock {% endblock %} {% block content %}
+<!--Nav bar-->
+{% include "nav.html" %}
+<h1>Stock</h1>
+
+<div>
+    <h3>este template no se usa </h3>
+</div>
+
+<div class="">
+
+    {% if formulario_nuevo_stock.errors %}
+    <p style="color:red;">Por favor revisa este campo</p>
+    {% endif %}
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Registrar stock</h3>
+        </div>
+
+        <form method="POST">{% csrf_token %}
+            <div class="card-body">
+                {{formulario_nuevo_stock.as_p}}
+            </div>
+            <div class="card-footer">
+                <input class="btn btn-primary" type="submit" value="Registrar">
+            </div>
+        </form>
+    </div>
 
 
-{% block content %}
-	
-	<h1>Stock</h1>
-	
-	<div>
-		<h3>el usuario es: </h3>
-		<p>{{usuario}}</p>
-	</div>
-
-	<div class="">
-	
-		{% if formulario_nuevo_stock.errors %}
-			<p style="color:red;">Por favor revisa este campo</p>
-		{% endif %}
-
-		<div class="card">
-			<div class="card-header">
-				<h3>Registrar stock</h3>
-			</div>
-		
-			<form method="POST">{% csrf_token %}
-				<div class="card-body">
-					{{formulario_nuevo_stock.as_p}}
-				</div>
-				<div class="card-footer">
-					<input class="btn btn-primary" type="submit" value="Registrar">
-				</div>
-			</form>
-		</div>
+</div>
 
 
-	</div>
+<hr>
 
 
-	<hr>
+<div>
+    <!-- ==============================-->
+    <!-- Tabla con los registros de stock -->
+    <!-- ==============================-->
+    {% if lotes_list %}
+    <table class="table table-hover">
 
+        <thead>
+            <tr>
+                <th>Stock</th>
+                <th>Medicamento</th>
+                <th>Ubicacion</th>
+                <th>Vencimiento</th>
+                <th>...</th>
+            </tr>
+        </thead>
 
-	<div>
-		<!-- ==============================-->
-		<!-- Tabla con los registros de stock -->
-		<!-- ==============================-->
-		{% if lotes_list  %}
-			<table class="table table-hover">
-                                
-				<thead>
-                                        <tr>
-                                                <th>Stock</th>
-                                                <th>Medicamento</th>
-                                                <th>Ubicacion</th>
-						<th>Vencimiento</th>
-						<th>...</th>
-                                        </tr>
-                                </thead>
-                                
-                                <tbody>
-					{% for lote in lotes_list %}
-                                                <tr>
-                                                        <td>{{ lote.stock }}</td>
-                                                        <td>{{ lote.medicamento }}</td>
-                                                        <td>{{ lote.ubicacion }}</td>
-							<td>{{ lote.vencimiento }}</td>
-							<td><a class="btn btn-sm btn-danger" href="/editar_stock/{{ lote.id }}">Editar</a></td>
-                                                </tr>
-                                        {% endfor %}
-				</tbody>
+        <tbody>
+            {% for lote in lotes_list %}
+            <tr>
+                <td>{{ lote.stock }}</td>
+                <td>{{ lote.medicamento }}</td>
+                <td>{{ lote.ubicacion }}</td>
+                <td>{{ lote.vencimiento }}</td>
+                <td><a class="btn btn-sm btn-danger" href="/editar_stock/{{ lote.id }}">Editar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
 
-                        </table>
-		{% endif %}
+    </table>
+    {% endif %}
 
-	</div>
+</div>
 
 
 
 
-	
+
 {% endblock content %}
-
-
-	

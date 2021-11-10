@@ -26,7 +26,7 @@ class LotesAdmin(admin.ModelAdmin):
         list_filter=("vencimiento",)
         
         #filtro tipo migas de pan
-        date_hierarchy="vencimiento"
+        #date_hierarchy="vencimiento"
 
 
 

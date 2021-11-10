@@ -85,11 +85,22 @@ WSGI_APPLICATION = 'gestion_de_farmacias.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'db_farmacia_asse',
+        'USER': 'user_FarmaciaASSE',
+        'PASSWORD': 'password_FarmaciaASSE',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -163,11 +174,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #================
 # ENVIO DE EMAILS =
 #================
-EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST="smtp.gmail.com"
-EMAIL_USE_TLS=True
-EMAIL_PORT=587
-EMAIL_HOST_USER="pandorasoftware0000@gmail.com"
-EMAIL_HOST_PASSWORD=""
-# comandosend_mail('asunto','mensaje', 'algo@algo.com',['rafaelburg@gmail.com'],fail_silently=False)
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+    EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+else:
+    EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST="smtp.gmail.com"
+    EMAIL_USE_TLS=True
+    EMAIL_PORT=587
+    EMAIL_HOST_USER="pandorasoftware0000@gmail.com"
+    EMAIL_HOST_PASSWORD=""
+    # comandosend_mail('asunto','mensaje', 'algo@algo.com',['rafaelburg@gmail.com'],fail_silently=False)
 

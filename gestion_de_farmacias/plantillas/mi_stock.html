@@ -1,0 +1,60 @@
+<!-- Contenido estatico de la pagina -->
+{% extends 'base.html' %}
+
+<!--Titulo de la pagina o pestaña-->
+{% block title %} Mi Farmacia {% endblock %} {% block content %}
+
+<!--Nav bar-->
+{% include "nav.html" %}
+
+<div class="container">
+    <div class="my-3">
+        <h1>Stock de {{mi_farmacia.nombre}}</h1>
+        <a class="btn btn-outline-grey text-white float-right" href="#formulario">Crear Registro De Stock</a>
+    </div>
+    <br>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Stock</th>
+                <th>Medicamento</th>
+                <th>vencimiento</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lote in lotes_list %}
+            <tr>
+                <td>{{lote.stock}}</td>
+                <td>{{lote.medicamento}}</td>
+                <td>{{lote.vencimiento}}</td>
+                <td><a class="btn btn-sm btn-primary" href="/editar_stock/{{ lote.id }}">editar...</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    {% if formulario_nuevo_stock.errors %}
+    <p style="color: red">Por favor revisa este campo</p>
+    {% endif %}
+
+    <div id="formulario" class="card my-3">
+        <div class="card-header">
+            <h3>Registrar stock</h3>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="card-body">
+                {{formulario_nuevo_stock.as_p}}
+            </div>
+            <div class="card-footer">
+                <input class="btn btn-primary" type="submit" value="Registrar" />
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

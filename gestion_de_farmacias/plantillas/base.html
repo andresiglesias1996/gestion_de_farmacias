@@ -28,22 +28,20 @@
 </head>
 <body>
         <!--Nav bar-->
+        {% comment "" %}
+        
         {% include "nav.html" %}
+        {% endcomment %}
         
         
-        <div class="container mt-3">
-
-                
-
-
-
+        <div class="">
                 <!-- Contenido dinamico o bloque cambiante -->
                 {% block content %}{% endblock  %}
-
-
         </div>
 
-	
+        <div class="" style="height:5em;">
+        <!--div vacio para ocupar espacio. Aca debe ir un footer-->  
+	</div>
 
         <script type="text/javascript">
 

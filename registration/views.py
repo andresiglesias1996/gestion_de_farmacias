@@ -1,7 +1,9 @@
 from django.contrib.auth.forms import UserCreationForm
 from gestionUsuarios.forms import FormularioCrearUsuario
+from registration.forms import PasswordResetForm
 
 from django.views.generic import CreateView
+from django.contrib.auth.views import PasswordResetView
 from django.urls import reverse_lazy
 
 from gestionUsuarios.models import Usuarios
@@ -23,3 +25,9 @@ class SignUpView(CreateView):
         #pero hacerlo asi permite egregar algo por metodo get
         def get_success_url(self):
             return reverse_lazy('login') + '?registrado'
+
+
+
+class RecuperarPassword(PasswordResetView):
+    template_name = 'registration/password_reset_form.html'
+    #form_class = PasswordResetForm

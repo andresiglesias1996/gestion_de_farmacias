@@ -20,7 +20,7 @@ class UsuariosAdmin(admin.ModelAdmin):
         list_filter=("rol",)
         
         #filtro tipo migas de pan
-        date_hierarchy="fecha_de_nacimiento"
+        #date_hierarchy="fecha_de_nacimiento"
 
 
 class RecetasAdmin(admin.ModelAdmin):

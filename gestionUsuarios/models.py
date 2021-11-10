@@ -86,13 +86,14 @@ class Usuarios(AbstractBaseUser):
         nombre = models.CharField(max_length = 100,blank=True, null=True)
         apellido = models.CharField(max_length = 100,blank=True, null=True)
         usuario_activo = models.BooleanField(default=True)
+        is_active = models.BooleanField(default=True)
         usuario_administrador = models.BooleanField(default=False)
         sexo = models.CharField(max_length = 50, blank=True, null=True)
-        fecha_de_nacimiento= models.DateField(blank=True, null=True, verbose_name="Fecha de nacimiento")
+        fecha_de_nacimiento= models.CharField(max_length = 50,blank=True, null=True, verbose_name="Fecha de nacimiento")
         departmento = models.CharField(max_length = 50, blank=True, null=True)
         direccion=models.CharField(max_length=200, blank=True, null=True)
         telefono=models.IntegerField(blank=True, null=True)
-        email=models.EmailField(blank=True, null=True)
+        email=models.EmailField(unique=True)
         created_at = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
         updated_at = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
 
@@ -139,7 +140,7 @@ class Recetas(models.Model):
         medico = models.ForeignKey(Usuarios, null=True, on_delete=models.CASCADE, related_name='+')
 
         descripcion = models.CharField(max_length = 500, blank=True, null=True)
-        vencimiento= models.DateField(blank=True, null=True, verbose_name="Fecha de vencimiento")
+        vencimiento= models.CharField(max_length = 50,blank=True, null=True, verbose_name="Fecha de vencimiento")
         estado = models.CharField(max_length = 50,choices=ESTADOS_DE_UNA_RECETA,blank=True, null=True) # el estado se refiere a si el medicamento esta reservado o ya fue retirado
         created_at = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
         updated_at = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")

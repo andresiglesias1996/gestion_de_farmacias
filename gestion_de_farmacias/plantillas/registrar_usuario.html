@@ -1,46 +1,38 @@
 <!-- Contenido estatico de la pagina -->
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 <!--Titulo de la pagina o pestaña-->
-{% block title %}
-	Registrar Usuario
-{% endblock  %}
+{% block title %} Registrar Usuario {% endblock %} {% block content %}
+<!--Nav bar-->
+{% include "nav.html" %}
+
+<div class="container">
+
+    {% if form.errors %}
+    <p style="color:red;">Por favor revisa los campos</p>
+    {% endif %}
+
+    <div class="card my-3">
+        <div class="card-header">
+            <h3>Registrar usuario</h3>
+        </div>
 
 
-{% block content %}
-	
+        <form method="POST">{% csrf_token %}
+            <div class="card-body">
+                {{form.as_p}}
+            </div>
 
-	<div class="">
+            <div class="card-footer">
+                <input class="btn btn-primary" type="submit" value="Registrar">
+            </div>
+        </form>
 
-		{% if form.errors %}
-			<p style="color:red;">Por favor revisa este campo</p>
-		{% endif %}
+    </div>
 
-		<div class="card">
-			<div class="card-header">
-				<h3>Registrar usuario</h3>
-			</div>
-			
-
-			<form method="POST">{% csrf_token %}
-				<div class="card-body">
-					{{form.as_p}}
-				</div>
-
-				<div class="card-footer">
-					<input class="btn btn-primary" type="submit" value="Registrar">
-				</div>
-			</form>
-
-		</div>
-
-	</div>
+</div>
 
 <script type="text/javascript">
-                
-        </script>
-	
+</script>
+
 {% endblock content %}
-
-
-	

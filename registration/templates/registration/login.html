@@ -1,40 +1,39 @@
 <!-- Cabecera del html, incluye la etiqueta <body> -->
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 <!--Titulo de la pagina o pestaña-->
-{% block title %}
-	Login
-{% endblock  %}
+{% block title %} Login {% endblock %} {% block content %}
+<!--Nav bar-->
+{% include "nav.html" %}
+<div class="container my-3">
+    <h1>Login</h1>
 
 
-{% block content %}
-	
-	<h1>Login</h1>
-	
-
-	{% if 'registrado' in request.GET %}
-		<div class="alert alert-success">
-  			<strong>Exito!</strong> Usuario creado correctamente.
-		</div>
-	{% endif %}
+    {% if 'registrado' in request.GET %}
+    <div class="alert alert-success">
+        <strong>Exito!</strong> Usuario creado correctamente.
+    </div>
+    {% endif %}
 
 
-	<div class="container">
-		<form method="POST"> {% csrf_token %}
 
-			<div class="form-group">
-				<label>Nombre de usuario</label>
-				<input type="text" class="form-control" name="username">
-			</div>
-			<div class="form-group">
-				<label>Contraseña</label>
-				<input type="password" class="form-control" name="password">
-			</div>
+    <form method="POST"> {% csrf_token %}
 
-			<button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Iniciar sesion</button>
+        <div class="form-group">
+            <label>Nombre de usuario</label>
+            <input type="text" class="form-control" name="username">
+        </div>
+        <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" class="form-control" name="password">
+        </div>
 
-		</form>
-	</div>
-	
+        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Iniciar sesion</button>
+
+    </form>
+
+    <div class="m-1 p-1 float-right">
+        <a class="" href="{% url 'recuperar_password' %}">Olvide mi contraseña</a>
+    </div>
+</div>
 {% endblock content %}
-

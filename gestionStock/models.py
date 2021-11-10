@@ -1,6 +1,9 @@
 from django.db import models
 from django.db.models.base import Model
 import datetime
+#from gestionUsuarios.models import Usuarios
+#from gestionUsuarios.models import Usuarios
+
 
 #==============
 # Medicamentos =
@@ -40,9 +43,10 @@ class Farmacias(models.Model):
         direccion = models.CharField(max_length=100, blank=True, null=True)
         localidad = models.CharField(max_length=100,blank=True, null=True)
         departamento = models.CharField(max_length=50, blank=True, null=True)
+        funcionarios = models.ManyToManyField('gestionUsuarios.Usuarios',blank=True, verbose_name="Funcionarios")
 
         def __str__(self):
-                return self.nombre + " " + self.localidad + " " + self.departamento
+                return self.nombre + ", " + self.localidad + ", " + self.departamento
         
         class Meta:
                 verbose_name = "Farmacia"
@@ -68,7 +72,7 @@ class Lotes(models.Model):
         ubicacion = models.ForeignKey(Farmacias, on_delete=models.CASCADE)
         
         ingreso = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de ingreso",blank=True, null=True)
-        vencimiento = models.DateField(verbose_name="Fecha de vencimiento",blank=True, null=True)
+        vencimiento = models.CharField(max_length = 50,verbose_name="Fecha de vencimiento",blank=True, null=True)
 
         #created = models.CharField(verbose_name="Fecha de creación", max_length=100, blank=True, default=datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
         created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",blank=True, null=True)

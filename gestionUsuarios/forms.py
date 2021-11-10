@@ -145,7 +145,25 @@ class FormularioEditarUsuario(forms.ModelForm):
                 return user
 
 
+# =======================================================================
+# Formulario Editar Usuario 2 ===========================================================
+# =======================================================================
+# este formulario lo usamos en la pagina mi_usuario
+# no permite editar c.i., usuario, passoword
+class FormularioEditarUsuario_2(forms.ModelForm):
 
+        class Meta:
+                model = Usuarios
+                fields = ['nombre','apellido','email','sexo','fecha_de_nacimiento','telefono']
+
+        def __init__(self, *args, **kwargs):
+                super().__init__(*args, **kwargs)
+                self.fields['nombre'].widget.attrs.update({'class': 'form-control'})
+                self.fields['apellido'].widget.attrs.update({'class': 'form-control'})
+                self.fields['email'].widget.attrs.update({'class': 'form-control'})
+                self.fields['sexo'].widget.attrs.update({'class': 'form-control'})
+                self.fields['fecha_de_nacimiento'].widget.attrs.update({'class': 'form-control','type':'date'})
+                self.fields['telefono'].widget.attrs.update({'class': 'form-control'})
 
 
 
@@ -168,3 +186,28 @@ class Formulario_nueva_receta(forms.ModelForm):
                 self.fields['vencimiento'].widget.attrs.update({'class': 'form-control','type':'date'})
                 #self.fields['vencimiento'].widget.attrs.update(type='date')
                 self.fields['estado'].widget.attrs.update({'class': 'form-control'})
+
+
+
+class Formulario_receta_usuario(forms.ModelForm):
+
+
+
+        class Meta:
+                
+                model= Usuarios
+                model = Recetas
+        
+                fields = ['medicamento','paciente','medico','descripcion','vencimiento','estado']
+              
+
+        def __init__(self, *args, **kwargs):
+                super().__init__(*args, **kwargs)
+                self.fields['medicamento'].widget=forms.TextInput({'class': 'form-control'})
+                self.fields['paciente'].widget=forms.TextInput({'class': 'form-control'})
+                self.fields['medico'].widget=forms.TextInput({'class': 'form-control'})
+                self.fields['descripcion'].widget=forms.TextInput({'class': 'form-control'})
+                self.fields['vencimiento'].widget=forms.TextInput({'class': 'form-control','type':'date'})
+                self.fields['estado'].widget=forms.TextInput({'class': 'form-control'}) 
+                self.fields['usuario'].widget=forms.TextInput({'class': 'form-control'})
+                self.fields['cedula_de_identidad'].widget=forms.TextInput({'class': 'form-control'})        

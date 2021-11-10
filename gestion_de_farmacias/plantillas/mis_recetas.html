@@ -2,24 +2,18 @@
 {% extends 'base.html' %} 
 
 <!--Titulo de la pagina o pestaña-->
-{% block title %}
-	Recetas
-{% endblock  %}
+{% block title %}Mis Recetas{% endblock  %}
 
 
 {% block content %}
-
 <!--Nav bar-->
-{% include "nav.html" %}	
+{% include "nav.html" %}
 	
-<div class="container">
-	<h1>Recetas</h1>
+	<div class="container my-3">
+
+		<h3>Mis Recetas</h3>
 	
-	<div>
-		<!-- ==============================-->
-		<!-- Tabla con las recetas -->
-		<!-- ==============================-->
-		{% if recetas_list  %}
+		{% if object_list  %}
 			<table class="table table-hover">
                                 
 				<thead>
@@ -30,12 +24,14 @@
                                                 <th>Descripcion</th>
 						<th>Vencimiento</th>
                                                 <th>Estado</th>
-						<th>...</th>
+						{% comment "" %}
+                                                <th>...</th>
+                                                {% endcomment %}
                                         </tr>
                                 </thead>
                                 
                                 <tbody>
-					{% for receta in recetas_list %}
+					{% for receta in object_list %}
                                                 <tr>
                                                         <td>{{ receta.medicamento }}</td>
                                                         <td>{{ receta.paciente }}</td>
@@ -43,52 +39,24 @@
                                                         <td>{{ receta.descripcion }}</td>
 							<td>{{ receta.vencimiento }}</td>
                                                         <td>{{ receta.estado }}</td>
-							<td><a class="btn btn-sm btn-danger" href="/editar_receta/{{ receta.id }}">Editar</a></td>
+							{% comment %}
+                                                        <td><a class="btn btn-sm btn-danger" href="/mi_receta/{{ receta.id }}">Editar</a></td>
+                                                        {% endcomment %}
                                                 </tr>
                                         {% endfor %}
 				</tbody>
 
                         </table>
-		{% endif %}
-
-	</div>
-
-	<hr>
-	
-	<div class="">
-	
-		{% if formulario_nueva_receta.errors %}
-			<p style="color:red;">Por favor revisa este campo</p>
-		{% endif %}
-
-		<div class="card">
-			<div class="card-header">
-				<h3>Crear receta</h3>
-			</div>
-			
-			<form method="POST">{% csrf_token %}
-				<div class="card-body">
-					{{formulario_nueva_receta.as_p}}
-				</div>
-
-				<div class="card-footer">
-					<input class="btn btn-primary" type="submit" value="Crear">
-				</div>
-			</form>
-		</div>
-
-	</div>
-
+		{% else %}
+                <div class="alert alert-warning">
+  <strong>Atencion!</strong>  Su usuario no tiene recetas.
 </div>
+                {% endif %}
 
-	<script type="text/javascript">
-                // esto corrije el tipo del campo imput 'id_vencimiento' en el formulario para crear recetas
-                // por alguna razon no quiere cambiar el type a date
-                window.onload = function() {
-                        document.getElementById('id_vencimiento').type = 'date';
-                        //document.getElementById('id_fecha_de_nacimiento').type = 'date';
-                }
-        </script>
+	</div>
+
+
+
+
 	
 {% endblock content %}
-

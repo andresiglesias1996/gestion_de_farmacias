@@ -4,7 +4,7 @@ from django.http import HttpResponse
 # vistas basadas en clases
 from django.views.generic import TemplateView, ListView, CreateView, View, UpdateView
 
-from gestionStock.models import Medicamentos
+from gestionStock.models import Medicamentos, Farmacias
 from gestionUsuarios.models import Usuarios
 
 #from django.core.urlresolvers import reverse_lazy
@@ -22,44 +22,63 @@ from django.conf import settings
 from django.core.mail import send_mail
 
 
-# ===============================================================
-# funciones que dan respuesta a las peticion provenientes de urls.py  =
-# ===============================================================
+# =====================================================================
+# funciones que dan respuesta a algunas peticiones provenientes de urls.py  =
+# =====================================================================
 
 
 # ========
 # Inicio =
 # ========
+class InicioView(TemplateView):
+
+    template_name = "inicio.html"
+
+    # aca se almacena los datos en variables que le llegan al frontend
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # verifica que la persona que accede a la pagina sea un usuario autentificado
+        if self.request.user.is_authenticated and self.request.user.rol == 'farmacia':
+            
+            # si esta autentificado obtenemos el valor de la cedula de identidad del usuario
+        	cedula_del_user = self.request.user.cedula_de_identidad
+            
+            #con el valor de su cedula verificamos si esta registrado como funcionario de farmacia y obtenemos el dato de que farmacia es
+        	mi_farmacia = Farmacias.objects.filter(funcionarios=cedula_del_user)[0]
+            
+
+            #pasamos el dato mi_farmacia al contexto que llega al fronend
+        	context['mi_farmacia'] = mi_farmacia
+
+        return context
+
+
+
+
+# =====================
+#  Inicio | ya no se usa =
+# =====================
 def inicio(request):
 
-    lista_personas = [{
-        'picture': 'http://placehold.it/32x32',
-        'age': 40,
-        'name': 'Velez William',
-        'email': 'velezwilliam@pearlesex.com'
-    },
-        {
-        'picture': 'http://placehold.it/32x32',
-        'age': 37,
-        'name': 'Walsh Gibbs',
-        'email': 'walshgibbs@pearlesex.com'
-    },
-    ]
     # print("el request.user.rol.nombre dice: " + str(request.user.rol.nombre) )
     # json_personas= json.dumps(lista_personas)
     # json_personas= json.dumps([11,12,13,14,15])
     json_personas = [11, 12, 13, 14, 15]
 
-
-    diccionario_de_contexto = {"usuario": "Rafael Burgueño"}
+    diccionario_de_contexto = {"usuario": "Fulano Detail"}
 
     return render(request, "inicio.html", diccionario_de_contexto)
 
 
-# =======
-# Login =
-# =======
-class LoginPageView(TemplateView):
+
+
+
+
+# =================================================
+# Login | la clase y la funcion siguientes ya no se usan=
+# =================================================
+"""class LoginPageView(TemplateView):
 
     template_name = "login.html"
 
@@ -67,16 +86,20 @@ class LoginPageView(TemplateView):
         diccionario_de_contexto = {"usuario": "Rafa"}
         return render(request, self.template_name, diccionario_de_contexto)
 
-
+"""
 """def login(request):
 	diccionario_de_contexto={"usuario":"Rafael Burgueño"}
 	return render(request, "login.html", diccionario_de_contexto)
 """
 
 
+
+
 # ===============================
 # Carga de datos a la base de datos =
 # ===============================
+# Se ejecutan cuando cuando se accede a la ruta 'localhost/carga_medicamentos/'
+# al ejecutar esta funcion se cargan registros a la tabla Medicamentos
 def carga_medicamentos(request):
 
     for medicamento in MEDICAMENTOS:
@@ -232,6 +255,8 @@ MEDICAMENTOS = [
 # ===============================
 # Carga Usuarios a la base de datos =
 # ===============================
+# Se ejecutan cuando cuando se accede a la ruta 'localhost/carga_usuarios/'
+# al ejecutar esta funcion se cargan registros a la tabla Usuarios
 def carga_usuarios(request):
 
     ROLES = ['usuario', 'farmacia', 'medico', 'stock']
@@ -258,182 +283,182 @@ def carga_usuarios(request):
 
 
 USUARIOS = [
-  {
-    "cedula_de_identidad": 26576383,
-    "rol": 0,
-    "usuario": "Rowe872",
-    "nombre": "Santiago",
-    "apellido": "Collins",
-    "fecha_de_nacimiento": "2009-11-05",
-    "email": "santiagocollins@parcoe.com",
-    "telefono": 94247985,
-    "direccion": "384 Randolph Street, Eagletown, Utah, 8901"
-  },
-  {
-    "cedula_de_identidad": 40239210,
-    "rol": 3,
-    "usuario": "Hendricks755",
-    "nombre": "Allyson",
-    "apellido": "Page",
-    "fecha_de_nacimiento": "1986-05-31",
-    "email": "allysonpage@parcoe.com",
-    "telefono": 98724006,
-    "direccion": "707 Grand Street, Chaparrito, Illinois, 1491"
-  },
-  {
-    "cedula_de_identidad": 17147749,
-    "rol": 0,
-    "usuario": "Jana588",
-    "nombre": "Earline",
-    "apellido": "Blake",
-    "fecha_de_nacimiento": "1954-10-28",
-    "email": "earlineblake@parcoe.com",
-    "telefono": 91756343,
-    "direccion": "603 Empire Boulevard, Harleigh, Virginia, 6529"
-  },
-  {
-    "cedula_de_identidad": 48479504,
-    "rol": 1,
-    "usuario": "Trisha959",
-    "nombre": "Gonzalez",
-    "apellido": "Grant",
-    "fecha_de_nacimiento": "1962-08-20",
-    "email": "gonzalezgrant@parcoe.com",
-    "telefono": 95241940,
-    "direccion": "471 Seacoast Terrace, Thermal, Texas, 3270"
-  },
-  {
-    "cedula_de_identidad": 64955168,
-    "rol": 3,
-    "usuario": "Huffman372",
-    "nombre": "Powell",
-    "apellido": "Cantu",
-    "fecha_de_nacimiento": "1999-02-03",
-    "email": "powellcantu@parcoe.com",
-    "telefono": 98787305,
-    "direccion": "292 Ocean Court, Sanborn, Wyoming, 8173"
-  },
-  {
-    "cedula_de_identidad": 49146380,
-    "rol": 3,
-    "usuario": "Fry372",
-    "nombre": "Josephine",
-    "apellido": "Golden",
-    "fecha_de_nacimiento": "1943-04-19",
-    "email": "josephinegolden@parcoe.com",
-    "telefono": 94446924,
-    "direccion": "552 Kane Street, Bluetown, Wisconsin, 3658"
-  },
-  {
-    "cedula_de_identidad": 32155540,
-    "rol": 0,
-    "usuario": "Parker135",
-    "nombre": "Davis",
-    "apellido": "Hubbard",
-    "fecha_de_nacimiento": "1987-07-22",
-    "email": "davishubbard@parcoe.com",
-    "telefono": 94969596,
-    "direccion": "875 Greene Avenue, Hinsdale, New Jersey, 4548"
-  },
-  {
-    "cedula_de_identidad": 38982891,
-    "rol": 2,
-    "usuario": "Hall876",
-    "nombre": "Spencer",
-    "apellido": "Cantrell",
-    "fecha_de_nacimiento": "1999-09-03",
-    "email": "spencercantrell@parcoe.com",
-    "telefono": 94804275,
-    "direccion": "191 Canal Avenue, Nipinnawasee, Oklahoma, 4793"
-  },
-  {
-    "cedula_de_identidad": 57343062,
-    "rol": 2,
-    "usuario": "Kerr728",
-    "nombre": "Dee",
-    "apellido": "Irwin",
-    "fecha_de_nacimiento": "2012-08-01",
-    "email": "deeirwin@parcoe.com",
-    "telefono": 99766561,
-    "direccion": "650 Bancroft Place, Bentley, Arkansas, 4812"
-  },
-  {
-    "cedula_de_identidad": 57939214,
-    "rol": 2,
-    "usuario": "Perry610",
-    "nombre": "Antoinette",
-    "apellido": "Mccoy",
-    "fecha_de_nacimiento": "1996-07-23",
-    "email": "antoinettemccoy@parcoe.com",
-    "telefono": 93556987,
-    "direccion": "867 Nostrand Avenue, Bradenville, Virgin Islands, 9594"
-  },
-  {
-    "cedula_de_identidad": 18926939,
-    "rol": 1,
-    "usuario": "Castro455",
-    "nombre": "Stanton",
-    "apellido": "Robertson",
-    "fecha_de_nacimiento": "2010-07-13",
-    "email": "stantonrobertson@parcoe.com",
-    "telefono": 99447516,
-    "direccion": "538 Powers Street, Carlton, Idaho, 3437"
-  },
-  {
-    "cedula_de_identidad": 35254813,
-    "rol": 3,
-    "usuario": "Hollie326",
-    "nombre": "Pauline",
-    "apellido": "Farley",
-    "fecha_de_nacimiento": "1977-05-06",
-    "email": "paulinefarley@parcoe.com",
-    "telefono": 91520512,
-    "direccion": "756 Crescent Street, Gerton, Colorado, 5700"
-  },
-  {
-    "cedula_de_identidad": 68020846,
-    "rol": 0,
-    "usuario": "Irwin819",
-    "nombre": "Cole",
-    "apellido": "Mcintyre",
-    "fecha_de_nacimiento": "2018-01-27",
-    "email": "colemcintyre@parcoe.com",
-    "telefono": 96046115,
-    "direccion": "652 Cumberland Walk, Williams, North Dakota, 5967"
-  },
-  {
-    "cedula_de_identidad": 12471780,
-    "rol": 3,
-    "usuario": "Merle334",
-    "nombre": "Shepard",
-    "apellido": "Crawford",
-    "fecha_de_nacimiento": "2020-10-13",
-    "email": "shepardcrawford@parcoe.com",
-    "telefono": 95914594,
-    "direccion": "100 Wyona Street, Cartwright, Louisiana, 7759"
-  },
-  {
-    "cedula_de_identidad": 45918227,
-    "rol": 3,
-    "usuario": "Sherry121",
-    "nombre": "Downs",
-    "apellido": "Kelley",
-    "fecha_de_nacimiento": "2004-01-22",
-    "email": "downskelley@parcoe.com",
-    "telefono": 96866153,
-    "direccion": "889 Allen Avenue, Idledale, South Carolina, 2198"
-  },
-  {
-    "cedula_de_identidad": 61380698,
-    "rol": 3,
-    "usuario": "Maryellen799",
-    "nombre": "Langley",
-    "apellido": "Stafford",
-    "fecha_de_nacimiento": "1956-07-17",
-    "email": "langleystafford@parcoe.com",
-    "telefono": 97431998,
-    "direccion": "617 Dunham Place, Marienthal, Ohio, 850"
-  }
+    {
+        "cedula_de_identidad": 26576383,
+        "rol": 0,
+        "usuario": "Rowe872",
+        "nombre": "Santiago",
+        "apellido": "Collins",
+        "fecha_de_nacimiento": "2009-11-05",
+        "email": "santiagocollins@parcoe.com",
+        "telefono": 94247985,
+        "direccion": "384 Randolph Street, Eagletown, Utah, 8901"
+    },
+    {
+        "cedula_de_identidad": 40239210,
+        "rol": 3,
+        "usuario": "Hendricks755",
+        "nombre": "Allyson",
+        "apellido": "Page",
+        "fecha_de_nacimiento": "1986-05-31",
+        "email": "allysonpage@parcoe.com",
+        "telefono": 98724006,
+        "direccion": "707 Grand Street, Chaparrito, Illinois, 1491"
+    },
+    {
+        "cedula_de_identidad": 17147749,
+        "rol": 0,
+        "usuario": "Jana588",
+        "nombre": "Earline",
+        "apellido": "Blake",
+        "fecha_de_nacimiento": "1954-10-28",
+        "email": "earlineblake@parcoe.com",
+        "telefono": 91756343,
+        "direccion": "603 Empire Boulevard, Harleigh, Virginia, 6529"
+    },
+    {
+        "cedula_de_identidad": 48479504,
+        "rol": 1,
+        "usuario": "Trisha959",
+        "nombre": "Gonzalez",
+        "apellido": "Grant",
+        "fecha_de_nacimiento": "1962-08-20",
+        "email": "gonzalezgrant@parcoe.com",
+        "telefono": 95241940,
+        "direccion": "471 Seacoast Terrace, Thermal, Texas, 3270"
+    },
+    {
+        "cedula_de_identidad": 64955168,
+        "rol": 3,
+        "usuario": "Huffman372",
+        "nombre": "Powell",
+        "apellido": "Cantu",
+        "fecha_de_nacimiento": "1999-02-03",
+        "email": "powellcantu@parcoe.com",
+        "telefono": 98787305,
+        "direccion": "292 Ocean Court, Sanborn, Wyoming, 8173"
+    },
+    {
+        "cedula_de_identidad": 49146380,
+        "rol": 3,
+        "usuario": "Fry372",
+        "nombre": "Josephine",
+        "apellido": "Golden",
+        "fecha_de_nacimiento": "1943-04-19",
+        "email": "josephinegolden@parcoe.com",
+        "telefono": 94446924,
+        "direccion": "552 Kane Street, Bluetown, Wisconsin, 3658"
+    },
+    {
+        "cedula_de_identidad": 32155540,
+        "rol": 0,
+        "usuario": "Parker135",
+        "nombre": "Davis",
+        "apellido": "Hubbard",
+        "fecha_de_nacimiento": "1987-07-22",
+        "email": "davishubbard@parcoe.com",
+        "telefono": 94969596,
+        "direccion": "875 Greene Avenue, Hinsdale, New Jersey, 4548"
+    },
+    {
+        "cedula_de_identidad": 38982891,
+        "rol": 2,
+        "usuario": "Hall876",
+        "nombre": "Spencer",
+        "apellido": "Cantrell",
+        "fecha_de_nacimiento": "1999-09-03",
+        "email": "spencercantrell@parcoe.com",
+        "telefono": 94804275,
+        "direccion": "191 Canal Avenue, Nipinnawasee, Oklahoma, 4793"
+    },
+    {
+        "cedula_de_identidad": 57343062,
+        "rol": 2,
+        "usuario": "Kerr728",
+        "nombre": "Dee",
+        "apellido": "Irwin",
+        "fecha_de_nacimiento": "2012-08-01",
+        "email": "deeirwin@parcoe.com",
+        "telefono": 99766561,
+        "direccion": "650 Bancroft Place, Bentley, Arkansas, 4812"
+    },
+    {
+        "cedula_de_identidad": 57939214,
+        "rol": 2,
+        "usuario": "Perry610",
+        "nombre": "Antoinette",
+        "apellido": "Mccoy",
+        "fecha_de_nacimiento": "1996-07-23",
+        "email": "antoinettemccoy@parcoe.com",
+        "telefono": 93556987,
+        "direccion": "867 Nostrand Avenue, Bradenville, Virgin Islands, 9594"
+    },
+    {
+        "cedula_de_identidad": 18926939,
+        "rol": 1,
+        "usuario": "Castro455",
+        "nombre": "Stanton",
+        "apellido": "Robertson",
+        "fecha_de_nacimiento": "2010-07-13",
+        "email": "stantonrobertson@parcoe.com",
+        "telefono": 99447516,
+        "direccion": "538 Powers Street, Carlton, Idaho, 3437"
+    },
+    {
+        "cedula_de_identidad": 35254813,
+        "rol": 3,
+        "usuario": "Hollie326",
+        "nombre": "Pauline",
+        "apellido": "Farley",
+        "fecha_de_nacimiento": "1977-05-06",
+        "email": "paulinefarley@parcoe.com",
+        "telefono": 91520512,
+        "direccion": "756 Crescent Street, Gerton, Colorado, 5700"
+    },
+    {
+        "cedula_de_identidad": 68020846,
+        "rol": 0,
+        "usuario": "Irwin819",
+        "nombre": "Cole",
+        "apellido": "Mcintyre",
+        "fecha_de_nacimiento": "2018-01-27",
+        "email": "colemcintyre@parcoe.com",
+        "telefono": 96046115,
+        "direccion": "652 Cumberland Walk, Williams, North Dakota, 5967"
+    },
+    {
+        "cedula_de_identidad": 12471780,
+        "rol": 3,
+        "usuario": "Merle334",
+        "nombre": "Shepard",
+        "apellido": "Crawford",
+        "fecha_de_nacimiento": "2020-10-13",
+        "email": "shepardcrawford@parcoe.com",
+        "telefono": 95914594,
+        "direccion": "100 Wyona Street, Cartwright, Louisiana, 7759"
+    },
+    {
+        "cedula_de_identidad": 45918227,
+        "rol": 3,
+        "usuario": "Sherry121",
+        "nombre": "Downs",
+        "apellido": "Kelley",
+        "fecha_de_nacimiento": "2004-01-22",
+        "email": "downskelley@parcoe.com",
+        "telefono": 96866153,
+        "direccion": "889 Allen Avenue, Idledale, South Carolina, 2198"
+    },
+    {
+        "cedula_de_identidad": 61380698,
+        "rol": 3,
+        "usuario": "Maryellen799",
+        "nombre": "Langley",
+        "apellido": "Stafford",
+        "fecha_de_nacimiento": "1956-07-17",
+        "email": "langleystafford@parcoe.com",
+        "telefono": 97431998,
+        "direccion": "617 Dunham Place, Marienthal, Ohio, 850"
+    }
 ]
 
 

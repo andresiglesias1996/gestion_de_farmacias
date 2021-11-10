@@ -1,53 +1,43 @@
 <!-- Contenido estatico de la pagina -->
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 <!--Titulo de la pagina o pestaña-->
-{% block title %}
-	Editar Stock
-{% endblock  %}
+{% block title %} Editar Stock {% endblock %} {% block content %}
 
+<!--Nav bar-->
+{% include "nav.html" %}
 
-{% block content %}
-	
-	<h1>Editar Stock</h1>
-	
-	<div>
-		<h3>el usuario es: </h3>
-		<p>{{usuario}}</p>
-	</div>
+<div class="container">
 
-	<div class="">
-	
-		{% if form.errors %}
-			<p style="color:red;">Por favor revisa este campo</p>
-		{% endif %}
+    
 
-		<div class="card">
-			<div class="card-header">
-				<h3>Editar registro de stock</h3>
-			</div>
+    <div class="card my-3">
+        <div class="card-header">
+            <h3>Editar registro de stock</h3>
+        </div>
 
-			<form method="POST">{% csrf_token %}
-				<div class="card-body">
-					{{form.as_p}}
-				</div>
-			<div class="card-footer">
-				<input class="btn btn-primary" type="submit" value="Editar">
-			</div>
-		</form>
+	{% if form.errors %}
+    <p style="color:red;">Por favor revisa este campo</p>
+    {% endif %}
 
-	</div>
+        <form method="POST">{% csrf_token %}
+            <div class="card-body">
+                {{form.as_p}}
+            </div>
+            <div class="card-footer">
+                <input class="btn btn-primary" type="submit" value="Editar">
+            </div>
+        </form>
 
-	<script type="text/javascript">
-                // esto corrije el tipo del campo imput 'id_vencimiento' en el formulario para crear recetas
-                // por alguna razon no quiere cambiar el type a date
-                window.onload = function() {
-                document.getElementById('id_vencimiento').type = 'date';
-                //document.getElementById('id_fecha_de_nacimiento').type = 'date';
-                }
-        </script>
-	
-{% endblock content %}
+    </div>
 
+    <script type="text/javascript">
+        // esto corrije el tipo del campo imput 'id_vencimiento' en el formulario para crear recetas
+        // por alguna razon no quiere cambiar el type a date
+        window.onload = function() {
+            document.getElementById('id_vencimiento').type = 'date';
+            //document.getElementById('id_fecha_de_nacimiento').type = 'date';
+        }
+    </script>
 
-	
+    {% endblock content %}
