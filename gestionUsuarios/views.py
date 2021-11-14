@@ -56,7 +56,7 @@ class RegistrarUsuario(CreateView):
 
 
 # =======================================================================
-# Mi Usuario ===========================================================
+# Mi Usuario | no se usa ===================================================
 # =======================================================================
 class MiUsuario(DetailView):
 
@@ -106,7 +106,7 @@ class EditarUsuario(UpdateView):
 
 
 # =======================================================================
-# Editar Usuario | esta desactivada =================
+# Editar Usuario | no se usa, esta desactivada =================
 #========================================================================
 @method_decorator(login_required, name='dispatch')
 class ActulizarMiUsuario(UpdateView):
@@ -157,13 +157,22 @@ class ListarRecetas(View):
         formulario_nueva_receta = self.form_class(request.POST)
 
         if formulario_nueva_receta.is_valid():
+
+            # con esto hacemos que el formulario sea editable
+            formulario_nueva_receta = formulario_nueva_receta.save(commit=False)
+
+            # editamos el atributo medico para que el registro nuevo tenga como medico firmante al usuario que creala receta
+            #luego le habilitamos el form solo a los usuarios que tienen rol == 'medico'
+            formulario_nueva_receta.medico = self.request.user
+
+
             formulario_nueva_receta.save()
             return redirect('recetas')
         
 
 
 # =======================================================================
-# Editar Receta ===========================================================
+# Editar Receta | creo que no se usa ========================================
 # =======================================================================
 class EditarReceta(UpdateView):
     model = Recetas

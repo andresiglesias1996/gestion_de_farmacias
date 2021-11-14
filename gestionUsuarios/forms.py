@@ -175,13 +175,14 @@ class Formulario_nueva_receta(forms.ModelForm):
 
         class Meta:
                 model = Recetas
-                fields = ['medicamento','paciente','medico','descripcion','vencimiento','estado']
+                #borramos el campo 'medico' porque se agrega automaticamente el usuario medico cuando se crea la receta
+                fields = ['medicamento','paciente','descripcion','vencimiento','estado']
 
         def __init__(self, *args, **kwargs):
                 super().__init__(*args, **kwargs)
                 self.fields['medicamento'].widget.attrs.update({'class': 'form-control'})
                 self.fields['paciente'].widget.attrs.update({'class': 'form-control'})
-                self.fields['medico'].widget.attrs.update({'class': 'form-control'})
+                #self.fields['medico'].widget.attrs.update({'class': 'form-control'})
                 self.fields['descripcion'].widget.attrs.update({'class': 'form-control'})
                 self.fields['vencimiento'].widget.attrs.update({'class': 'form-control','type':'date'})
                 #self.fields['vencimiento'].widget.attrs.update(type='date')

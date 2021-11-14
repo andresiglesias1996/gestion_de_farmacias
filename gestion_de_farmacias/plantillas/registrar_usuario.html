@@ -2,17 +2,20 @@
 {% extends 'base.html' %}
 
 <!--Titulo de la pagina o pestaña-->
-{% block title %} Registrar Usuario {% endblock %} {% block content %}
+{% block title %} Registrar Usuario {% endblock %} 
+
+{% block content %}
+
 <!--Nav bar-->
 {% include "nav.html" %}
-
-<div class="container">
+<br>
+<div class="form-group form-group col-md-12">
 
     {% if form.errors %}
     <p style="color:red;">Por favor revisa los campos</p>
     {% endif %}
 
-    <div class="card my-3">
+    <div class="card">
         <div class="card-header">
             <h3>Registrar usuario</h3>
         </div>
@@ -24,7 +27,7 @@
             </div>
 
             <div class="card-footer">
-                <input class="btn btn-primary" type="submit" value="Registrar">
+                <input class="btn btn-secondary btn-lg btn-block" type="submit" value="Registrar">
             </div>
         </form>
 
@@ -32,7 +35,5 @@
 
 </div>
 
-<script type="text/javascript">
-</script>
 
 {% endblock content %}

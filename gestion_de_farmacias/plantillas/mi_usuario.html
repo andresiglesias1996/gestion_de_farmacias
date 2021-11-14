@@ -2,16 +2,14 @@
 {% extends 'base.html' %} 
 
 <!--Titulo de la pagina o pestaña-->
-{% block title %}
-	Mi Usuario
-{% endblock  %}
-
+{% block title %}Mi Usuario{% endblock  %}
 
 {% block content %}
+
 <!--Nav bar-->
 {% include "nav.html" %}
 
-        <div class="container">
+        <div class="m-3">
 	
 		{% if form.errors %}
 			<p style="color:red;">Por favor revisa los campos</p>

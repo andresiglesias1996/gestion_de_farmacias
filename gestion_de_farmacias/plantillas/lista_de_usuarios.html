@@ -1,57 +1,55 @@
 <!-- Contenido estatico de la pagina -->
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 <!--Titulo de la pagina o pestaña-->
-{% block title %}
-	Lista de Usuarios
-{% endblock  %}
+{% block title %} Lista de Usuarios {% endblock %} {% block content %}
 
-
-{% block content %}
-	<!--Nav bar-->
+<!--Nav bar-->
 {% include "nav.html" %}
 
-<div class="container my-3">
-	<h1>Lista de Usuarios</h1>
-	
-		<!-- ==============================-->
-		<!-- Tabla con los Usuarios activos -->
-		<!-- ==============================-->
-		{% if object_list  %}
-			<table class="table table-hover">
-                                
-				<thead>
-                                        <tr>
-                                                <th>C.i.</th>
-                                                <th>Rol</th>
-                                                <th>Usuario</th>
-						<th>Nombre</th>
-						<th>Apellido</th>
-						<th>Telefono</th>
-						<th>...</th>
-                                        </tr>
-                                </thead>
-                                
-                                <tbody>
-					{% for usuario in object_list %}
-                                                <tr>
-                                                        <td>{{ usuario.cedula_de_identidad }}</td>
-                                                        <td>{{ usuario.rol }}</td>
-                                                        <td>{{ usuario.usuario }}</td>
-                                                        <td>{{ usuario.nombre }}</td>
-                                                        <td>{{ usuario.apellido }}</td>
-							<td>{{ usuario.telefono }}</td>
-							{% comment "" %}
-							<td><a class="btn btn-sm btn-primary" href="/usuario/{{ usuario.cedula_de_identidad }}">Mas info...</a></td>
-							{% endcomment %}
-                                                </tr>
-                                        {% endfor %}
-				</tbody>
+<div class="m-3">
+    <h1>Lista de Usuarios</h1>
 
-                        </table>
-		{% endif %}
+    <!-- ==============================-->
+    <!-- Tabla con los Usuarios activos -->
+    <!-- ==============================-->
+    {% if object_list %}
 
-		<!-- Menú de paginación -->
+    <div class="table-responsive">
+        <table class="table table-hover">
+
+            <thead class="thead-dark">
+                <tr>
+                    <th>C.i.</th>
+                    <th>Rol</th>
+                    <th>Usuario</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Telefono</th>
+                    <th>...</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for usuario in object_list %}
+                <tr>
+                    <td>{{ usuario.cedula_de_identidad }}</td>
+                    <td>{{ usuario.rol }}</td>
+                    <td>{{ usuario.usuario }}</td>
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.apellido }}</td>
+                    <td>{{ usuario.telefono }}</td>
+                    <td><a class="btn btn-sm btn-primary" href="/usuario/{{ usuario.cedula_de_identidad }}">Ver usuario...</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+    {% endif %}
+    <br>
+    <!-- Menú de paginación -->
     {% if is_paginated %}
     <nav aria-label="Page navigation">
         <ul class="pagination  justify-content-center">
@@ -80,13 +78,6 @@
     </nav>
     {% endif %}
 
-	
-
 </div>
 
-
-	
 {% endblock content %}
-
-
-	

@@ -53,7 +53,7 @@ urlpatterns = [
     #path('recetas/', views.recetas, name="recetas"),
     path('recetas/', ListarRecetas.as_view(), name="recetas"),
     path('editar_receta/<int:pk>', EditarReceta.as_view(), name="editar_stock"),
-    path('mis_recetas/', MisRecetas.as_view(), name="mis_recetas"),
+    path('mis_recetas/', MisRecetas.as_view(), name="mis_recetas"), #la clase MisRecetas esta en gestionUsuarios.views
 
     path('lista_de_usuarios/', ListaDeUsuarios.as_view(), name="lista_de_usuarios"),
     path('registrar_usuario/', RegistrarUsuario.as_view(), name="registrar_usuario"),

@@ -88,6 +88,3 @@ local_settings.py
 .env
 db.sqlite3
 
-gestionUsuarios/migrations/
-gestionStock/migrations/
-registration/migrations/

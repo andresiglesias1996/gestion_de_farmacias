@@ -2,24 +2,27 @@
 {% extends 'base.html' %}
 
 <!--Titulo de la pagina o pestaña-->
-{% block title %} Mi Farmacia {% endblock %} {% block content %}
+{% block title %} Mi Farmacia {% endblock %} 
+
+{% block content %}
 
 <!--Nav bar-->
 {% include "nav.html" %}
 
-<div class="container">
-    <div class="my-3">
+<div class="m-3">
+    <div class="">
+        <a class="btn btn-success float-right" href="#formulario">+ Stock</a>
         <h1>Stock de {{mi_farmacia.nombre}}</h1>
-        <a class="btn btn-outline-grey text-white float-right" href="#formulario">Crear Registro De Stock</a>
     </div>
-    <br>
 
+<div class="table-responsive">
     <table class="table table-hover">
-        <thead>
+        <thead class="thead-dark">
             <tr>
                 <th>Stock</th>
                 <th>Medicamento</th>
-                <th>vencimiento</th>
+                <th>Vencimiento</th>
+                <th>Codigo</th>
                 <th></th>
             </tr>
         </thead>
@@ -29,12 +32,13 @@
                 <td>{{lote.stock}}</td>
                 <td>{{lote.medicamento}}</td>
                 <td>{{lote.vencimiento}}</td>
+                <td>{{lote.id}}</td>
                 <td><a class="btn btn-sm btn-primary" href="/editar_stock/{{ lote.id }}">editar...</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-
+</div>
 
     {% if formulario_nuevo_stock.errors %}
     <p style="color: red">Por favor revisa este campo</p>

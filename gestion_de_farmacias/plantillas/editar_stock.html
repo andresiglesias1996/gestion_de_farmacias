@@ -7,18 +7,17 @@
 <!--Nav bar-->
 {% include "nav.html" %}
 
-<div class="container">
+<div class="form-group col-md-12">
 
-    
 
-    <div class="card my-3">
+    <div class="card">
         <div class="card-header">
             <h3>Editar registro de stock</h3>
         </div>
 
-	{% if form.errors %}
-    <p style="color:red;">Por favor revisa este campo</p>
-    {% endif %}
+        {% if form.errors %}
+        <p style="color:red;">Por favor revisa este campo</p>
+        {% endif %}
 
         <form method="POST">{% csrf_token %}
             <div class="card-body">

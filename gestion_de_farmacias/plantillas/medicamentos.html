@@ -2,46 +2,64 @@
 {% extends 'base.html' %}
 
 <!--Titulo de la pagina o pestaña-->
-{% block title %} Medicamentos {% endblock %} {% block content %}
+{% block title %} Medicamentos {% endblock %} 
+
+{% block content %}
 
 <!--Nav bar-->
 {% include "nav.html" %}
 
-<div class="container my-3">
+<div class="m-3">
     <h1>Medicamentos</h1>
+
+    <div class="consulta medicamento mb-3">
+        <h3>
+            <p>Criterios de búsqueda</p>
+        </h3>
+        <input type="text" class="form-control mb-2" id="cc-number" placeholder="Medicamento, Laboratorio, Número de Registro" required="">
+        <button class="btn btn-secondary btn-lg btn-block" type="submit">Buscar</button>
+    </div>
+
+
+
+    <div class="table-responsive">
+
     <!-- ==============================-->
     <!-- Tabla con los Medicamentos -->
     <!-- ==============================-->
-    {% if medicamentos %}
-    <table class="table table-hover">
+        {% if medicamentos %}
+        <table class="table table-hover">
 
-        <thead>
-            <tr>
-                <th>Nombre Comercial</th>
-                <th>Categoria</th>
-                <th>Laboratorio</th>
-                <th>Principio activo</th>
-                <th>Forma</th>
-                <!--<th>Contraindicaciones</th>-->
-            </tr>
-        </thead>
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nombre Comercial</th>
+                    <th>Categoria</th>
+                    <th>Laboratorio</th>
+                    <th>Principio activo</th>
+                    <th>Forma</th>
+                    <!--<th>Contraindicaciones</th>-->
+                </tr>
+            </thead>
 
-        <tbody>
-            {% for medicamentos in medicamentos %}
-            <tr>
-                <td>{{ medicamentos.nombre_comercial }}</td>
-                <td>{{ medicamentos.categoria }}</td>
-                <td>{{ medicamentos.laboratorio }}</td>
-                <td>{{ medicamentos.principio_activo }}</td>
-                <td>{{ medicamentos.forma }}</td>
-                <!--<td>{{ medicamentos.contraindicaciones }}</td>-->
-                <!--<td><a class="btn btn-sm btn-danger" href="/editar_stock/{{ medicamentos.id }}">Editar</a></td>-->
-            </tr>
-            {% endfor %}
-        </tbody>
+            <tbody>
+                {% for medicamentos in medicamentos %}
+                <tr>
+                    <td>{{ medicamentos.nombre_comercial }}</td>
+                    <td>{{ medicamentos.categoria }}</td>
+                    <td>{{ medicamentos.laboratorio }}</td>
+                    <td>{{ medicamentos.principio_activo }}</td>
+                    <td>{{ medicamentos.forma }}</td>
+                    <!--<td>{{ medicamentos.contraindicaciones }}</td>-->
+                    <!--<td><a class="btn btn-sm btn-danger" href="/editar_stock/{{ medicamentos.id }}">Editar</a></td>-->
+                </tr>
+                {% endfor %}
+            </tbody>
 
-    </table>
-    {% endif %}
+        </table>
+        {% endif %}
+    </div>
+
+    <br>
 
     <!-- Menú de paginación -->
     {% if is_paginated %}
@@ -72,9 +90,9 @@
     </nav>
     {% endif %}
 
+
+
 </div>
-
-
 
 
 {% endblock content %}
