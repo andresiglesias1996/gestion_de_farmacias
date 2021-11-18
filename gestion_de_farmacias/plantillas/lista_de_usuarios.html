@@ -1,5 +1,5 @@
-<!-- Contenido estatico de la pagina -->
 {% extends 'base.html' %}
+<!-- Contenido estatico de la pagina -->
 
 <!--Titulo de la pagina o pestaña-->
 {% block title %} Lista de Usuarios {% endblock %} {% block content %}
@@ -39,7 +39,7 @@
                     <td>{{ usuario.nombre }}</td>
                     <td>{{ usuario.apellido }}</td>
                     <td>{{ usuario.telefono }}</td>
-                    <td><a class="btn btn-sm btn-primary" href="/usuario/{{ usuario.cedula_de_identidad }}">Ver usuario...</a></td>
+                    <td><a class="btn btn-sm btn-primary" href="/recetas_usuario/{{ usuario.cedula_de_identidad }}">Ver recetas</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

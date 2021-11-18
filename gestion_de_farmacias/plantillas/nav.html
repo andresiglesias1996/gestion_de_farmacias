@@ -1,4 +1,4 @@
-<!-- menu responsive -->
+{% comment "" %}<!-- menu responsive -->{% endcomment %}
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark navbar-toggler -md sm">
     <!-- Logo -->
 
@@ -129,7 +129,8 @@
                 </a>
             </li>
 
-            {% endif %} {% if not request.user.is_authenticated %}
+            {% endif %} 
+            {% if not request.user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
             </li>

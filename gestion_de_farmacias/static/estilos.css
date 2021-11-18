@@ -1,5 +1,6 @@
 body {
-    background-color: #f8f9fa;
+    /*background-color: #f8f9fa;*/
+    background-color: #ff9090;
     /*color: rgb(80, 80, 80);*/
 }
 
@@ -11,7 +12,9 @@ aumentar o disminuir el valor numerico de los campos input*/
 /* Chrome, Safari, Edge, Opera */
 
 #id_cedula_de_identidad::-webkit-inner-spin-button,
-#id_cedula_de_identidad::-webkit-outer-spin-button {
+#id_cedula_de_identidad::-webkit-outer-spin-button,
+#id_telefono::-webkit-inner-spin-button,
+#id_telefono::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
@@ -19,6 +22,7 @@ aumentar o disminuir el valor numerico de los campos input*/
 
 /* Firefox */
 
-#id_cedula_de_identidad {
+#id_cedula_de_identidad,
+#id_telefono {
     -moz-appearance: textfield;
 }

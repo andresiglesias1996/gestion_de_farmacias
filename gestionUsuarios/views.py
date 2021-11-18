@@ -49,7 +49,7 @@ class RegistrarUsuario(CreateView):
         form_class = FormularioCrearUsuario
 
         template_name = 'registrar_usuario.html'
-        success_url = reverse_lazy('lista_de_usuarios')
+        success_url = reverse_lazy('login')
 
 
 
@@ -184,7 +184,9 @@ class EditarReceta(UpdateView):
 
 
 
-
+# =======================================================================
+# Mis Recetas ============================================================
+# =======================================================================
 class MisRecetas(ListView):
 
     #model = Usuarios
@@ -208,3 +210,21 @@ class MisRecetas(ListView):
         #context['Usuarios'] = str(type(Usuarios.objects.filter(Usuarios='Nombre')))
 
         return context         
+
+
+
+
+# =======================================================================
+# Recetas Usuario ========================================================
+# =======================================================================
+class RecetasUsuario(DetailView):
+    model = Usuarios
+    template_name = 'recetas_usuario.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cedula_de_identidad =self.kwargs['pk']
+        
+        context['Recetas'] = Recetas.objects.filter(paciente=cedula_de_identidad)
+   
+        return context

@@ -1,5 +1,6 @@
 
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from gestionStock.models import Medicamentos
 
@@ -92,7 +93,7 @@ class Usuarios(AbstractBaseUser):
         fecha_de_nacimiento= models.CharField(max_length = 50,blank=True, null=True, verbose_name="Fecha de nacimiento")
         departmento = models.CharField(max_length = 50, blank=True, null=True)
         direccion=models.CharField(max_length=200, blank=True, null=True)
-        telefono=models.IntegerField(blank=True, null=True)
+        telefono=models.IntegerField(blank=True, null=True,validators=[MinValueValidator(10000000), MaxValueValidator(2147483646)])
         email=models.EmailField(unique=True)
         created_at = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
         updated_at = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")

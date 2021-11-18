@@ -18,6 +18,8 @@ window.onload = function() {
     let input_telefono = document.getElementById('id_telefono');
     if (input_telefono) {
         input_telefono.type = 'tel';
+        //input_telefono.setAttribute("max", 999999999);
+        //input_telefono.setAttribute("min",99999999);
     }
 
 

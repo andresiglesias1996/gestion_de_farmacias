@@ -1,5 +1,5 @@
-<!-- Contenido estatico de la pagina -->
 {% extends 'base.html' %}
+{% comment %}Contenido estatico de la pagina{% endcomment %}
 
 <!--Titulo de la pagina o pestaña-->
 {% block title %} Inicio {% endblock %} {% block content %}
@@ -33,6 +33,7 @@
     {% endif %} {% endif %}
 
     <p>user.rol: {{user.rol}}</p>
+    <p>user.usuario_administrador: {{user.usuario_administrador}}</p>
     <p>user: {{user}}</p>
     <p>user.group: {{user.group }}</p>
     <p>user.is_authenticated: {{user.is_authenticated }}</p>

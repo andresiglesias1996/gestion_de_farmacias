@@ -2,7 +2,7 @@
 <!-- Contenido estatico de la pagina -->
 
 <!--Titulo de la pagina o pestaña-->
-{% block title %}Mis Recetas{% endblock  %}
+{% block title %}Receta de usuario{% endblock  %}
 
 {% block content %}
 
@@ -11,20 +11,20 @@
 	
 	<div class="m-3">
 
-		<h1>Mis Recetas</h1>
-	
-		{% if object_list  %}
+		{% if Recetas  %}
+		        <h1>Receta de {{object.usuario}} </h1>
 			<div class="table-responsive">
                                 <table class="table table-hover">
                                         
                                         <thead class="thead-dark">
                                                 <tr>
-                                                        <th>Medicamento</th>
-                                                        <th>Paciente</th>
-                                                        <th>Medico</th>
-                                                        <th>Descripcion</th>
-                                                        <th>Vencimiento</th>
-                                                        <th>Estado</th>
+                                                        <th> medicamento </th>
+                                                        <th> paciente </th>
+                                                        <th> medico </th>
+                                                         <th> descripcion </th>
+                                                        <th> vencimiento </th>
+                                                        <th> estado </th>
+                                                        
                                                         {% comment "" %}
                                                         <th>...</th>
                                                         {% endcomment %}
@@ -32,7 +32,7 @@
                                         </thead>
                                         
                                         <tbody>
-                                                {% for receta in object_list %}
+                                                {% for receta in Recetas %}
                                                         <tr>
                                                                 <td>{{ receta.medicamento }}</td>
                                                                 <td>{{ receta.paciente }}</td>
@@ -51,14 +51,11 @@
                         </div>
 		{% else %}
                 <div class="alert alert-warning">
-                        <strong>Atencion!</strong>  Su usuario no tiene recetas.
+                        <strong>Atencion!</strong>  El usuario {{object.usuario}} no tiene recetas.
                 </div>
                 {% endif %}
 
 	</div>
 
 
-
-
-	
 {% endblock content %}

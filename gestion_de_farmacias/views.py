@@ -40,20 +40,18 @@ class InicioView(TemplateView):
 
         # verifica que la persona que accede a la pagina sea un usuario autentificado
         if self.request.user.is_authenticated and self.request.user.rol == 'farmacia':
-            
-            # si esta autentificado obtenemos el valor de la cedula de identidad del usuario
-        	cedula_del_user = self.request.user.cedula_de_identidad
-            
-            #con el valor de su cedula verificamos si esta registrado como funcionario de farmacia y obtenemos el dato de que farmacia es
-        	mi_farmacia = Farmacias.objects.filter(funcionarios=cedula_del_user)[0]
-            
 
-            #pasamos el dato mi_farmacia al contexto que llega al fronend
-        	context['mi_farmacia'] = mi_farmacia
+            # si esta autentificado obtenemos el valor de la cedula de identidad del usuario
+            cedula_del_user = self.request.user.cedula_de_identidad
+
+            # con el valor de su cedula verificamos si esta registrado como funcionario de farmacia y obtenemos el dato de que farmacia es
+            mis_farmacias = Farmacias.objects.filter(funcionarios=cedula_del_user)
+
+            if len(mis_farmacias)>0:
+                # pasamos el dato mi_farmacia al contexto que llega al fronend
+                context['mi_farmacia'] = mis_farmacias[0]
 
         return context
-
-
 
 
 # =====================
@@ -69,10 +67,6 @@ def inicio(request):
     diccionario_de_contexto = {"usuario": "Fulano Detail"}
 
     return render(request, "inicio.html", diccionario_de_contexto)
-
-
-
-
 
 
 # =================================================
@@ -91,8 +85,6 @@ def inicio(request):
 	diccionario_de_contexto={"usuario":"Rafael Burgueño"}
 	return render(request, "login.html", diccionario_de_contexto)
 """
-
-
 
 
 # ===============================

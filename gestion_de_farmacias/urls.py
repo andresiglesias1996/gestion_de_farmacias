@@ -19,7 +19,7 @@ from django.contrib.auth.views import LoginView, logout_then_login
 
 #from gestion_de_farmacias.views import login, inicio
 from gestion_de_farmacias import views
-from gestionUsuarios.views import MisRecetas, RegistrarUsuario, EditarUsuario, ListaDeUsuarios, ListarRecetas, EditarReceta, ActulizarMiUsuario,MiUsuario
+from gestionUsuarios.views import RecetasUsuario, MisRecetas, RegistrarUsuario, EditarUsuario, ListaDeUsuarios, ListarRecetas, EditarReceta, ActulizarMiUsuario,MiUsuario
 from gestionStock.views import ListarMedicamentos, MiStock, Stock, EditarStock
 
 urlpatterns = [
@@ -54,6 +54,8 @@ urlpatterns = [
     path('recetas/', ListarRecetas.as_view(), name="recetas"),
     path('editar_receta/<int:pk>', EditarReceta.as_view(), name="editar_stock"),
     path('mis_recetas/', MisRecetas.as_view(), name="mis_recetas"), #la clase MisRecetas esta en gestionUsuarios.views
+    path('recetas_usuario/<int:pk>/', RecetasUsuario.as_view(), name='recetas_usuario'),
+
 
     path('lista_de_usuarios/', ListaDeUsuarios.as_view(), name="lista_de_usuarios"),
     path('registrar_usuario/', RegistrarUsuario.as_view(), name="registrar_usuario"),
