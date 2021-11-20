@@ -51,7 +51,7 @@ class UsuarioManager(BaseUserManager):
 class Roles(models.Model):
         #id= models.IntegerField(primary_key=True)
         nombre = models.CharField(max_length = 50, unique = True)
-        descripcion=models.CharField(max_length=200,blank=True, null=True)
+        descripcion=models.TextField(max_length=200,blank=True, null=True)
 
         def __str__(self):
                 return self.nombre
@@ -91,7 +91,7 @@ class Usuarios(AbstractBaseUser):
         usuario_administrador = models.BooleanField(default=False)
         sexo = models.CharField(max_length = 50, blank=True, null=True)
         fecha_de_nacimiento= models.CharField(max_length = 50,blank=True, null=True, verbose_name="Fecha de nacimiento")
-        departmento = models.CharField(max_length = 50, blank=True, null=True)
+        departamento = models.CharField(max_length = 50, blank=True, null=True)
         direccion=models.CharField(max_length=200, blank=True, null=True)
         telefono=models.IntegerField(blank=True, null=True,validators=[MinValueValidator(10000000), MaxValueValidator(2147483646)])
         email=models.EmailField(unique=True)

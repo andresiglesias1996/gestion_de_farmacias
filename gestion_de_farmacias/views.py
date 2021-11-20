@@ -141,107 +141,295 @@ plantilla para generar los datos en: https://www.json-generator.com/
 """
 
 MEDICAMENTOS = [
-    {
-        "nombre_comercial": "Young165",
-        "laboratorio": "BITENDREX",
-        "contraindicaciones": "Tempor aliqua ullamco est dolore ea. Laborum adipisicing fugiat est reprehenderit occaecat anim fugiat occaecat aute ad irure voluptate sunt. Reprehenderit aute incididunt elit est nulla mollit cupidatat amet.\r\n"
+{
+    'nombre_comercial':'AAS',  
+    'laboratorio':'OPELLA HEALTHCARE', 
+    'principio_activo':'Acetilsalicílico ácido',                   
+    'forma':'Comprimidos',  
+    'contraindicaciones':'No contraindicado',                              
+    'categoria':'RC'
     },
-    {
-        "nombre_comercial": "Poole701",
-        "laboratorio": "XTH",
-        "contraindicaciones": "Cupidatat elit in ad elit anim qui ex eu. Nostrud deserunt ipsum nulla quis commodo culpa cillum consequat veniam. Tempor nisi sit mollit laboris irure dolore cupidatat amet.\r\n"
+{
+    'nombre_comercial':'ATROVENT NASAL',
+    'laboratorio':'OPELLA HEALTHCARE',        
+    'principio_activo':'Ipratropio bromuro',                        
+    'forma':' PULVERIZACION NASAL',                   
+    'contraindicaciones':'Hipersensibilidad a análogos de atropina.',
+    'categoria': 'VL'
     },
-    {
-        "nombre_comercial": "Mcpherson865",
-        "laboratorio": "THREDZ",
-        "contraindicaciones": "Fugiat id minim aliquip sunt in commodo. Sint exercitation amet consectetur culpa incididunt sit mollit sint tempor proident sit in est occaecat. Sint do in amet commodo eu dolor quis aliqua id ipsum id proident id.\r\n"
+{
+    'nombre_comercial':'BISOLVON MUCOLITICO' ,     
+    'laboratorio':'OPELLA HEALTHCARE',        
+    'principio_activo':'Bromhexina hidrocloruro',                 
+    'forma':'JARABE',                                              
+    'contraindicaciones':'Hipersensibilidad.',  
+    'categoria':'VL'
     },
-    {
-        "nombre_comercial": "Bright795",
-        "laboratorio": "ROBOID",
-        "contraindicaciones": "Nulla cupidatat deserunt officia minim aliqua culpa amet non laboris. Magna consectetur eu ullamco laboris aliquip irure consequat aute nisi in elit anim. Sunt irure pariatur id ea id aute. Ut eiusmod fugiat incididunt cillum officia nulla excepteur incididunt proident ipsum labore. Mollit cillum irure mollit eu consequat. Enim sit est exercitation Lorem exercitation qui aliquip et pariatur amet occaecat eiusmod.\r\n"
+{
+    'nombre_comercial':'BUSCAPINA 10',            
+    'laboratorio':'OPELLA HEALTHCARE',        
+    'principio_activo':'Escopolamina butilbromuro'  ,                  
+    'forma':'Comprimidos',                                         
+    'contraindicaciones':'Hipersensibilidad, glaucoma de ángulo estrecho no tratado, hipertrofia prostática', 
+    'categoria':'VL'
     },
-    {
-        "nombre_comercial": "Rivera355",
-        "laboratorio": "COLLAIRE",
-        "contraindicaciones": "Exercitation dolor id duis elit ad excepteur nisi deserunt tempor occaecat proident. Lorem qui cillum proident ut consectetur elit laboris consequat qui. Laborum nulla irure anim eiusmod id nisi eiusmod duis adipisicing consectetur Lorem eiusmod ipsum. Nisi cupidatat in minim nulla sunt amet veniam enim deserunt voluptate. Do ipsum ad magna ea sint.\r\n"
+{
+    'nombre_comercial':'TELFAST 120',               
+    'laboratorio': 'OPELLA HEALTHCARE' ,      
+    'principio_activo':'Fexofenadina hidrocloruro'  ,                 
+    'forma': 'Comprimidos',                                       
+    'contraindicaciones':  'Hipersensibilidad' ,
+    'categoria':'RC'
     },
-    {
-        "nombre_comercial": "Stuart598",
-        "laboratorio": "REALYSIS",
-        "contraindicaciones": "Deserunt dolore voluptate exercitation sit dolore sit pariatur velit ut id in magna tempor mollit. Aute veniam ex commodo consequat incididunt dolor aliqua dolore exercitation laboris enim. Voluptate mollit ut minim occaecat et labore reprehenderit elit esse.\r\n"
+{
+    'nombre_comercial':'ABACAVIR/LAMIVUDINA 600' ,
+       'laboratorio':'MYLAN PHARMACEUTICALS',  
+       'principio_activo': 'Abacavir sulfato, Lamivudina',               
+       'forma' :'Comprimidos',                                         
+       'contraindicaciones': 'Hipersensibilidad  individuales. I.H. grave', 
+       'categoria':'RC'
+       },
+{
+    'nombre_comercial':'ABICREM 0,25 GALENICUM',     
+    'laboratorio': 'DERMA S.L.',             
+    'principio_activo':'Fluocinolona acetónido, Framicetina sulfato',
+    'forma':  'Crema',                                           
+    'contraindicaciones': 'Hipersensibilidad a sus componentes; infecciones cutáneas víricas y tuberculosas en actividad; úlceras de las extremidades; niños < 2 años', 
+    'categoria':  'VL'
     },
-    {
-        "nombre_comercial": "Newman212",
-        "laboratorio": "NETBOOK",
-        "contraindicaciones": "Mollit consequat enim anim aliqua sint. Nulla sunt tempor ullamco ullamco elit non eiusmod velit eu qui do. Aute sint laboris sit ut consequat exercitation in eiusmod.\r\n"
+{
+    'nombre_comercial':'ABILIFY 1 MG',               
+    'laboratorio':'OTSUKA PHARMACEUTICAL',    
+    'principio_activo': 'Aripiprazol' ,                             
+    'forma' :'Solucion Oral',                                       
+    'contraindicaciones': 'Hipersensibilidad a aripiprazol',
+    'categoria':  'VL'
     },
-    {
-        "nombre_comercial": "Winters413",
-        "laboratorio": "BITTOR",
-        "contraindicaciones": "Enim et deserunt ipsum aliquip consequat non. Esse amet eu laborum incididunt laborum amet magna sit eu incididunt pariatur proident elit esse. Velit et cupidatat labore enim exercitation exercitation labore ea do irure elit eiusmod elit incididunt. Aliqua in occaecat voluptate id duis occaecat eu. Duis dolore exercitation pariatur exercitation nisi Lorem. Aliquip irure nisi reprehenderit occaecat aliquip enim occaecat ut duis. Nostrud sunt ad ex officia dolor id ipsum do.\r\n"
+{
+    'nombre_comercial':'ACARBOSA FARMALIDER 100',    
+    'laboratorio':  'FARMALIDER',            
+    'principio_activo':'Acarbosa',                                  
+    'forma': 'Comprimidos' , 
+    'contraindicaciones': 'Hipersensibilidad a los componentes de la planta',                                     
+    'categoria': 'RC'
     },
-    {
-        "nombre_comercial": "Wade360",
-        "laboratorio": "CONFRENZY",
-        "contraindicaciones": "Esse et in eu laboris culpa ex ut et. Velit mollit adipisicing sit pariatur dolore in magna magna laborum cupidatat. Occaecat amet qui est ut in et Lorem esse magna nulla. Reprehenderit proident aute proident amet do.\r\n"
+{
+    'nombre_comercial':'ACTITHIOL MUCOLITICO INFANTIL 20 MG',  
+    'laboratorio':'lacer' ,         
+    'principio_activo':'Carbocisteína Carbocisteína',             
+    'forma':'Solucion Oral'    ,                                     
+    'contraindicaciones':'Hipersensibilidad a la carbocisteína, a otros compuestos relacionados con la cisteína o a alguno de los excipientes Pacientes con úlcera gastroduodena' ,
+    'categoria':'RC'
     },
-    {
-        "nombre_comercial": "Gates944",
-        "laboratorio": "COGENTRY",
-        "contraindicaciones": "Do aute irure quis pariatur mollit velit ipsum. Reprehenderit duis adipisicing mollit magna. Nostrud id velit aliquip laboris non voluptate culpa et proident quis eu ut. Lorem aliqua duis esse sit ipsum in laborum ea id officia adipisicing ullamco exercitation.\r\n"
+{
+    'nombre_comercial':'ADIAVAL 1.000 MG',           
+    'laboratorio':'LACER',                    
+    'principio_activo':'Calcio carbonato, Colecalciferol',         
+    'forma':'Comprimidos Masticables',                          
+    'contraindicaciones':'Hipersensibilidad. situaciones que dan lugar a hipecalcemiahipercalcemia y/o hipercalciuria; cálculos renales',  
+    'categoria':'RC'
     },
-    {
-        "nombre_comercial": "Fox342",
-        "laboratorio": "ECSTASIA",
-        "contraindicaciones": "Officia reprehenderit pariatur ullamco elit dolor excepteur ullamco anim occaecat Lorem et reprehenderit excepteur esse. Pariatur reprehenderit irure elit exercitation. Cillum et qui et officia incididunt in duis aliqua. Culpa veniam adipisicing laborum labore est. Occaecat magna laborum Lorem cupidatat culpa est laborum eiusmod tempor.\r\n"
+{
+    'nombre_comercial':'AGIOLAX GRANULADO',         
+    'laboratorio':'MYLAN PHARMACEUTICALS'   ,   
+    'principio_activo':'Plantago ovata forskk'   ,                 
+    'forma':'semilla,  Granulado', 
+    'contraindicaciones':'Hipersensibilidad, obstrucción y estenosis intestinal, íleo paralítico, enf. inflamatoria de colon' ,
+    'categoria':'RC'
     },
-    {
-        "nombre_comercial": "Humphrey186",
-        "laboratorio": "UTARIAN",
-        "contraindicaciones": "Ea nostrud commodo officia magna commodo fugiat. Velit qui duis non exercitation minim sint cillum Lorem et. Irure irure occaecat nulla magna. Ut ipsum id eiusmod cillum magna aliquip veniam amet aliquip deserunt qui reprehenderit minim do. Qui cillum laboris cupidatat consectetur elit dolor ullamco non irure qui ad duis. Consequat qui consequat sit amet esse exercitation.\r\n"
+{
+    'nombre_comercial':'BECLOFORTE 250',           
+    'laboratorio':'GLAXOSMITHKLINE, S.A.' ,     
+    'principio_activo':'Beclometasona dipropionato'  ,                
+    'forma':'Inhalador',                                    
+     'contraindicaciones':'Hipersensibilidad' ,
+     'categoria':'RC'
+     },
+{
+    'nombre_comercial':'BENZETACIL 1.200.000 UI' ,   
+    'laboratorio':'REIG JOFRE'  ,               
+    'principio_activo':'Bencilpenicilina benzatina' ,                 
+    'forma':'POLVO PARA SUSPENSIÓN INYECTABLE',
+    'contraindicaciones': 'Hipersensibilidad', 
+    'categoria':'RC'
     },
-    {
-        "nombre_comercial": "Harvey401",
-        "laboratorio": "ACCUFARM",
-        "contraindicaciones": "Irure laborum labore consequat irure non. Reprehenderit commodo dolor exercitation occaecat reprehenderit ipsum pariatur excepteur Lorem ullamco elit ut quis ea. Sint consequat proident proident amet ipsum minim nisi cillum ad. Aute sunt adipisicing minim ea non labore do adipisicing irure consequat elit culpa.\r\n"
+{
+    'nombre_comercial':'BICALUTAMIDA BLUEFISH 150'  , 
+    'laboratorio':'PHARMA SLU'    ,            
+    'principio_activo':'Bicalutamida'   ,                               
+    'forma':'Comprimidos',                            
+    'contraindicaciones':'Hipersensibilidad.antecedentes de toxicidad hepática asociada con bicalutamida, concomitancia de terfenadina, astemizol o cisaprida',  
+    'categoria':'RC'
     },
-    {
-        "nombre_comercial": "Davenport305",
-        "laboratorio": "ANDRYX",
-        "contraindicaciones": "Dolore cillum incididunt irure eiusmod veniam consectetur amet et magna proident in aute proident. Ut minim cillum consequat nulla. Laborum fugiat enim est incididunt dolore tempor ea in reprehenderit. Voluptate excepteur ex duis nulla. Id aute sint incididunt ipsum fugiat.\r\n"
+{
+    'nombre_comercial':'BISOLFREN 200' ,           
+    'laboratorio':'OPELLA HEALTHCARE' , 
+    'forma':'Comprimidos',           
+    'principio_activo':'Ibuprofeno, Pseudoefedrina hidrocloruro EXC: Carboximetilalmidón sódico','forma':  'Comprimidos' ,        
+    'contraindicaciones':'Hipersensibilidad', 
+    'categoria':'RC'
     },
-    {
-        "nombre_comercial": "Mcintyre728",
-        "laboratorio": "URBANSHEE",
-        "contraindicaciones": "Minim labore sunt laborum velit dolor occaecat aliquip pariatur reprehenderit excepteur aute quis. Reprehenderit ex excepteur ullamco deserunt. Et pariatur est eu sit do. Duis nostrud ullamco magna voluptate nostrud.\r\n"
+{
+    'nombre_comercial':'lantus 100 U/mL' ,           
+    'laboratorio':'Sanofi'          ,           
+    'principio_activo':'Insulina glargina'  ,                          
+    'forma':'solución inyectable' ,                           
+    'contraindicaciones':  'Hipersensibilidad' , 
+    'categoria':'FNR'
     },
-    {
-        "nombre_comercial": "Knapp419",
-        "laboratorio": "QUOTEZART",
-        "contraindicaciones": "Eiusmod incididunt duis exercitation sint labore occaecat nostrud. Tempor elit reprehenderit minim elit qui ex. Et sunt sit fugiat qui ea enim reprehenderit. Sit eiusmod laboris cupidatat nisi Lorem et proident exercitation qui ad nisi incididunt. Pariatur nostrud ea id sint aliquip occaecat sit dolore laborum fugiat irure. Fugiat eiusmod ea reprehenderit tempor aute ipsum. Eu ad commodo sit proident nulla adipisicing incididunt ad aliquip officia ut tempor.\r\n"
+{
+    'nombre_comercial':'dyslor 500 U',
+    'laboratorio': 'Roemmers-Iclos',  
+    'principio_activo':'Toxina botulinica', 
+    'forma':  'solucion inyectable' , 
+    'contraindicaciones':'Hipersensibilidad', 
+    'categoria':'FNR'
     },
-    {
-        "nombre_comercial": "Velez656",
-        "laboratorio": "MEDESIGN",
-        "contraindicaciones": "Sint elit proident do excepteur consequat culpa enim sint amet. Proident in do pariatur sit ullamco. Velit cillum qui velit minim mollit non enim cillum do magna velit. Amet voluptate duis consectetur nulla duis eiusmod id nostrud sint occaecat ullamco ullamco ut magna. Cillum incididunt laboris mollit veniam ea mollit.\r\n"
+{
+    'nombre_comercial':'tacrolimus sandoz 1 mg'  ,    
+    'laboratorio':'Scienza-Novartis' ,         
+    'principio_activo':'Tacrolimús'  ,                                  
+    'forma':'Capsula'     ,                                
+    'contraindicaciones':'Hipersensibilidad a tacrolimús o a otros macrólidos',
+    'categoria':  'FNR'
     },
-    {
-        "nombre_comercial": "Greer919",
-        "laboratorio": "CYCLONICA",
-        "contraindicaciones": "Cillum consequat nulla ex cupidatat. Aliqua quis reprehenderit anim consectetur eu nostrud sint qui nulla voluptate magna occaecat. Reprehenderit laborum veniam quis laborum cillum amet laboris ea pariatur.\r\n"
+{
+    'nombre_comercial':'CERTICAN Comprimido 0.75 mg',  
+    'laboratorio':'Scienza-Novartis',         
+    'principio_activo': 'Everolimus'   ,                                 
+    'forma':'Comprimidos'   ,                              
+    'contraindicaciones':'Hipersensibilidad a everolimús y sirolimús.' ,
+    'categoria':'FNR'
     },
-    {
-        "nombre_comercial": "Conrad572",
-        "laboratorio": "IMKAN",
-        "contraindicaciones": "Deserunt deserunt sunt nisi laborum eu do magna exercitation adipisicing. Ex elit mollit est labore labore dolore enim eiusmod in veniam anim id. Adipisicing eu nostrud ullamco ea do. Eiusmod quis excepteur ipsum est deserunt excepteur duis. Tempor officia Lorem laboris est officia est ut do aute occaecat consequat.\r\n"
+{
+    'nombre_comercial':'AVONEX EN JERINGA PRELLENADA', 
+    'laboratorio':'Biogen Idec'  ,             
+    'principio_activo':'Interferón beta-1a'  ,                            
+    'forma': 'Inyectable'  ,                               
+    'contraindicaciones':'Hipersensibilidad a interferón-ß natural o recombinante; embarazo; depresión grave activa y/o ideación suicida', 
+    'categoria':'FNR'},
+{
+    'nombre_comercial':'quetipax 200 mg',               
+    'laboratorio':'Roemmers-Rowe'  ,          
+    'principio_activo':'Quetiapina'   ,                                  
+    'forma':'Comprimidos'  ,                                    
+    'contraindicaciones':'Hipersensibilidad a quetiapina, concomitante con inhibidores del citocromo P450 3A4 (como inhibidores de la proteasa del VIH, antifúngicos tipo azol, eritromicina, claritromicina y nefazodona' ,
+    'categoria': 'RV'
     },
-    {
-        "nombre_comercial": "Wise511",
-        "laboratorio": "TSUNAMIA",
-        "contraindicaciones": "Ut pariatur excepteur aliqua ex sit nostrud. Id eu deserunt est tempor fugiat nulla pariatur commodo. Ea labore eu eiusmod in. Amet enim velit non ad id voluptate laboris nostrud pariatur magna culpa. Ullamco sit proident excepteur fugiat aliquip do laboris labore enim consectetur.\r\n"
+{
+    'nombre_comercial':'ondil 2 mg',                 
+    'laboratorio':'Roemmers-Rowe' ,              
+    'principio_activo':  'Alprazolam'  ,                                  
+    'forma':'Comprimidos',                                 
+    'contraindicaciones':'Hipersensibilidad a alprazolam, a benzodiazepinas, miastenia gravis, insuf. Respiratoria grave, síndrome de apnea del sueño',  
+    'categoria':'RV'
+    },
+{
+    'nombre_comercial':'bropan 12 mg',               
+    'laboratorio':'Fármaco Uruguayo',            
+    'principio_activo':'Bromazepam'   ,                                
+    'forma':'Comprimidos' ,                                    
+    'contraindicaciones':'Hipersensibilidad a bromazepam, a benzodiazepinas, miastenia gravis',
+    'categoria': 'RV'
+    },
+{
+    'nombre_comercial':'DALGION Gotas' ,               
+    'laboratorio':'Gramón Bagó' ,                
+    'principio_activo':'Tramadol'   ,                                     
+    'forma':   'Gotas',                                     
+    'contraindicaciones':'Hipersensibilidad a tramadol; intoxicación aguda o sobredosis con depresores del SNC (alcohol, hipnóticos, otros analgésicos opiáceos', 
+    'categoria':'RV'
+    },
+{
+    'nombre_comercial':'Aceprax',                        
+    'laboratorio':'Celsius' ,                 
+    'principio_activo':'Alprazolam'  ,                                
+    'forma':'Comprimidos',                                       
+    'contraindicaciones':'Hipersensibilidad a alprazolam, a benzodiazepinas, miastenia gravis, insuf. Respiratoria grave, síndrome de apnea del sueño',  
+    'categoria':'RV'
+    },
+{
+    'nombre_comercial':'TRAPAX',                       
+    'laboratorio':'Roemmers-Rowe',                
+    'principio_activo':'Lorazepam'  ,                              
+    'forma':'Comprimidos',                                       
+    'contraindicaciones':'Hipersensibilidad, miastenia gravis, síndrome de apnea del sueño, insuf. respiratoria severa, I.H. severa, tto. simultáneo con opiáceos, barbitúricos, neurolépticos' ,
+    'categoria':'RV'},
+{
+    'nombre_comercial':'abretia 40 mg',                 
+    'laboratorio':'Roemmers',                   
+    'principio_activo':'Atomoxetina',                                  
+    'forma':'Capsula',                                      
+    'contraindicaciones':'Hipersensibilidad atomoxetina . Tto. concomitante con IMAO; distanciar al menos 2 sem. Glaucoma de ángulo estrecho', 
+    'categoria':'RV'
+    },
+{
+    'nombre_comercial':'ezentius 20 mg',                 
+    'laboratorio':'Roemmers'  ,               
+    'principio_activo':'Escitalopram',                               
+    'forma':'Comprimidos',                                    
+    'contraindicaciones':'Hipersensibilidad, con antecedentes de intervalo QT alargado o síndrome congénito del segmento QT largo, tto. concomitante con IMAO no selectivos irreversibles, con IMAO A reversibles',  
+    'categoria':'RV'
+    },
+{
+    'nombre_comercial':'Mizapin  ',                        
+    'laboratorio':'Dispert',              
+    'principio_activo': 'Mirtazapina',                                
+    'forma':'Comprimidos' ,                                    
+    'contraindicaciones':'Hipersensibilidad. Uso concomitante con IMAO', 
+    'categoria':'RV'
+    },
+{
+    'nombre_comercial':'NOVEMINA CON CODEINA FORTE',   
+    'laboratorio':'Lazar',                      
+    'principio_activo':'Codeína y otros analgésicos no opiáceos', 
+    'forma':'Comprimidos',                                         
+    'contraindicaciones':'Hipersensibilidad' ,
+    'categoria':  'RV'
     }
 ]
+
+
+
+
+# =================================
+# Carga Farmacias a la base de datos =
+# =================================
+# Se ejecutan cuando cuando se accede a la ruta 'localhost/carga_farmacias/'
+# al ejecutar esta funcion se cargan registros a la tabla Farmacias
+def carga_farmacias(request):
+
+    for farmacia in FARMACIAS:
+        farmacia_nueva = Farmacias.objects.create(
+        #id=farmacia['id'],
+        nombre=farmacia['nombre'],
+        direccion=farmacia['direccion'],
+        localidad=farmacia['localidad'],
+        departamento=farmacia['departamento'],
+        )
+        farmacia_nueva.save()
+
+    return redirect('farmacias')
+
+FARMACIAS = [
+{'nombre':'Montevideo Central'  , 'departamento':'Montevideo', 'direccion':   '18 de julio 1234', 'localidad':'  Montevideo'},
+{'nombre':'Montevideo Curva de Maroñas' , 'departamento':'Montevideo', 'direccion':   '8 de octubre 1234', 'localidad':' Montevideo'},
+{'nombre':'Montevideo Pocitos'  , 'departamento':'Montevideo', 'direccion':   'Tezanos 1234', 'localidad':'  Montevideo'},
+{'nombre':'Montevideo Cerro'  , 'departamento':'Montevideo', 'direccion':   'Rusia 1234', 'localidad':'  Montevideo'},
+{'nombre':'Montevideo Prado'  , 'departamento':'Montevideo', 'direccion':   'Millan 1234', 'localidad':' Montevideo'},
+{'nombre':'Canelones Zona Sur'  , 'departamento':'Canelones', 'direccion':  'Las violetas 2345', 'localidad':' Pando'},
+{'nombre':'San Jose Oeste'  , 'departamento':'San Jose', 'direccion':   'Miraflores 3456', 'localidad':' Libertad'},
+{'nombre':'Maldonado Central' , 'departamento':'Maldonado', 'direccion':  'Dr Puey 3456', 'localidad':'  Maldonado'},
+{'nombre':'Canelones Central' , 'departamento':'Canelones', 'direccion':  'Edison 5645', 'localidad':' Canelones'},
+{'nombre':'  Maldonado  Norte'  , 'departamento':'Maldonado', 'direccion':  'Los ceibos 2345', 'localidad':' Aigua'},
+{'nombre':'  San Jose Central'  , 'departamento':'San Jose', 'direccion':   'Avda Gutierrez', 'localidad':' 4567', 'localidad':' San Jose'},
+{'nombre':'  Durazno Central' , 'departamento':'Durazno', 'direccion':  'Juan Carlos Reyles 6785', 'localidad':' Durazno'},
+{'nombre':'  Durazno Este'  , 'departamento':'Durazno', 'direccion':  'Los abetos 5678', 'localidad':' Sarandi del Yi'},
+{'nombre':'  Artigas Central' , 'departamento':'Artigas', 'direccion':  'Manuel Lavalleja 3456', 'localidad':' Artigas'},
+{'nombre':'  Artigas Norte' , 'departamento':'Artigas', 'direccion':  'Brandzen 6789', 'localidad':' Bella Union'},
+]
+
+
 
 
 # ===============================

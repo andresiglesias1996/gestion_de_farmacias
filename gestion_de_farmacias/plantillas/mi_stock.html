@@ -2,63 +2,82 @@
 <!-- Contenido estatico de la pagina -->
 
 <!--Titulo de la pagina o pestaña-->
-{% block title %} Mi Farmacia {% endblock %} 
-
-{% block content %}
+{% block title %} Mi Farmacia {% endblock %} {% block content %}
 
 <!--Nav bar-->
 {% include "nav.html" %}
+<div class="container mt-3">
+	{% if mi_farmacia %}
+	
+	<div class="">
+		<a class="btn btn-success float-right" href="#formulario">+ Stock</a>
+		<h1>Stock de {{mi_farmacia.nombre}}</h1>
+	</div>
 
-<div class="m-3">
-    <div class="">
-        <a class="btn btn-success float-right" href="#formulario">+ Stock</a>
-        <h1>Stock de {{mi_farmacia.nombre}}</h1>
-    </div>
+	<div class="table-responsive">
+		{% if lotes_list %}
+		<table class="table table-hover">
+			<thead class="thead-dark">
+				<tr>
+        				<th>Stock</th>
+        				<th>Medicamento</th>
+					<th>Vencimiento</th>
+					<th>Codigo</th>
+					<th></th>
+        			</tr>
+      			</thead>
+      			<tbody>
+        			{% for lote in lotes_list %}
+        			<tr>
+          				<td>
+						{{lote.stock}}  
+						{% if lote.stock < 50 %}
+							<span class="badge badge-danger">¡bajo stock!</span>
+						{% endif %}
+          				</td>
+					<td>{{lote.medicamento}}</td>
+					<td>{{lote.vencimiento}}</td>
+					<td>{{lote.id}}</td>
+          				<td><a class="btn btn-sm btn-primary" href="/editar_stock/{{ lote.id }}">editar...</a></td>
+        			</tr>
+        			{% endfor %}
+      			</tbody>
+    		</table>
+    		{% else %}
+    		<div class="alert alert-warning">
+      			<strong>Atencion!</strong> La farmacia no tiene registros de stock.
+    		</div>
+    		{% endif %}
+  	</div>
 
-<div class="table-responsive">
-    <table class="table table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th>Stock</th>
-                <th>Medicamento</th>
-                <th>Vencimiento</th>
-                <th>Codigo</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for lote in lotes_list %}
-            <tr>
-                <td>{{lote.stock}}</td>
-                <td>{{lote.medicamento}}</td>
-                <td>{{lote.vencimiento}}</td>
-                <td>{{lote.id}}</td>
-                <td><a class="btn btn-sm btn-primary" href="/editar_stock/{{ lote.id }}">editar...</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
 
-    {% if formulario_nuevo_stock.errors %}
-    <p style="color: red">Por favor revisa este campo</p>
-    {% endif %}
 
-    <div id="formulario" class="card my-3">
-        <div class="card-header">
-            <h3>Registrar stock</h3>
-        </div>
+  	{% if formulario_nuevo_stock.errors %}
+  		<div class="alert alert-danger" role="alert">
+    			<p class="">Por favor revisa los campos</p>
+  		</div>
+  	{% endif %}
 
-        <form method="POST">
-            {% csrf_token %}
-            <div class="card-body">
-                {{formulario_nuevo_stock.as_p}}
-            </div>
-            <div class="card-footer">
-                <input class="btn btn-primary" type="submit" value="Registrar" />
-            </div>
-        </form>
-    </div>
+  	<div id="formulario" class="card my-3">
+    		<div class="card-header">
+      			<h3>Registrar stock</h3>
+    		</div>
+
+    		<form method="POST">
+      			{% csrf_token %}
+      			<div class="card-body">{{formulario_nuevo_stock.as_p}}</div>
+      			<div class="card-footer">
+        			<input class="btn btn-primary" type="submit" value="Registrar" />
+      			</div>
+    		</form>
+  	</div>
+
+	{% else %}
+    		<div class="alert alert-warning">
+      			<strong>Atencion!</strong> El usuario no esta asignado a ninguna farmacia.
+    		</div>
+    	{% endif %}
+
 </div>
 
 {% endblock content %}

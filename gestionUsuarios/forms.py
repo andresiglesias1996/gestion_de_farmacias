@@ -23,7 +23,7 @@ class FormularioCrearUsuario(forms.ModelForm):
                 self.fields['sexo'].widget.attrs.update({'class': 'form-control'})
                 self.fields['fecha_de_nacimiento'].widget.attrs.update({'class': 'form-control'})
                 self.fields['direccion'].widget.attrs.update({'class': 'form-control'})
-                self.fields['departmento'].widget.attrs.update({'class': 'form-control'})
+                self.fields['departamento'].widget.attrs.update({'class': 'form-control'})
                 self.fields['telefono'].widget.attrs.update({'class': 'form-control'})
 
 
@@ -55,7 +55,7 @@ class FormularioCrearUsuario(forms.ModelForm):
 
         class Meta:
                 model= Usuarios
-                fields = ['cedula_de_identidad','usuario','email','nombre','apellido','sexo','fecha_de_nacimiento','direccion','departmento','telefono']
+                fields = ['cedula_de_identidad','usuario','email','nombre','apellido','sexo','fecha_de_nacimiento','direccion','departamento','telefono']
                 
                 
 

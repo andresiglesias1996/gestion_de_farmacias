@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-
+# re-cableando la mente
 # vistas basadas en clases
 from django.views.generic import DetailView, TemplateView, ListView, CreateView, View, UpdateView
 
@@ -26,6 +26,20 @@ class ListarMedicamentos(ListView):
         # la siguiente linea define el nombre de la lista de elementos que se mandan al template
         context_object_name = "medicamentos"
         paginate_by = 8  # cantidad de elementos por pagina
+
+
+
+# =======================================================================
+# Farmacias =============================================================
+# =====================================================================
+class ListarFarmacias(ListView):
+        model = Farmacias
+    
+        template_name = 'farmacias.html'
+
+        context_object_name = "farmacias"
+        paginate_by = 10  
+
 
 
 
@@ -137,15 +151,22 @@ class MiStock(ListView):
 
         #con la cedula hacemos la busqueda de la Farmacia que tiene a ese usuario cono funcionario
         queryset_mi_farmacia = Farmacias.objects.filter(funcionarios=cedula_del_user)
-        mi_farmacia = queryset_mi_farmacia[0]
+        #print("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
+        #print("el len(queryset_mi_farmacia) dice: vvvv")
+        #print(len(queryset_mi_farmacia))
+        if len(queryset_mi_farmacia)>0:
+            mi_farmacia = queryset_mi_farmacia[0]
 
         # con el numero id de la farmacia a la que pertenecemos
         # hacemos la busqueda de los registros de stock de esa farmacia
-        stock_de_mi_farmacia = Lotes.objects.filter(ubicacion_id=mi_farmacia.id)
+            stock_de_mi_farmacia = Lotes.objects.filter(ubicacion_id=mi_farmacia.id)
         
         # y retornamos solo el stock_de_mi_farmacia
-        return stock_de_mi_farmacia
+            return stock_de_mi_farmacia
         
+        return {"mensaje":"El funcionario de farmacia no tiene ninguna farmacia asignada"}
+
+
     # aca le agregamos los datos que vamos a usar en el template
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -155,11 +176,13 @@ class MiStock(ListView):
 
         # obtenemos la farmacias a la que pertenece el usuario 
         queryset_mi_farmacia = Farmacias.objects.filter(funcionarios=cedula_del_user)
-        mi_farmacia = queryset_mi_farmacia[0]
+        if len(queryset_mi_farmacia)>0:
+            mi_farmacia = queryset_mi_farmacia[0]
     
         
         # enviamos la farmacia y el formulario como variables de contexto
-        context['mi_farmacia'] = mi_farmacia
+            context['mi_farmacia'] = mi_farmacia
+        
         context["formulario_nuevo_stock"] = self.form_class
 
         return context

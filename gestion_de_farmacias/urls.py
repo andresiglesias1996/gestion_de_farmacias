@@ -20,7 +20,7 @@ from django.contrib.auth.views import LoginView, logout_then_login
 #from gestion_de_farmacias.views import login, inicio
 from gestion_de_farmacias import views
 from gestionUsuarios.views import RecetasUsuario, MisRecetas, RegistrarUsuario, EditarUsuario, ListaDeUsuarios, ListarRecetas, EditarReceta, ActulizarMiUsuario,MiUsuario
-from gestionStock.views import ListarMedicamentos, MiStock, Stock, EditarStock
+from gestionStock.views import ListarFarmacias,ListarMedicamentos, MiStock, Stock, EditarStock
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,7 +41,7 @@ urlpatterns = [
     #path('medicamentos/', views.medicamentos, name="medicamentos"),
     path('medicamentos/', ListarMedicamentos.as_view(), name="medicamentos"),
     #path('buscar_medicamento/', buscar_medicamento, name="buscar_medicamento"),
-
+    path('farmacias/', ListarFarmacias.as_view(), name="farmacias"),
 
     path('stock/', Stock.as_view(), name="stock"),
     #path('crear_stock/', views.LoteCreate.as_view(), name="cerar_stock"),
@@ -68,6 +68,6 @@ urlpatterns = [
     # Rutas para cargar datos a la base de datos
     path('carga_medicamentos/', views.carga_medicamentos, name="carga_medicamentos"),
     path('carga_usuarios/', views.carga_usuarios, name="carga_usuarios"),
-
+    path('carga_farmacias/',views.carga_farmacias, name="carga_farmacias"),
     
 ]

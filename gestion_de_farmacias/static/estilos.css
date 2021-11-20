@@ -1,6 +1,12 @@
 body {
-    /*background-color: #f8f9fa;*/
-    background-color: #ff9090;
+    /*uso el rojo para testear que los estilos se carguen*/
+    /*blanco */
+    background-color: #f8f9fa;
+    /*rojo*/
+    /*background-color: #ff9090;*/
+    /*      wwww       */
+    /*     (ojo)       */
+    /*     ( O )        */
     /*color: rgb(80, 80, 80);*/
 }
 
@@ -25,4 +31,10 @@ aumentar o disminuir el valor numerico de los campos input*/
 #id_cedula_de_identidad,
 #id_telefono {
     -moz-appearance: textfield;
+}
+
+.consulta {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
 }
