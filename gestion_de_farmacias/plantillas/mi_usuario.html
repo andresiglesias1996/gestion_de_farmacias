@@ -15,7 +15,7 @@
 			<p style="color:red;">Por favor revisa los campos</p>
 		{% endif %}
 
-		<div class="card my-3">
+		<div class="form-group form-group col-md-12">
 			<div class="card-header">
 				<h3>Actulizar mi Usuario</h3>
 			</div>
@@ -35,10 +35,10 @@
                                         <p>{{form.password1.label_tag}}{{form.password1}}</p>
                                         <p>{{form.password2.label_tag}}{{form.password2}}</p>
 
-					<p>si deseas cambiar tu contraseña has click <a href="{% url 'password_change' %}">aquí</a>.</p>
+					<h5><p>si deseas cambiar tu contraseña has click <a class="colora" href="{% url 'password_change' %}">aquí</a>.</p></h5>
 				</div>
 			        <div class="card-footer">
-				        <input class="btn btn-primary" type="submit" value="Actualizar">
+				        <input class="btn btn-primary btn-lg btn-block" type="submit" value="Actualizar">
 			        </div>
 		        </form>
 	        </div>

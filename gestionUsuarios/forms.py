@@ -2,7 +2,7 @@ from django import forms
 from django.forms import widgets
 
 from gestionUsuarios.models import Usuarios, Recetas
-
+from gestionStock.models import Medicamentos
 
 
 
@@ -166,21 +166,57 @@ class FormularioEditarUsuario_2(forms.ModelForm):
                 self.fields['telefono'].widget.attrs.update({'class': 'form-control'})
 
 
+def obtener_principios_activos():
 
+        lista_de_principios_activos =(
+                ("el 1", "One"),
+                ("el 2", "Two"),
+                ("el 3", "Three"),
+                ("el 4", "Four"),
+                ("el 5", "Five"),
+        )
+
+        lista_de_medicamentos = []
+        queryset_de_medicamentos = Medicamentos.objects.all()
+        print("==================medicamentos===================")
+        print(queryset_de_medicamentos)
+
+        if len(queryset_de_medicamentos) > 0:
+
+                for medicamento in queryset_de_medicamentos:
+                        mi_tupla = (medicamento.principio_activo,medicamento.principio_activo)
+                        lista_de_medicamentos.append(mi_tupla)
+
+        print("=========================")
+        print(lista_de_medicamentos)
+        #return lista_de_medicamentos
+
+        return lista_de_principios_activos
 
 # =======================================================================
 # Crear Receta ===========================================================
 # =======================================================================
 class Formulario_nueva_receta(forms.ModelForm):
 
+        principio_activo = forms.ChoiceField(choices=[])
+        
         class Meta:
                 model = Recetas
+                
                 #borramos el campo 'medico' porque se agrega automaticamente el usuario medico cuando se crea la receta
-                fields = ['medicamento','paciente','descripcion','vencimiento','estado']
+                fields = ['principio_activo','paciente','descripcion','vencimiento','estado']
+
 
         def __init__(self, *args, **kwargs):
                 super().__init__(*args, **kwargs)
-                self.fields['medicamento'].widget.attrs.update({'class': 'form-control'})
+                
+                #con esta linea genero la lista de tuplas que necesita el argumento choices del campo Principio activo
+                # traigo todos los medicamentos y obtengo el campo principio_activo 
+                principio_activo_choices_con_duplicados = [(medicamento.principio_activo, medicamento.principio_activo) for medicamento in Medicamentos.objects.all()]
+                principio_activo_choices = list(dict.fromkeys(principio_activo_choices_con_duplicados))
+                self.fields['principio_activo'].choices = principio_activo_choices
+                
+                self.fields['principio_activo'].widget.attrs.update({'class': 'form-control'})
                 self.fields['paciente'].widget.attrs.update({'class': 'form-control'})
                 #self.fields['medico'].widget.attrs.update({'class': 'form-control'})
                 self.fields['descripcion'].widget.attrs.update({'class': 'form-control'})
@@ -199,12 +235,12 @@ class Formulario_receta_usuario(forms.ModelForm):
                 model= Usuarios
                 model = Recetas
         
-                fields = ['medicamento','paciente','medico','descripcion','vencimiento','estado']
+                fields = ['principio_activo','paciente','medico','descripcion','vencimiento','estado']
               
 
         def __init__(self, *args, **kwargs):
                 super().__init__(*args, **kwargs)
-                self.fields['medicamento'].widget=forms.TextInput({'class': 'form-control'})
+                self.fields['principio_activo'].widget=forms.TextInput({'class': 'form-control'})
                 self.fields['paciente'].widget=forms.TextInput({'class': 'form-control'})
                 self.fields['medico'].widget=forms.TextInput({'class': 'form-control'})
                 self.fields['descripcion'].widget=forms.TextInput({'class': 'form-control'})

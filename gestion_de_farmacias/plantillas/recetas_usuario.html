@@ -1,61 +1,58 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 <!-- Contenido estatico de la pagina -->
 
 <!--Titulo de la pagina o pestaña-->
-{% block title %}Receta de usuario{% endblock  %}
-
-{% block content %}
+{% block title %}Receta de usuario{% endblock %} {% block content %}
 
 <!--Nav bar-->
 {% include "nav.html" %}
-	
-	<div class="m-3">
 
-		{% if Recetas  %}
-		        <h1>Receta de {{object.usuario}} </h1>
-			<div class="table-responsive">
-                                <table class="table table-hover">
-                                        
-                                        <thead class="thead-dark">
-                                                <tr>
-                                                        <th> medicamento </th>
-                                                        <th> paciente </th>
-                                                        <th> medico </th>
-                                                         <th> descripcion </th>
-                                                        <th> vencimiento </th>
-                                                        <th> estado </th>
-                                                        
-                                                        {% comment "" %}
-                                                        <th>...</th>
-                                                        {% endcomment %}
-                                                </tr>
-                                        </thead>
-                                        
-                                        <tbody>
-                                                {% for receta in Recetas %}
-                                                        <tr>
-                                                                <td>{{ receta.medicamento }}</td>
-                                                                <td>{{ receta.paciente }}</td>
-                                                                <td>{{ receta.medico }}</td>
-                                                                <td>{{ receta.descripcion }}</td>
-                                                                <td>{{ receta.vencimiento }}</td>
-                                                                <td>{{ receta.estado }}</td>
-                                                                {% comment %}
-                                                                <td><a class="btn btn-sm btn-danger" href="/mi_receta/{{ receta.id }}">Editar</a></td>
-                                                                {% endcomment %}
-                                                        </tr>
-                                                {% endfor %}
-                                        </tbody>
+<div class="m-3">
 
-                                </table>
-                        </div>
-		{% else %}
-                <div class="alert alert-warning">
-                        <strong>Atencion!</strong>  El usuario {{object.usuario}} no tiene recetas.
-                </div>
-                {% endif %}
+    {% if Recetas %}
+    <h1>Receta de {{object.usuario}} </h1>
+    <div class="table-responsive">
+        <table id="tabla_de_recetas" class="table table-hover">
 
-	</div>
+            <thead class="thead-darkk">
+                <tr>
+                    <th> Principio activo </th>
+                    <th> paciente </th>
+                    <th> medico </th>
+                    <th> descripcion </th>
+                    <th> vencimiento </th>
+                    <th> estado </th>
+
+                    <th>gestionar</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for receta in Recetas %}
+                <tr>
+                    <td>{{ receta.principio_activo }}</td>
+                    <td>{{ receta.paciente }}</td>
+                    <td>{{ receta.medico }}</td>
+                    <td>{{ receta.descripcion }}</td>
+                    <td>{{ receta.vencimiento }}</td>
+                    <td>{{ receta.estado }}</td>
+                    
+                    <td><a class="btn btn-danger btn-lg btn-block" href="/gestionar_receta/{{ receta.id }}">Gestionar</a></td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-warning">
+        <strong>Atencion!</strong> El usuario {{object.usuario}} no tiene recetas.
+    </div>
+    {% endif %}
+
+</div>
 
 
 {% endblock content %}

@@ -25,10 +25,10 @@ class UsuariosAdmin(admin.ModelAdmin):
 
 class RecetasAdmin(admin.ModelAdmin):
         # asi se determinan las columnas que muestra el panel admin
-        list_display=("medicamento", "medico", "paciente", "estado")
+        list_display=("principio_activo", "medico", "paciente", "estado")
 
         # aca se determinan los criterios de busqueda que admite el buscador
-        search_fields=("medicamento", "paciente", "medico")
+        search_fields=("principio_activo", "paciente", "medico")
 
 
 

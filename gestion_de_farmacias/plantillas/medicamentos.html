@@ -2,9 +2,7 @@
 <!-- Contenido estatico de la pagina -->
 
 <!--Titulo de la pagina o pestaña-->
-{% block title %} Medicamentos {% endblock %} 
-
-{% block content %}
+{% block title %} Medicamentos {% endblock %} {% block content %}
 
 <!--Nav bar-->
 {% include "nav.html" %}
@@ -12,25 +10,29 @@
 <div class="m-3">
     <h1>Medicamentos</h1>
 
+    {% comment  %}
     <div class="consulta medicamento mb-3">
         <h3>
             <p>Criterios de búsqueda</p>
         </h3>
-        <input type="text" class="form-control mb-2" id="cc-number" placeholder="Medicamento, Laboratorio, Número de Registro" required="">
-        <button class="btn btn-secondary btn-lg btn-block" type="submit">Buscar</button>
-    </div>
 
+        <input type="text" onkeyup="buscar_medicamento()" id="medicamento_buscado" class="form-control mb-2" id="cc-number" placeholder="Medicamento, Laboratorio, Número de Registro" required="">
+        <!--<button onclick="buscar_medicamento()" class="btn btn-secondary btn-lg btn-block" type="submit">Buscar</button>-->
+
+    </div>
+    {% endcomment %}
 
 
     <div class="table-responsive">
 
-    <!-- ==============================-->
-    <!-- Tabla con los Medicamentos -->
-    <!-- ==============================-->
+        <!-- ==============================-->
+        <!-- Tabla con los Medicamentos -->
+        <!-- ==============================-->
         {% if medicamentos %}
-        <table class="table table-hover">
+        
+        <table id="tabla_de_medicamentos" class="table table-hover">
 
-            <thead class="thead-dark">
+            <thead class="thead-darkk">
                 <tr>
                     <th>Nombre Comercial</th>
                     <th>Categoria</th>
@@ -56,6 +58,10 @@
             </tbody>
 
         </table>
+        {% else %}
+        <div class="alert alert-warning">
+            <strong>Atencion!</strong>  No existen registros.
+        </div>
         {% endif %}
     </div>
 

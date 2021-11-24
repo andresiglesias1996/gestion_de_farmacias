@@ -7,7 +7,7 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, D
 
 from gestionUsuarios.models import Usuarios, Recetas
 
-from gestionStock.models import Farmacias, Lotes
+from gestionStock.models import Farmacias, Lotes, Medicamentos
 
 from gestionUsuarios.forms import FormularioCrearUsuario, Formulario_nueva_receta, FormularioEditarUsuario, FormularioEditarUsuario_2, Formulario_receta_usuario
 
@@ -32,7 +32,7 @@ class ListaDeUsuarios(ListView):
         model = Usuarios
 
         template_name = 'lista_de_usuarios.html'
-        paginate_by = 6  # cantidad de elementos por pagina
+        #paginate_by = 6  # cantidad de elementos por pagina
         
         def get_queryset(self) :
                 #return self.objects.filter(usuario_activo=True)
@@ -144,7 +144,12 @@ class ListarRecetas(View):
         diccionario_de_contexto = {}
         diccionario_de_contexto["recetas_list"] = self.get_queryset()
 
-        #formulario_nuevo_stock
+        #formulario_nuevo_receta
+        #formulario_nueva_receta = self.form_class.save(commit=False)
+        #formulario_nueva_receta.principio_activo.queryset = Medicamentos.objects.all()
+        #formulario_nueva_receta.save(self)
+
+        #diccionario_de_contexto["formulario_nueva_receta"] = formulario_nueva_receta
         diccionario_de_contexto["formulario_nueva_receta"] = self.form_class
         return diccionario_de_contexto
     
@@ -226,5 +231,29 @@ class RecetasUsuario(DetailView):
         cedula_de_identidad =self.kwargs['pk']
         
         context['Recetas'] = Recetas.objects.filter(paciente=cedula_de_identidad)
-   
+
         return context
+
+
+
+
+# =======================================================================
+# Gestionar Receta ========================================================
+# =======================================================================
+"""class GestionarReceta(DetailView):
+    model = Recetas
+    template_name = 'gestionar_receta.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        numero_de_receta =self.kwargs['pk']
+        queryset_recetas = Recetas.objects.filter(id=numero_de_receta)
+        
+        if len(queryset_recetas) > 0:
+            context['receta'] = queryset_recetas[0]
+        
+        #print("===========================")
+        #print(context['receta'])
+
+        return context
+        """

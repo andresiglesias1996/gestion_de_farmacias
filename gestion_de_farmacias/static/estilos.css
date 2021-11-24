@@ -1,4 +1,5 @@
 body {
+
     /*uso el rojo para testear que los estilos se carguen*/
     /*blanco */
     background-color: #f8f9fa;
@@ -7,9 +8,35 @@ body {
     /*      wwww       */
     /*     (ojo)       */
     /*     ( O )        */
+
     /*color: rgb(80, 80, 80);*/
 }
 
+
+.classcolor {
+    background-color: #00469C;
+}
+
+.colora
+{
+    color: #00469C!important;;
+}
+a{
+    color: #fff!important;
+}
+
+.btn {
+    background-color: #00469C;
+}
+
+.imglogo {
+    max-width: 200px;
+}
+
+footer 
+{
+    color: #fff!important;
+}
 
 /*las siguientes lines se usan para sacar las flechitas de 
 aumentar o disminuir el valor numerico de los campos input*/

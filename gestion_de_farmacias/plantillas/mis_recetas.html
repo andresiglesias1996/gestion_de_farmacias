@@ -1,64 +1,62 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 <!-- Contenido estatico de la pagina -->
 
 <!--Titulo de la pagina o pestaña-->
-{% block title %}Mis Recetas{% endblock  %}
-
-{% block content %}
+{% block title %}Mis Recetas{% endblock %} {% block content %}
 
 <!--Nav bar-->
 {% include "nav.html" %}
-	
-	<div class="m-3">
 
-		<h1>Mis Recetas</h1>
-	
-		{% if object_list  %}
-			<div class="table-responsive">
-                                <table class="table table-hover">
-                                        
-                                        <thead class="thead-dark">
-                                                <tr>
-                                                        <th>Medicamento</th>
-                                                        <th>Paciente</th>
-                                                        <th>Medico</th>
-                                                        <th>Descripcion</th>
-                                                        <th>Vencimiento</th>
-                                                        <th>Estado</th>
-                                                        {% comment "" %}
-                                                        <th>...</th>
-                                                        {% endcomment %}
-                                                </tr>
-                                        </thead>
-                                        
-                                        <tbody>
-                                                {% for receta in object_list %}
-                                                        <tr>
-                                                                <td>{{ receta.medicamento }}</td>
-                                                                <td>{{ receta.paciente }}</td>
-                                                                <td>{{ receta.medico }}</td>
-                                                                <td>{{ receta.descripcion }}</td>
-                                                                <td>{{ receta.vencimiento }}</td>
-                                                                <td>{{ receta.estado }}</td>
-                                                                {% comment %}
-                                                                <td><a class="btn btn-sm btn-danger" href="/mi_receta/{{ receta.id }}">Editar</a></td>
-                                                                {% endcomment %}
-                                                        </tr>
-                                                {% endfor %}
-                                        </tbody>
+<div class="m-3">
 
-                                </table>
-                        </div>
-		{% else %}
-                <div class="alert alert-warning">
-                        <strong>Atencion!</strong>  Su usuario no tiene recetas.
-                </div>
-                {% endif %}
+    <h1>Mis Recetas</h1>
 
-	</div>
+    {% if object_list %}
+    <div class="table-responsive">
+        <table id="tabla_de_recetas" class="table table-hover">
 
+            <thead class="thead-darkk">
+                <tr>
+                    <th>Medicamento</th>
+                    <th>Paciente</th>
+                    <th>Medico</th>
+                    <th>Descripcion</th>
+                    <th>Vencimiento</th>
+                    <th>Estado</th>
+                    {% comment "" %}
+                    <th>...</th>
+                    {% endcomment %}
+                </tr>
+            </thead>
 
+            <tbody>
+                {% for receta in object_list %}
+                <tr>
+                    <td>{{ receta.medicamento }}</td>
+                    <td>{{ receta.paciente }}</td>
+                    <td>{{ receta.medico }}</td>
+                    <td>{{ receta.descripcion }}</td>
+                    <td>{{ receta.vencimiento }}</td>
+                    <td>{{ receta.estado }}</td>
+                    {% comment %}
+                    <td><a class="btn btn-sm btn-danger" href="/mi_receta/{{ receta.id }}">Editar</a></td>
+                    {% endcomment %}
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-warning">
+        <strong>Atencion!</strong> Su usuario no tiene recetas.
+    </div>
+    {% endif %}
+
+</div>
 
 
-	
+
+
+
 {% endblock content %}

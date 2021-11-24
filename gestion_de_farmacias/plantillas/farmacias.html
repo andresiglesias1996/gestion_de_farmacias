@@ -7,12 +7,11 @@
 <!--Nav bar-->
 {% include "nav.html" %}
 
-<div class="container pt-3">
+<div class="m-3">
     <h1>Farmacias</h1>
 
-{% comment %}
-    BUSCADOR
-{% endcomment %}
+    {% comment %} BUSCADOR {% endcomment %}
+    {% comment %}
     <div class="consulta farmacias mb-3 ">
         <h3>
             <p>Criterios de búsqueda</p>
@@ -20,18 +19,16 @@
         <input type="text" class="form-control mb-2" id="cc-number" placeholder="Nombre, Departamento, Localidad" required="">
         <button class="btn btn-secondary btn-lg btn-block" type="submit">Buscar</button>
     </div>
+    {% endcomment %}
 
-
-{% comment %}
-    TABLA DE FARMACIAS
-{% endcomment %}
+    {% comment %} TABLA DE FARMACIAS {% endcomment %}
     <div class="table-responsive">
 
 
         {% if farmacias %}
-        <table class="table table-hover">
+        <table id="tabla_de_farmacias" class="table table-hover">
 
-            <thead class="thead-dark">
+            <thead class="thead-darkk">
                 <tr>
                     <th>Nombre </th>
                     <th>Departamento</th>
@@ -50,8 +47,7 @@
                     <td>{{ farmacia.direccion }}</td>
                     {% comment %}
                     <td>{{ farmacia.forma }}</td>
-                    farmacia.forma?    
-                    {% endcomment %}
+                    farmacia.forma? {% endcomment %}
 
                 </tr>
                 {% endfor %}
@@ -61,7 +57,7 @@
         {% endif %}
     </div>
 
-    
+
 
     <!-- Menú de paginación -->
     {% if is_paginated %}

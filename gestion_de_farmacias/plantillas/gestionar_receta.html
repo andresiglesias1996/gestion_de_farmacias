@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+<!-- Contenido estatico de la pagina -->
+
+<!--Titulo de la pagina o pestaña-->
+{% block title %}Gestionar Receta{% endblock %} {% block content %}
+
+<!--Nav bar-->
+{% include "nav.html" %}
+
+<div class="m-3">
+
+    {% if receta %}
+    <h1>{{receta}} </h1>
+    
+    <h3>Las opciones son: </h3>
+
+        <table id="tabla_de_medicamentos" class="table table-hover">
+
+            <thead class="thead-darkk">
+                <tr>
+                    <th>Principio activo</th>
+                    <th>Nombre Comercial</th>
+                    <th>Categoria</th>
+                    <th>Laboratorio</th>
+                    <th>Forma</th>
+                    <th>Contraindicaciones</th>
+                    <th>...</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for medicamento in opciones_de_medicamentos %}
+                <tr>
+                    <td>{{ medicamento.principio_activo }}</td>
+                    <td>{{ medicamento.nombre_comercial }}</td>
+                    <td>{{ medicamento.categoria }}</td>
+                    <td>{{ medicamento.laboratorio }}</td>
+                    <td>{{ medicamento.forma }}</td>
+                    <td>{{ medicamento.contraindicaciones }}</td>
+                    <td><a class="btn btn-sm btn-danger" href="/despachar_medicamento/{{ medicamento.id }}">Despachar</a></td>-->
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    {% endif %}
+
+</div>
+
+
+{% endblock content %}

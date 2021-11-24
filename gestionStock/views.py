@@ -5,7 +5,7 @@ from django.views.generic import DetailView, TemplateView, ListView, CreateView,
 
 # Importacion de los Modelos
 from gestionStock.models import Medicamentos, Lotes, Farmacias
-from gestionUsuarios.models import Usuarios
+from gestionUsuarios.models import Usuarios, Recetas
 
 # FORMULARIOS
 from gestionStock.forms import Formulario_nuevo_medicamento, Formulario_nuevo_stock
@@ -25,7 +25,7 @@ class ListarMedicamentos(ListView):
 
         # la siguiente linea define el nombre de la lista de elementos que se mandan al template
         context_object_name = "medicamentos"
-        paginate_by = 8  # cantidad de elementos por pagina
+        #paginate_by = 8  # cantidad de elementos por pagina
 
 
 
@@ -38,7 +38,7 @@ class ListarFarmacias(ListView):
         template_name = 'farmacias.html'
 
         context_object_name = "farmacias"
-        paginate_by = 10  
+        #paginate_by = 10  
 
 
 
@@ -216,3 +216,33 @@ class MiStock(ListView):
         #return redirect('mi_stock')
 
 
+
+
+# =======================================================================
+# Gestionar Receta ===========================================================
+# =======================================================================
+class GestionarReceta(TemplateView):
+    #model = Lotes
+    #form_class = Formulario_nuevo_stock
+    template_name = 'gestionar_receta.html'
+
+    #success_url = reverse_lazy('lista_de_usuarios')
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        numero_de_receta =self.kwargs['pk']
+        queryset_recetas = Recetas.objects.filter(id=numero_de_receta)
+        
+        if len(queryset_recetas) > 0:
+            context['receta'] = queryset_recetas[0]
+        
+            #print("===========medicamentos desde gestionStock=========")
+            #print(context['receta'].principio_activo)
+            principio_activo = context['receta'].principio_activo
+            #print(principio_activo)
+            context['opciones_de_medicamentos'] = Medicamentos.objects.filter(principio_activo=principio_activo)
+            #context['opciones_de_medicamentos'] = Medicamentos.objects.all()
+            #print(context['opciones_de_medicamentos'])
+
+        return context

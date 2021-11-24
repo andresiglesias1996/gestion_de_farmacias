@@ -2,9 +2,7 @@
 <!-- Contenido estatico de la pagina -->
 
 <!--Titulo de la pagina o pestaña-->
-{% block title %} Recetas {% endblock %} 
-
-{% block content %}
+{% block title %} Recetas {% endblock %} {% block content %}
 
 <!--Nav bar-->
 {% include "nav.html" %}
@@ -17,11 +15,11 @@
         <!-- Tabla con las recetas -->
         <!-- ==============================-->
         {% if recetas_list %}
-        <table class="table table-hover">
+        <table id="tabla_de_recetas" class="table table-hover">
 
-            <thead class="thead-dark">
+            <thead class="thead-darkk">
                 <tr>
-                    <th>Medicamento</th>
+                    <th>Principio activo</th>
                     <th>Paciente</th>
                     <th>Medico</th>
                     <th>Descripcion</th>
@@ -34,7 +32,7 @@
             <tbody>
                 {% for receta in recetas_list %}
                 <tr>
-                    <td>{{ receta.medicamento }}</td>
+                    <td>{{ receta.principio_activo }}</td>
                     <td>{{ receta.paciente }}</td>
                     <td>{{ receta.medico }}</td>
                     <td>{{ receta.descripcion }}</td>
@@ -46,12 +44,16 @@
             </tbody>
 
         </table>
+        {% else %}
+        <div class="alert alert-warning">
+            <strong>Atencion!</strong>  No existen registros.
+        </div>
         {% endif %}
 
     </div>
 
     <hr> {% if user.rol == 'medico'%}
-    <div class="">
+    <div class="form-group form-group col-md-12">
 
         {% if formulario_nueva_receta.errors %}
         <p style="color:red;">Por favor revisa este campo</p>
@@ -68,7 +70,7 @@
                 </div>
 
                 <div class="card-footer">
-                    <input class="btn btn-secondary btn-lg btn-block" type="submit" value="Crear">
+                    <input class="btn btn-primary btn-lg btn-block" type="submit" value="Crear">
                 </div>
             </form>
         </div>

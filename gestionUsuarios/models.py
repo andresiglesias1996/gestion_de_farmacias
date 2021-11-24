@@ -129,14 +129,42 @@ class Usuarios(AbstractBaseUser):
 # Recetas =
 #==========
 class Recetas(models.Model):
+        """
+        def principios_activos():
+                lista = [
+                ('paracetamol', 'paracetamol'),
+                ('algun farmaco 01','algun farmaco 01'),
+                ('algun farmaco 02','algun farmaco 02'),
+                ('algun farmaco 03','algun farmaco 03'),
+                ('algun farmaco 04','algun farmaco 04'),
+                ('un nuevo farmaco 01','un nuevo farmaco 01'),
+                ]
+                lista_de_medicamentos = []
+                queryset_de_medicamentos = Medicamentos.objects.all()
+                #print("==================medicamentos===================")
+                if len(queryset_de_medicamentos) > 0:
+
+                        for medicamento in queryset_de_medicamentos:
+                                mi_tupla = (medicamento.principio_activo,medicamento.principio_activo)
+                                lista_de_medicamentos.append(mi_tupla)
+
+                print("=========================")
+                #print(lista_de_medicamentos)
+                return lista_de_medicamentos
+        """
+
         ESTADOS_DE_UNA_RECETA = [
                 ('RES', 'Reservado'),
                 ('RET','Retirado')
         ]
+        
+        #LISTA_DE_PRINCIPIOS_ACTIVOS = principios_activos()
+
+       
 
         #id = models.IntegerField(primary_key=True)
         
-        medicamento = models.ForeignKey(Medicamentos, on_delete=models.CASCADE)
+        principio_activo = models.CharField(max_length = 100, default="----")
         paciente = models.ForeignKey(Usuarios, null=True, on_delete=models.CASCADE, related_name='+')
         medico = models.ForeignKey(Usuarios, null=True, on_delete=models.CASCADE, related_name='+')
 
@@ -149,7 +177,7 @@ class Recetas(models.Model):
         
 
         def __str__(self):
-                return "Se receta " + str(self.medicamento) + " al usuario " +str(self.paciente)
+                return "Se receta " + str(self.principio_activo) + " al usuario " +str(self.paciente)
 
 
         class Meta:

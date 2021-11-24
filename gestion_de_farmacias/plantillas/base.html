@@ -1,4 +1,5 @@
 {% comment "" %}{% endcomment %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,6 +24,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- PLUGIN PARA EL BUSCADOR Y LA PAGINACION-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+    <!--<script type="text/javascript" src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>-->
+    <!--traduccion de la libreria al español-->
+    <script src="{% static 'jquery.dataTables.min.js' %}"></script>
 
     <link rel="stylesheet" href="{% static 'estilos.css' %}" />
 
@@ -52,6 +59,23 @@
     <script src="{% static 'mi_script.js' %}"></script>
 
 
+
+        <footer >
+        <div class="container classcolor">
+         <p class="float-right">
+                2021 © Creado con fines educativos <br>
+                Todos los derechos reservados.
+          </p> 
+        
+          <p>
+Administración de los Servicios de Salud del Estado <br>
+Dirección: Av. Luis A. de Herrera 3326 | Montevideo, Uruguay <br>
+Teléfono: (+598) 2486 5008
+</p>
+ 
+        </div>
+      </footer>
 </body>
+
 
 </html>

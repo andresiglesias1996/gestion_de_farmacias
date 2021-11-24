@@ -1,20 +1,46 @@
-{% extends 'base.html' %}
-{% comment %}Contenido estatico de la pagina{% endcomment %}
+{% extends 'base.html' %} {% comment %}Contenido estatico de la pagina{% endcomment %}
 
 <!--Titulo de la pagina o pestaña-->
 {% block title %} Inicio {% endblock %} {% block content %}
 <!--Nav bar-->
 {% include "nav.html" %}
 
-<div class="m-3">
-    <h1 class="">Inicio</h1>
+<div class="m-3" id="featured-3">
 
+    <h1 class="">Bienvenido al sistema de Gestion de Farmacia</h1>
+
+    <h2 class="pb-2 border-bottom">Una nueva forma que facilitará el acceso a la medicacion</h2>
+    <div class="row g- py-5 row-cols-1 row-cols-lg-2">
+        <div class="feature col">
+            <div class="feature-icon bg-primary bg-gradient">
+            </div>
+
+            <ul>
+                <h2>Usuarios</h2>
+                <li> Reserva de medicacion</li>
+                <li>Consulta de medicacion disponible</li>
+                <li> Historial de medicacion</li>
+            </ul>
+        </div>
+        <div class="feature col">
+            <ul>
+                <h2>Personal de Farmacia</h2>
+                <li>Desde el sistema se podrá administrar el stock de medicamentos a nivel nacional y en las unidades de farmacia a nivel local.</li>
+                <li> Da trazabilidad a los medicamentosn</li>
+                <li> Permite realizar consultas sobre vencimientos, cantidades, ubicación, despacho, medicamentos alternativosn</li>
+            </ul>
+        </div>
+        <div class="feature col">
+
+
+
+            <!--
     <h4>Prueba de datos que llegan desde el backend</h4>
 
 
-    <!--
+    
 
-	-->
+	
     {% if user.is_authenticated%} {% if user.usuario_activo %}
     <p>user.usuario_activo = {{user.usuario_activo}}</p>
     {% endif %}
@@ -47,8 +73,9 @@
     <p>request.user.username: {{request.user.username | upper}}</p>
     <p>request.user.nombre: {{request.user.nombre }}</p>
     <p>request.user: {{request.user }}</p>
+-->
 
-</div>
+        </div>
 
 
-{% endblock content %}
+        {% endblock content %}
