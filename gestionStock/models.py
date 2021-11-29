@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models.base import Model
 import datetime
 #from gestionUsuarios.models import Usuarios
-#from gestionUsuarios.models import Usuarios
+#from gestionUsuarios.models import Recetas
 
 
 #==============
@@ -25,7 +25,7 @@ class Medicamentos(models.Model):
         contraindicaciones = models.CharField(max_length=1000,blank=True, null=True)
 
         def __str__(self):
-                return self.nombre_comercial
+                return self.nombre_comercial + " -> "+ self.principio_activo
         
         class Meta:
                 verbose_name = "Medicamento"
@@ -47,6 +47,17 @@ class Farmacias(models.Model):
 
         def __str__(self):
                 return self.nombre + ", " + self.localidad + ", " + self.departamento
+
+        def consultar_stock_acumulado(self, id_medicamento):
+
+                stock_acumulado = 0
+
+                lotes = Lotes.objects.filter(ubicacion=self.id).filter(medicamento=id_medicamento)
+                for lote in lotes:
+                        stock_acumulado += lote.stock
+
+
+                return stock_acumulado
         
         class Meta:
                 verbose_name = "Farmacia"
@@ -65,11 +76,14 @@ class Lotes(models.Model):
         
         #medicamento (id_medicamento)
         medicamento = models.ForeignKey(Medicamentos, on_delete=models.CASCADE)
-        
+        principio_activo = models.CharField(max_length=200,blank=True, null=True)
+        #funcionarios = models.ManyToManyField('gestionUsuarios.Usuarios',blank=True, verbose_name="Funcionarios")
+        funcionario = models.ForeignKey('gestionUsuarios.Usuarios', on_delete=models.CASCADE,blank=True, null=True, related_name='funcionario')
         stock = models.IntegerField()
         
         #ubicacion (id_farmacia)
         ubicacion = models.ForeignKey(Farmacias, on_delete=models.CASCADE)
+        receta_de_destino = models.ForeignKey('gestionUsuarios.Recetas', on_delete=models.CASCADE,blank=True, null=True, related_name='receta_de_destino')
         
         ingreso = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de ingreso",blank=True, null=True)
         vencimiento = models.CharField(max_length = 50,verbose_name="Fecha de vencimiento",blank=True, null=True)

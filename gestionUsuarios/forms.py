@@ -204,7 +204,7 @@ class Formulario_nueva_receta(forms.ModelForm):
                 model = Recetas
                 
                 #borramos el campo 'medico' porque se agrega automaticamente el usuario medico cuando se crea la receta
-                fields = ['principio_activo','paciente','descripcion','vencimiento','estado']
+                fields = ['principio_activo','paciente','descripcion','vencimiento','cronico']
 
 
         def __init__(self, *args, **kwargs):
@@ -213,7 +213,12 @@ class Formulario_nueva_receta(forms.ModelForm):
                 #con esta linea genero la lista de tuplas que necesita el argumento choices del campo Principio activo
                 # traigo todos los medicamentos y obtengo el campo principio_activo 
                 principio_activo_choices_con_duplicados = [(medicamento.principio_activo, medicamento.principio_activo) for medicamento in Medicamentos.objects.all()]
-                principio_activo_choices = list(dict.fromkeys(principio_activo_choices_con_duplicados))
+                
+                #el siguiente casting se hace para eliminar los valores duplicados
+                #y la funcion sorted lo ordena alfabeticamente
+                principio_activo_choices = sorted(list(dict.fromkeys(principio_activo_choices_con_duplicados)))
+                #print("=================================")
+                #print(principio_activo_choices)
                 self.fields['principio_activo'].choices = principio_activo_choices
                 
                 self.fields['principio_activo'].widget.attrs.update({'class': 'form-control'})
@@ -222,7 +227,7 @@ class Formulario_nueva_receta(forms.ModelForm):
                 self.fields['descripcion'].widget.attrs.update({'class': 'form-control'})
                 self.fields['vencimiento'].widget.attrs.update({'class': 'form-control','type':'date'})
                 #self.fields['vencimiento'].widget.attrs.update(type='date')
-                self.fields['estado'].widget.attrs.update({'class': 'form-control'})
+                self.fields['cronico'].widget.attrs.update({'class': 'radio'})
 
 
 

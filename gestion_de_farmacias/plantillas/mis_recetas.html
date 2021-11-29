@@ -17,12 +17,13 @@
 
             <thead class="thead-darkk">
                 <tr>
-                    <th>Medicamento</th>
-                    <th>Paciente</th>
-                    <th>Medico</th>
-                    <th>Descripcion</th>
-                    <th>Vencimiento</th>
+                    <th>Emitida el</th>
+                    <th>Tipo</th>
                     <th>Estado</th>
+                    <th>Principio activo</th>
+                    <th>Descripcion</th>
+                    <th>Medico</th>
+                    <th>Vencimiento</th>
                     {% comment "" %}
                     <th>...</th>
                     {% endcomment %}
@@ -31,17 +32,29 @@
 
             <tbody>
                 {% for receta in object_list %}
-                <tr>
-                    <td>{{ receta.medicamento }}</td>
-                    <td>{{ receta.paciente }}</td>
-                    <td>{{ receta.medico }}</td>
-                    <td>{{ receta.descripcion }}</td>
-                    <td>{{ receta.vencimiento }}</td>
-                    <td>{{ receta.estado }}</td>
+                    {% if receta.estado == "RES" %}
+                    <tr class="table-warning">
+                    {% else %}
+                    <tr>
+                    {% endif %}
+                        <td>{{ receta.created_at }}</td>
+                        <td>
+                    {% if receta.cronico %}
+                        <span class="badge badge-pill badge-danger">Cronico</span>
+                    {% else %}
+                        <span class="badge badge-pill badge-success">No cronico</span>
+                    {% endif %}
+                        </td>
+                        <td>{{ receta.estado }}</td>
+                        <td>{{ receta.principio_activo }}</td>
+                        <td>{{ receta.descripcion }}</td>
+                        <td>{{ receta.medico }}</td>
+                        <td>{{ receta.vencimiento }}</td>
+                    
                     {% comment %}
                     <td><a class="btn btn-sm btn-danger" href="/mi_receta/{{ receta.id }}">Editar</a></td>
                     {% endcomment %}
-                </tr>
+                    </tr>
                 {% endfor %}
             </tbody>
 

@@ -8,6 +8,35 @@
 {% include "nav.html" %}
 
 <div class="m-3">
+
+    {% if user.rol == 'medico'%}
+    <div class="container">
+        <div id="crear_receta" class="form-group form-group col-md-12">
+
+            {% if formulario_nueva_receta.errors %}
+            <p style="color:red;">Por favor revisa este campo</p>
+            {% endif %}
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Crear receta</h3>
+                </div>
+
+                <form method="POST">{% csrf_token %}
+                    <div class="card-body">
+                        {{formulario_nueva_receta.as_p}}
+                    </div>
+
+                    <div class="card-footer">
+                        <input class="btn btn-primary btn-lg btn-block" type="submit" value="Crear">
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+    <hr>
     <h1>Recetas</h1>
 
     <div class="table-responsive">
@@ -19,64 +48,63 @@
 
             <thead class="thead-darkk">
                 <tr>
+                    <th>Emitida el</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
                     <th>Principio activo</th>
                     <th>Paciente</th>
-                    <th>Medico</th>
                     <th>Descripcion</th>
-                    <th>Vencimiento</th>
-                    <th>Estado</th>
+                    {% if user.rol == 'farmacia'%}
+                    <th>Gestionar</th>
+                    {% else %} {% if user.rol == 'medico'%}
+                    <th>Editar</th>
+                    {% else %}
                     <th>...</th>
+                    {% endif %} {% endif %}
                 </tr>
             </thead>
 
             <tbody>
-                {% for receta in recetas_list %}
-                <tr>
-                    <td>{{ receta.principio_activo }}</td>
-                    <td>{{ receta.paciente }}</td>
-                    <td>{{ receta.medico }}</td>
-                    <td>{{ receta.descripcion }}</td>
-                    <td>{{ receta.vencimiento }}</td>
-                    <td>{{ receta.estado }}</td>
-                    <td><a class="btn btn-sm btn-primary" href="/editar_receta/{{ receta.id }}">Editar</a></td>
-                </tr>
-                {% endfor %}
+                {% for receta in recetas_list %} {% if receta.estado == "RES" %}
+                <tr class="table-warning">
+                    {% else %}
+                    <tr>
+                        {% endif %}
+                        <td>{{ receta.created_at }}</td>
+                        <td>
+                            {% if receta.cronico %}
+                            <span class="badge badge-pill badge-danger">Cronico</span> {% else %}
+                            <span class="badge badge-pill badge-success">No cronico</span> {% endif %}
+                        </td>
+                        <td>{{ receta.estado }}</td>
+                        <td>{{ receta.principio_activo }}</td>
+                        <td>{{ receta.paciente }}</td>
+                        <td>{{ receta.descripcion }}</td>
+                        {% comment %} {% if user.rol == 'medico'%}
+                        <td><a class="btn btn-sm btn-primary" href="/editar_receta/{{ receta.id }}">Editar</a></td>
+                        {% endif %} {% endcomment %} {% if receta.estado == "RES" and user.rol == 'farmacia'%}
+                        <td><a class="btn btn-sm btn-outline-primary" href="/gestionar_receta/{{ receta.id }}">Gestionar</a></td>
+                        {% else %} {% if user.rol == 'medico'%}
+                        <td><a class="btn btn-sm btn-primary" href="/editar_receta/{{ receta.id }}">Editar</a></td>
+                        {% else %}
+                        <td>
+                            <p></p>
+                        </td>
+                        {% endif %} {% endif %}
+                    </tr>
+                    {% endfor %}
             </tbody>
 
         </table>
         {% else %}
         <div class="alert alert-warning">
-            <strong>Atencion!</strong>  No existen registros.
+            <strong>Atencion!</strong> No existen registros.
         </div>
         {% endif %}
 
     </div>
 
-    <hr> {% if user.rol == 'medico'%}
-    <div class="form-group form-group col-md-12">
 
-        {% if formulario_nueva_receta.errors %}
-        <p style="color:red;">Por favor revisa este campo</p>
-        {% endif %}
-
-        <div class="card">
-            <div class="card-header">
-                <h3>Crear receta</h3>
-            </div>
-
-            <form method="POST">{% csrf_token %}
-                <div class="card-body">
-                    {{formulario_nueva_receta.as_p}}
-                </div>
-
-                <div class="card-footer">
-                    <input class="btn btn-primary btn-lg btn-block" type="submit" value="Crear">
-                </div>
-            </form>
-        </div>
-
-    </div>
-    {% endif %}
 
 </div>
 

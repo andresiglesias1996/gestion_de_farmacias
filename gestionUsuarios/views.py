@@ -49,9 +49,10 @@ class RegistrarUsuario(CreateView):
         form_class = FormularioCrearUsuario
 
         template_name = 'registrar_usuario.html'
-        success_url = reverse_lazy('login')
-
-
+        #success_url = reverse_lazy('login')
+    
+        def get_success_url(self):
+                return reverse_lazy('login') + '?registro_exitoso'
 
 
 
@@ -98,11 +99,14 @@ class EditarUsuario(UpdateView):
         form_class = FormularioEditarUsuario_2
 
         template_name = 'mi_usuario.html'
-        success_url = reverse_lazy('mi_usuario')
+        #success_url = reverse_lazy('mi_usuario')
 
         def get_object(self):
             usuario = Usuarios.objects.get(cedula_de_identidad=self.request.user.cedula_de_identidad)
             return usuario
+
+        def get_success_url(self):
+            return reverse_lazy('mi_usuario') + '?editado_correctamente'
 
 
 # =======================================================================
@@ -237,23 +241,22 @@ class RecetasUsuario(DetailView):
 
 
 
-# =======================================================================
-# Gestionar Receta ========================================================
-# =======================================================================
-"""class GestionarReceta(DetailView):
-    model = Recetas
-    template_name = 'gestionar_receta.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        numero_de_receta =self.kwargs['pk']
-        queryset_recetas = Recetas.objects.filter(id=numero_de_receta)
-        
-        if len(queryset_recetas) > 0:
-            context['receta'] = queryset_recetas[0]
-        
-        #print("===========================")
-        #print(context['receta'])
+# =======================================================================
+# MisPacientes ========================================================
+# =======================================================================
+class MisPacientes(ListView):
+    model = Usuarios
+    template_name = 'lista_de_usuarios.html'
 
-        return context
-        """
+    def get_queryset(self):
+        cedula_del_user= self.request.user.cedula_de_identidad
+        queryset_mis_receta = Recetas.objects.filter(medico=cedula_del_user)
+        mis_pacientes = []
+        
+        for receta in queryset_mis_receta:
+
+            mis_pacientes.append(Usuarios.objects.get(cedula_de_identidad=receta.paciente.cedula_de_identidad))
+            #print(receta.paciente.cedula_de_identidad)
+        
+        return list(set(mis_pacientes))

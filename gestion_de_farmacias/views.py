@@ -100,10 +100,10 @@ def carga_medicamentos(request):
 
         medicamento_nuevo = Medicamentos.objects.create(
             nombre_comercial=medicamento["nombre_comercial"],
-            categoria='venta libre',
+            categoria=medicamento["categoria"],
             laboratorio=medicamento["laboratorio"],
-            principio_activo=medicamento["nombre_comercial"],
-            forma="comprimidos",
+            principio_activo=medicamento["principio_activo"],
+            forma=medicamento["forma"],
             contraindicaciones=medicamento["contraindicaciones"]
         )
 
@@ -184,7 +184,7 @@ MEDICAMENTOS = [
 {
     'nombre_comercial':'ABACAVIR/LAMIVUDINA 600' ,
        'laboratorio':'MYLAN PHARMACEUTICALS',  
-       'principio_activo': 'Abacavir sulfato, Lamivudina',               
+       'principio_activo': 'Aripiprazol',               
        'forma' :'Comprimidos',                                         
        'contraindicaciones': 'Hipersensibilidad  individuales. I.H. grave', 
        'categoria':'RC'
@@ -192,7 +192,7 @@ MEDICAMENTOS = [
 {
     'nombre_comercial':'ABICREM 0,25 GALENICUM',     
     'laboratorio': 'DERMA S.L.',             
-    'principio_activo':'Fluocinolona acetónido, Framicetina sulfato',
+    'principio_activo':'Aripiprazol',
     'forma':  'Crema',                                           
     'contraindicaciones': 'Hipersensibilidad a sus componentes; infecciones cutáneas víricas y tuberculosas en actividad; úlceras de las extremidades; niños < 2 años', 
     'categoria':  'VL'
@@ -265,7 +265,8 @@ MEDICAMENTOS = [
     'nombre_comercial':'BISOLFREN 200' ,           
     'laboratorio':'OPELLA HEALTHCARE' , 
     'forma':'Comprimidos',           
-    'principio_activo':'Ibuprofeno, Pseudoefedrina hidrocloruro EXC: Carboximetilalmidón sódico','forma':  'Comprimidos' ,        
+    'principio_activo':'Bicalutamida',
+    'forma':  'Comprimidos' ,        
     'contraindicaciones':'Hipersensibilidad', 
     'categoria':'RC'
     },
@@ -296,7 +297,7 @@ MEDICAMENTOS = [
 {
     'nombre_comercial':'CERTICAN Comprimido 0.75 mg',  
     'laboratorio':'Scienza-Novartis',         
-    'principio_activo': 'Everolimus'   ,                                 
+    'principio_activo': 'Interferón beta-1a'   ,                                 
     'forma':'Comprimidos'   ,                              
     'contraindicaciones':'Hipersensibilidad a everolimús y sirolimús.' ,
     'categoria':'FNR'
@@ -343,7 +344,7 @@ MEDICAMENTOS = [
 {
     'nombre_comercial':'Aceprax',                        
     'laboratorio':'Celsius' ,                 
-    'principio_activo':'Alprazolam'  ,                                
+    'principio_activo':'Lorazepam'  ,                                
     'forma':'Comprimidos',                                       
     'contraindicaciones':'Hipersensibilidad a alprazolam, a benzodiazepinas, miastenia gravis, insuf. Respiratoria grave, síndrome de apnea del sueño',  
     'categoria':'RV'
@@ -442,7 +443,7 @@ def carga_usuarios(request):
     ROLES = ['usuario', 'farmacia', 'medico', 'stock']
 
     for usuario in USUARIOS:
-
+        
         usuario_nuevo = Usuarios.objects.create(
             cedula_de_identidad=usuario['cedula_de_identidad'],
             rol=ROLES[usuario["rol"]],
@@ -473,6 +474,17 @@ USUARIOS = [
         "email": "santiagocollins@parcoe.com",
         "telefono": 94247985,
         "direccion": "384 Randolph Street, Eagletown, Utah, 8901"
+    },
+    {
+        "cedula_de_identidad": 56574425,
+        "rol": 0,
+        "usuario": "anamar22",
+        "nombre": "Ana María",
+        "apellido": "Perez Collins",
+        "fecha_de_nacimiento": "2085-11-05",
+        "email": "anamar22@parcoe.com",
+        "telefono": 94515908,
+        "direccion": "384 Random Street, Eagletown, Utah, 8901"
     },
     {
         "cedula_de_identidad": 40239210,

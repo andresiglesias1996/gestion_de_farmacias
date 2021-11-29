@@ -9,39 +9,90 @@
 
 <div class="m-3">
 
+    <h2>Informacion de {{object.nombre}}  {{object.apellido}}  {{object.usuario}}</h2>
+
+    <div class="container">
+        <table class="table table-hover text">
+            <tr>
+                <td>Nombre:</td>
+                <td>{{object.nombre}}</td>
+            </tr>
+            <tr>
+                <td>Apellido:</td>
+                <td>{{object.apellido}}</td>
+            </tr>
+            <tr>
+                <td>Usuario:</td>
+                <td>{{object.usuario}}</td>
+            </tr>
+            <tr>
+                <td>Fecha de nacimiento:</td>
+                <td>{{object.fecha_de_nacimiento}}</td>
+            </tr>
+            <tr>
+                <td>Telefono:</td>
+                <td>{{object.telefono}}</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>{{object.email}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <hr>
+
     {% if Recetas %}
-    <h1>Receta de {{object.usuario}} </h1>
+    <h2>Recetas de {{object.nombre}}  {{object.apellido}}  {{object.usuario}} </h2>
     <div class="table-responsive">
         <table id="tabla_de_recetas" class="table table-hover">
 
             <thead class="thead-darkk">
                 <tr>
-                    <th> Principio activo </th>
-                    <th> paciente </th>
-                    <th> medico </th>
-                    <th> descripcion </th>
-                    <th> vencimiento </th>
-                    <th> estado </th>
-
-                    <th>gestionar</th>
+                    <th>Numero de receta</th>
+                    <th>Estado </th>
+                    <th>Tipo</th>
+                    <th>Principio activo </th>
+                    <th>Paciente </th>
+                    <th>Medico </th>
+                    <th>Descripcion </th>
+                    <th>Vencimiento </th>
+                    {% if user.rol == "farmacia" %}
+                    <th>Gestionar</th>
+                    {% else %}
+                    <th></th>
+                    {% endif %}
 
                 </tr>
             </thead>
 
             <tbody>
-                {% for receta in Recetas %}
-                <tr>
-                    <td>{{ receta.principio_activo }}</td>
-                    <td>{{ receta.paciente }}</td>
-                    <td>{{ receta.medico }}</td>
-                    <td>{{ receta.descripcion }}</td>
-                    <td>{{ receta.vencimiento }}</td>
-                    <td>{{ receta.estado }}</td>
-                    
-                    <td><a class="btn btn-danger btn-lg btn-block" href="/gestionar_receta/{{ receta.id }}">Gestionar</a></td>
-                    
-                </tr>
-                {% endfor %}
+                {% for receta in Recetas %} {% if receta.estado == "RES" %}
+                <tr class="table-warning">
+                    {% else %}
+                    <tr>
+                        {% endif %}
+                        <td>{{ receta.id }}</td>
+                        <td>{{ receta.estado }}</td>
+                        <td>
+                            {% if receta.cronico %}
+                            <span class="badge badge-pill badge-danger">Cronico</span> {% else %}
+                            <span class="badge badge-pill badge-success">No cronico</span> {% endif %}
+                        </td>
+                        <td>{{ receta.principio_activo }}</td>
+                        <td>{{ receta.paciente }}</td>
+                        <td>{{ receta.medico }}</td>
+                        <td>{{ receta.descripcion }}</td>
+                        <td>{{ receta.vencimiento }}</td>
+                        {% if receta.estado == "RES" and user.rol == "farmacia" %}
+                        <td><a class="btn btn-primary" href="/gestionar_receta/{{ receta.id }}">Gestionar</a></td>
+                        {% else %}
+                        <td>
+                            <p></p>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
             </tbody>
 
         </table>

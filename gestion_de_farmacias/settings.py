@@ -92,18 +92,22 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-"""
+
+""""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_farmacia_asse',
-        'USER': 'user_FarmaciaASSE',
+        #'NAME': 'farmacia_asse',
+        'USER': 'user_Gestion_de_FarmaciasASSE',
+        #'USER': 'user_FarmaciaASSE',
         'PASSWORD': 'password_FarmaciaASSE',
         'HOST': 'localhost',
         'PORT': '3306',
     }
 }
 """
+
 """
 DATABASES = {
     'default': {

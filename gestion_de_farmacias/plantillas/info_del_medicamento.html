@@ -8,10 +8,38 @@
 {% include "nav.html" %}
 
 <div class="m-3">
-    <h1>Farmacias</h1>
+    <h2>Informacion de {{medicamento}}</h2>
 
-    {% comment %} BUSCADOR {% endcomment %}
-    {% comment %}
+    <div class="container">
+        <table class="table table-hover text">
+            <tr>
+                <td>nombre comercial:</td>
+                <td>{{medicamento.nombre_comercial}}</td>
+            </tr>
+            <tr>
+                <td>Categoria:</td>
+                <td>{{medicamento.categoria}}</td>
+            </tr>
+            <tr>
+                <td>Laboratorio:</td>
+                <td>{{medicamento.laboratorio}}</td>
+            </tr>
+            <tr>
+                <td>Principio activo</td>
+                <td>{{medicamento.principio_activo}}</td>
+            </tr>
+            <tr>
+                <td>Forma:</td>
+                <td>{{medicamento.forma}}</td>
+            </tr>
+            <tr>
+                <td>Contraindicaciones:</td>
+                <td>{{medicamento.contraindicaciones}}</td>
+            </tr>
+        </table>
+    </div>
+
+    {% comment %} BUSCADOR {% endcomment %} {% comment %}
     <div class="consulta farmacias mb-3 ">
         <h3>
             <p>Criterios de búsqueda</p>
@@ -19,35 +47,37 @@
         <input type="text" class="form-control mb-2" id="cc-number" placeholder="Nombre, Departamento, Localidad" required="">
         <button class="btn btn-secondary btn-lg btn-block" type="submit">Buscar</button>
     </div>
-    {% endcomment %}
+    {% endcomment %} {% comment %} TABLA DE FARMACIAS {% endcomment %}
+    <div class="my-5">
+    <hr>
+    </div> 
 
-    {% comment %} TABLA DE FARMACIAS {% endcomment %}
+    <h2>Disponibilidad en farmacias:</h2>
     <div class="table-responsive">
 
 
         {% if farmacias %}
-        <table id="tabla_de_farmacias" class="table table-hover">
+        <table id="tabla_de_disponibilidad_en_farmacias" class="table table-hover">
 
             <thead class="thead-darkk">
                 <tr>
-                    <th>Departamento</th>
+                    <th>Stock disponible de {{medicamento.nombre_comercial}}</th>
+                    <th>Farmacia </th>
                     <th>Localidad</th>
-                    <th>Nombre </th>
+                    <th>Departamento</th>
                     <th>Direccion</th>
 
                 </tr>
             </thead>
 
             <tbody>
-                {% for farmacia in farmacias %}
+                {% for farmacia, stock in farmacias %}
                 <tr>
-                    <td>{{ farmacia.departamento }}</td>
-                    <td>{{ farmacia.localidad }}</td>
+                    <td>{{ stock}} unidades</td>
                     <td>{{ farmacia.nombre }}</td>
+                    <td>{{ farmacia.localidad }}</td>
+                    <td>{{ farmacia.departamento }}</td>
                     <td>{{ farmacia.direccion }}</td>
-                    {% comment %}
-                    <td>{{ farmacia.forma }}</td>
-                    farmacia.forma? {% endcomment %}
 
                 </tr>
                 {% endfor %}
@@ -56,7 +86,7 @@
         </table>
         {% else %}
         <div class="alert alert-warning">
-            <strong>Atencion!</strong>  No existen registros.
+            <strong>Atencion!</strong> No hay stock diponible en ninguna farmacia.
         </div>
         {% endif %}
     </div>
@@ -64,10 +94,7 @@
 
 
     <!-- Menú de paginación -->
-    {% comment %}
-        
-    
-    {% if is_paginated %}
+    {% comment %} {% if is_paginated %}
     <nav aria-label="Page navigation">
         <ul class="pagination  justify-content-center">
             {% if page_obj.has_previous %}
@@ -93,9 +120,7 @@
             {% endif %}
         </ul>
     </nav>
-    {% endif %}
-
-{% endcomment %}
+    {% endif %} {% endcomment %}
 
 </div>
 

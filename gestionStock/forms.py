@@ -13,10 +13,12 @@ from gestionStock.models import Medicamentos, Lotes
 # =======================================================================
 class Formulario_nuevo_stock(forms.ModelForm):
 
+        #principio_activo = forms.CharField()
         # aca se enumeran los campos que se van a mostrar con el formulario
         class Meta:
                 model = Lotes
                 fields = ['medicamento','stock','vencimiento']
+
 
         #===============================================
         # aca se definen las clases de bootstrap que se le 
@@ -30,6 +32,30 @@ class Formulario_nuevo_stock(forms.ModelForm):
                 #self.fields['ubicacion'].widget.attrs.update({'class': 'form-control'})
                 self.fields['vencimiento'].widget.attrs.update({'class': 'form-control','required':'required'})
 
+
+# =======================================================================
+# Nuevo Stock para el funcionarios auditor de stock=================================================
+# =======================================================================
+class Formulario_nuevo_stock_con_farmacias(forms.ModelForm):
+
+        #principio_activo = forms.CharField()
+        # aca se enumeran los campos que se van a mostrar con el formulario
+        class Meta:
+                model = Lotes
+                fields = ['medicamento','stock', 'ubicacion','vencimiento']
+
+
+        #===============================================
+        # aca se definen las clases de bootstrap que se le 
+        # aplican a los campos del formulario _nuevo_stock 
+        #===============================================
+        def __init__(self, *args, **kwargs):
+                super().__init__(*args, **kwargs)
+                self.fields['medicamento'].widget.attrs.update({'class': 'form-control'})
+                self.fields['stock'].widget.attrs.update({'class': 'form-control'})
+                self.fields['stock'].widget.attrs.update(value='100')
+                self.fields['ubicacion'].widget.attrs.update({'class': 'form-control'})
+                self.fields['vencimiento'].widget.attrs.update({'class': 'form-control','required':'required'})
 
 
 

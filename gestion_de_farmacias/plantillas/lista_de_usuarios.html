@@ -1,7 +1,4 @@
-  
-
-
-{% extends 'base.html' %}
+ {% extends 'base.html' %}
 <!-- Contenido estatico de la pagina -->
 
 <!--Titulo de la pagina o pestaña-->
@@ -9,16 +6,18 @@
 
 <!--Nav bar-->
 {% include "nav.html" %}
-
 <div class="m-3">
+    {% if user.rol == 'medico' %}
+    <h1>Mis Pacientes</h1>
+    {%else%}
+
     <h1>Lista de Usuarios</h1>
+    {%endif%}
 
     <!-- ==============================-->
     <!-- Tabla con los Usuarios activos -->
     <!-- ==============================-->
-    {% if object_list %}
-
-    {% comment %}
+    {% if object_list %} {% comment %}
     <div class="consulta usuario mb-3">
         <h3>
             <p>Criterios de búsqueda</p>
@@ -34,11 +33,10 @@
             <thead class="thead-darkk">
                 <tr>
                     <th>C.i.</th>
-                    <th>Rol</th>
-                    <th>Usuario</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Telefono</th>
+                    <th>Usuario</th>
+                    <th>Rol</th>
                     <th>Ver</th>
                 </tr>
             </thead>
@@ -47,21 +45,23 @@
                 {% for usuario in object_list %}
                 <tr>
                     <td>{{ usuario.cedula_de_identidad }}</td>
-                    <td>{{ usuario.rol }}</td>
-                    <td>{{ usuario.usuario }}</td>
                     <td>{{ usuario.nombre }}</td>
                     <td>{{ usuario.apellido }}</td>
-                    <td>{{ usuario.telefono }}</td>
-                    
+                    <td>{{ usuario.usuario }}</td>
+                    <td>{{ usuario.rol }}</td>
                     <td>
-                        <a   class="btn btn-primary btn-block" href="/recetas_usuario/{{ usuario.cedula_de_identidad }}">Ver recetas</a></td> 
-                    </tr>
+                        <a class="btn btn-sm btn-outline-primary" href="/recetas_usuario/{{ usuario.cedula_de_identidad }}">Ver usuario</a>
+                    </td>
+                </tr>
                 {% endfor %}
             </tbody>
 
         </table>
     </div>
-
+    {% else %}
+    <div class="alert alert-danger" role="alert">
+        No hay usuarios registrados
+    </div>
     {% endif %}
     <br>
     <!-- Menú de paginación -->

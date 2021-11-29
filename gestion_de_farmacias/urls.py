@@ -19,8 +19,9 @@ from django.contrib.auth.views import LoginView, logout_then_login
 
 #from gestion_de_farmacias.views import login, inicio
 from gestion_de_farmacias import views
-from gestionUsuarios.views import  RecetasUsuario, MisRecetas, RegistrarUsuario, EditarUsuario, ListaDeUsuarios, ListarRecetas, EditarReceta, ActulizarMiUsuario,MiUsuario
-from gestionStock.views import GestionarReceta, ListarFarmacias,ListarMedicamentos, MiStock, Stock, EditarStock
+from gestionUsuarios.views import  RecetasUsuario, MisRecetas, RegistrarUsuario, EditarUsuario, ListaDeUsuarios, ListarRecetas, EditarReceta, ActulizarMiUsuario,MiUsuario, MisPacientes
+from gestionStock.views import InfoDelMedicamento,GestionarReceta, ListarFarmacias,ListarMedicamentos, MiStock, Stock, EditarStock
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,8 +34,8 @@ urlpatterns = [
     #path('login/', views.login, name="login"),
     #path('login/', LoginView.as_view(template_name='login.html'), name="login"),
     #path('logout/', logout_then_login.as_view(template_name='login.html'), name="logout"),
-    path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('registration.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 
 
 
@@ -42,6 +43,7 @@ urlpatterns = [
     path('medicamentos/', ListarMedicamentos.as_view(), name="medicamentos"),
     #path('buscar_medicamento/', buscar_medicamento, name="buscar_medicamento"),
     path('farmacias/', ListarFarmacias.as_view(), name="farmacias"),
+    path('info_del_medicamento/<int:pk>/', InfoDelMedicamento.as_view(), name="info_del_medicamento"),
 
     path('stock/', Stock.as_view(), name="stock"),
     #path('crear_stock/', views.LoteCreate.as_view(), name="cerar_stock"),
@@ -56,6 +58,7 @@ urlpatterns = [
     path('mis_recetas/', MisRecetas.as_view(), name="mis_recetas"), #la clase MisRecetas esta en gestionUsuarios.views
     path('recetas_usuario/<int:pk>/', RecetasUsuario.as_view(), name='recetas_usuario'),
     path('gestionar_receta/<int:pk>/', GestionarReceta.as_view(), name='gestionar_receta'),
+    path('mis_pacientes/', MisPacientes.as_view(), name='mis_pacientes'),
 
 
     path('lista_de_usuarios/', ListaDeUsuarios.as_view(), name="lista_de_usuarios"),

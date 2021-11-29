@@ -129,55 +129,31 @@ class Usuarios(AbstractBaseUser):
 # Recetas =
 #==========
 class Recetas(models.Model):
-        """
-        def principios_activos():
-                lista = [
-                ('paracetamol', 'paracetamol'),
-                ('algun farmaco 01','algun farmaco 01'),
-                ('algun farmaco 02','algun farmaco 02'),
-                ('algun farmaco 03','algun farmaco 03'),
-                ('algun farmaco 04','algun farmaco 04'),
-                ('un nuevo farmaco 01','un nuevo farmaco 01'),
-                ]
-                lista_de_medicamentos = []
-                queryset_de_medicamentos = Medicamentos.objects.all()
-                #print("==================medicamentos===================")
-                if len(queryset_de_medicamentos) > 0:
-
-                        for medicamento in queryset_de_medicamentos:
-                                mi_tupla = (medicamento.principio_activo,medicamento.principio_activo)
-                                lista_de_medicamentos.append(mi_tupla)
-
-                print("=========================")
-                #print(lista_de_medicamentos)
-                return lista_de_medicamentos
-        """
-
+        
         ESTADOS_DE_UNA_RECETA = [
                 ('RES', 'Reservado'),
                 ('RET','Retirado')
+               
         ]
         
         #LISTA_DE_PRINCIPIOS_ACTIVOS = principios_activos()
-
-       
 
         #id = models.IntegerField(primary_key=True)
         
         principio_activo = models.CharField(max_length = 100, default="----")
         paciente = models.ForeignKey(Usuarios, null=True, on_delete=models.CASCADE, related_name='+')
         medico = models.ForeignKey(Usuarios, null=True, on_delete=models.CASCADE, related_name='+')
-
+        cronico = models.BooleanField(default=False)
         descripcion = models.CharField(max_length = 500, blank=True, null=True)
         vencimiento= models.CharField(max_length = 50,blank=True, null=True, verbose_name="Fecha de vencimiento")
-        estado = models.CharField(max_length = 50,choices=ESTADOS_DE_UNA_RECETA,blank=True, null=True) # el estado se refiere a si el medicamento esta reservado o ya fue retirado
+        estado = models.CharField(max_length = 50,choices=ESTADOS_DE_UNA_RECETA,default="RES") # el estado se refiere a si el medicamento esta reservado o ya fue retirado
         created_at = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
         updated_at = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
 
         
 
         def __str__(self):
-                return "Se receta " + str(self.principio_activo) + " al usuario " +str(self.paciente)
+                return "El Dr. " + str(self.medico) + " receta " + str(self.principio_activo) + " al usuario " +str(self.paciente)
 
 
         class Meta:
