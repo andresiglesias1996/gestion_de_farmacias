@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'gestion_de_farmacias.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -93,20 +93,20 @@ DATABASES = {
     }
 }
 
-""""
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_farmacia_asse',
-        #'NAME': 'farmacia_asse',
+       
         'USER': 'user_Gestion_de_FarmaciasASSE',
-        #'USER': 'user_FarmaciaASSE',
+        
         'PASSWORD': 'password_FarmaciaASSE',
         'HOST': 'localhost',
         'PORT': '3306',
     }
 }
-"""
+
 
 """
 DATABASES = {

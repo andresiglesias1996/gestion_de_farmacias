@@ -48,7 +48,9 @@
                 </a>
             </li>
 
-            {% if user.is_authenticated %} {% if user.rol == 'farmacia'%}
+
+            {% if user.is_authenticated %} {% if user.rol == 'farmacia' %}
+
             <li class="nav-item h6 text-center">
                 <a class="nav-link text-light" href="{% url 'mi_stock' %}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="i mx-auto mb-1e d-none d-lg-block" viewBox="0 0 16 16">

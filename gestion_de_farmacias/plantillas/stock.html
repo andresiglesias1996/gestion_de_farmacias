@@ -10,9 +10,50 @@
 
     <div class="">
         <a class="btn btn-success float-right" href="#formulario">+ Stock</a>
-        <h2>Registros de stock a nivel nacional.</h2>
+        <h2>Stock acumulado.</h2>
+    </div>
+    <div class="table-responsive">
+        {% if stock_acumulado %}
+        <table id="tabla_de_stock_acumulado" class="table table-hover">
+            <thead class="thead-darkk">
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Stock</th>
+                    <th>Medicamento</th>
+                    <th>Principio activo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lote in stock_acumulado %} {% comment %}
+                <h4>{{lote.medicamento}}</h4>
+                <p>{{lote.stock}}</p>
+                {% endcomment %}
+
+                <tr {% if lote.stock < 50 %}class="table-danger" {% endif %} {% if lote.stock < 100 %}class="table-warning" {% else %}class="table-successs" {% endif %}>
+                    <td>
+                        {{lote.stock}}
+                    </td>
+                    <td>
+                        {% if lote.stock < 50 %} <span class="badge badge-danger">muy bajo</span>
+                            {% else %} {% if lote.stock < 100 %} <span class="badge badge-warning">bajo </span>
+                                {% else %}
+                                <span class="badge badge-success">ok</span> {% endif %} {% endif %}
+                    </td>
+                    <td>{{lote.medicamento.nombre_comercial}}</td>
+                    <td>{{lote.medicamento.principio_activo}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="alert alert-warning">
+            <strong>Atencion!</strong> La farmacia no tiene registros de stock.
+        </div>
+        {% endif %}
     </div>
 
+    <hr>
+    <h2>Registros de stock a nivel nacional.</h2>
     <div class="table-responsive">
         {% if lotes_list %}
         <table id="tabla_de_stock_nacional" class="table table-hover">
@@ -21,7 +62,7 @@
                     <th>Ingreso</th>
                     <th>Ubicacion</th>
                     <th>Cantidad</th>
-                    <th>Stock</th>
+                    
                     {% comment %}
                     <th></th>
                     {% endcomment %}
@@ -34,20 +75,15 @@
                 </tr>
             </thead>
             <tbody>
-                {% for lote in lotes_list %} {% if lote.stock < 50 %} <tr class="table-danger">
-                    {% else %} {% if lote.stock < 100 %} <tr class="table-warning">
-                        {% else %}
+
+                {% for lote in lotes_list %} 
                         <tr>
-                            {% endif %} {% endif %}
+                            
                             <td>{{lote.ingreso}}</td>
                             <td>{{lote.ubicacion}}</td>
                             <td>{{lote.stock}}</td>
-                            <td>
-                                {% if lote.stock < 50 %} <span class="badge badge-danger">muy bajo</span>
-                                    {% else %} {% if lote.stock < 100 %} <span class="badge badge-warning">bajo </span>
-                                        {% else %}
-                                        <span class="badge badge-success">ok</span> {% endif %} {% endif %}
-                            </td>
+                      
+
                             {% comment %}
                             <td>
                                 {% if lote.stock
