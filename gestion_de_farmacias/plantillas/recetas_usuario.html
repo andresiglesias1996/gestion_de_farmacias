@@ -10,7 +10,7 @@
 <div class="m-3">
 
 
-    <h2>Informacion de {{object.nombre}}  {{object.apellido}}  {{object.usuario}}</h2>
+    <h4>Informacion de <strong class="font-italic">{{object.nombre}}  {{object.apellido}}  {{object.usuario}}</strong></h4>
 
 
     <div class="container">
@@ -42,11 +42,9 @@
         </table>
     </div>
 
-    <hr>
+    <hr class="mt-5 mb-5"> {% if Recetas %}
 
-    {% if Recetas %}
-
-    <h2>Recetas de {{object.nombre}}  {{object.apellido}}  {{object.usuario}} </h2>
+    <h2>Recetas de {{object.nombre}} {{object.apellido}} {{object.usuario}} </h2>
 
     <div class="table-responsive">
         <table id="tabla_de_recetas" class="table table-hover">

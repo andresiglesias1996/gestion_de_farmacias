@@ -42,6 +42,11 @@ class ListarFarmacias(ListView):
         context_object_name = "farmacias"
         #paginate_by = 10  
 
+        def get_queryset(self):
+                #con el filter(receta_de_destino=None) traemos los registros que no estan asignados a ninguna receta
+                #los registros despachados quedan registrados como registros negativos y con un objeto Recetas en la variable receta_de_destino
+                return Farmacias.objects.exclude(nombre='Farmacia General')
+
 
 
 
@@ -93,7 +98,7 @@ class Stock(View):
     def get_queryset(self):
         #con el filter(receta_de_destino=None) traemos los registros que no estan asignados a ninguna receta
         #los registros despachados quedan registrados como registros negativos y con un objeto Recetas en la variable receta_de_destino
-        return Lotes.objects.all().filter(receta_de_destino=None)
+        return Lotes.objects.all()
     
     # este metodo devuelve el diccionario de contexto(los datos) que va a ser enviado al template
     # la usamos para agregar datos que queremos hacer llegar al template
@@ -107,7 +112,8 @@ class Stock(View):
             #STOCK ACUMULADO
             #este algoritmo va a ser muy ineficiente XD
 #===============================================================
-        queryset_stock_total_mi_farmacia = Lotes.objects.all()
+        mi_farmacia = Farmacias.objects.filter(funcionarios=self.request.user.cedula_de_identidad)[0]
+        queryset_stock_total_mi_farmacia = Lotes.objects.filter(ubicacion_id=mi_farmacia.id)
 
         stock_acumulado = []
 
@@ -304,7 +310,7 @@ class MiStock(ListView):
 
         #medicamento=formulario_nuevo_stock.get('id_medicamento')
         #request.POST.get('id_receta')
-        #print(medicamento.principio_activo)
+        #print(farmacia_general)
         #print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 
         mi_farmacia = Farmacias.objects.filter(funcionarios=cedula_del_user)[0]

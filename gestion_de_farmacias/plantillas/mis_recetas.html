@@ -9,7 +9,7 @@
 
 <div class="m-3">
 
-    <h1>Mis Recetas</h1>
+    <h3>Mis Recetas</h3>
 
     {% if object_list %}
     <div class="table-responsive">
@@ -31,31 +31,28 @@
             </thead>
 
             <tbody>
-                {% for receta in object_list %}
-                    {% if receta.estado == "RES" %}
-                    <tr class="table-warning">
+                {% for receta in object_list %} {% if receta.estado == "RES" %}
+                <tr class="table-warning">
                     {% else %}
                     <tr>
-                    {% endif %}
+                        {% endif %}
                         <td>{{ receta.created_at }}</td>
                         <td>
-                    {% if receta.cronico %}
-                        <span class="badge badge-pill badge-danger">Cronico</span>
-                    {% else %}
-                        <span class="badge badge-pill badge-success">No cronico</span>
-                    {% endif %}
+                            {% if receta.cronico %}
+                            <span class="badge badge-pill badge-danger">Cronico</span> {% else %}
+                            <span class="badge badge-pill badge-success">No cronico</span> {% endif %}
                         </td>
                         <td>{{ receta.estado }}</td>
                         <td>{{ receta.principio_activo }}</td>
                         <td>{{ receta.descripcion }}</td>
                         <td>{{ receta.medico }}</td>
                         <td>{{ receta.vencimiento }}</td>
-                    
-                    {% comment %}
-                    <td><a class="btn btn-sm btn-danger" href="/mi_receta/{{ receta.id }}">Editar</a></td>
-                    {% endcomment %}
+
+                        {% comment %}
+                        <td><a class="btn btn-sm btn-danger" href="/mi_receta/{{ receta.id }}">Editar</a></td>
+                        {% endcomment %}
                     </tr>
-                {% endfor %}
+                    {% endfor %}
             </tbody>
 
         </table>
@@ -64,6 +61,7 @@
     <div class="alert alert-warning">
         <strong>Atencion!</strong> Su usuario no tiene recetas.
     </div>
+    <div style="height:10em"></div>
     {% endif %}
 
 </div>

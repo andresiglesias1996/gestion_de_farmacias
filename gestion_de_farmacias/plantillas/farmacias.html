@@ -8,10 +8,9 @@
 {% include "nav.html" %}
 
 <div class="m-3">
-    <h1>Farmacias</h1>
+    <h3>Farmacias</h3>
 
-    {% comment %} BUSCADOR {% endcomment %}
-    {% comment %}
+    {% comment %} BUSCADOR {% endcomment %} {% comment %}
     <div class="consulta farmacias mb-3 ">
         <h3>
             <p>Criterios de búsqueda</p>
@@ -19,9 +18,7 @@
         <input type="text" class="form-control mb-2" id="cc-number" placeholder="Nombre, Departamento, Localidad" required="">
         <button class="btn btn-secondary btn-lg btn-block" type="submit">Buscar</button>
     </div>
-    {% endcomment %}
-
-    {% comment %} TABLA DE FARMACIAS {% endcomment %}
+    {% endcomment %} {% comment %} TABLA DE FARMACIAS {% endcomment %}
     <div class="table-responsive">
 
 
@@ -56,7 +53,7 @@
         </table>
         {% else %}
         <div class="alert alert-warning">
-            <strong>Atencion!</strong>  No existen registros.
+            <strong>Atencion!</strong> No existen registros.
         </div>
         {% endif %}
     </div>
@@ -64,10 +61,7 @@
 
 
     <!-- Menú de paginación -->
-    {% comment %}
-        
-    
-    {% if is_paginated %}
+    {% comment %} {% if is_paginated %}
     <nav aria-label="Page navigation">
         <ul class="pagination  justify-content-center">
             {% if page_obj.has_previous %}
@@ -93,9 +87,7 @@
             {% endif %}
         </ul>
     </nav>
-    {% endif %}
-
-{% endcomment %}
+    {% endif %} {% endcomment %}
 
 </div>
 

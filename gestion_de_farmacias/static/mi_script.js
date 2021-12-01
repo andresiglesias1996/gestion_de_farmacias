@@ -128,7 +128,7 @@ $(document).ready(function() {
     });
     $('#tabla_de_stock_nacional').DataTable({
         order: [
-            [2, 'asc']
+            [1, 'desc']
         ]
     });
     //$('#tabla_de_stock_acumulado').DataTable();
