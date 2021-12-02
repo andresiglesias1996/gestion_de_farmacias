@@ -49,6 +49,7 @@ urlpatterns = [
     #path('crear_stock/', views.LoteCreate.as_view(), name="cerar_stock"),
     path('editar_stock/<int:pk>', EditarStock.as_view(), name="editar_stock"),
     path('mi_stock/', MiStock.as_view(), name="mi_stock"),
+    path('sin_stock', views.sin_stock, name="sin_stock"),
 
 
     #path('receta/<int:receta_numero>/<str:usuario>', views.receta, name="receta"),

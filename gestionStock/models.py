@@ -1,6 +1,14 @@
 from django.db import models
 from django.db.models.base import Model
-import datetime
+
+
+#import datetime
+#from datetime import datetime
+#import time
+from datetime import date
+from django.core.exceptions import ValidationError
+#from django import forms
+
 #from gestionUsuarios.models import Usuarios
 #from gestionUsuarios.models import Recetas
 
@@ -71,7 +79,16 @@ class Farmacias(models.Model):
 # Lotes =
 #=======
 class Lotes(models.Model):
-        
+
+        #intento hacer la validacion de las fechas pasadas
+        """
+        def clean(self):
+                today = date.today()
+                if self.vencimiento < str(today):
+                       raise ValidationError("La fecha de vencimiento no puede ser anterior a hoy!")
+                return self.vencimiento
+        """
+
         id = models.AutoField(primary_key=True)
         
         #medicamento (id_medicamento)
@@ -86,11 +103,13 @@ class Lotes(models.Model):
         receta_de_destino = models.ForeignKey('gestionUsuarios.Recetas', on_delete=models.CASCADE,blank=True, null=True, related_name='receta_de_destino')
         
         ingreso = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de ingreso",blank=True, null=True)
-        vencimiento = models.CharField(max_length = 50,verbose_name="Fecha de vencimiento",blank=True, null=True)
+        vencimiento = models.CharField(max_length = 50,verbose_name="Fecha de vencimiento",blank=True, null=True) #validators=[validate_date])
 
         #created = models.CharField(verbose_name="Fecha de creación", max_length=100, blank=True, default=datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
         created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación",blank=True, null=True)
         updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición",blank=True, null=True)
+
+        
 
         def __str__(self):
                 return str(self.stock) + " unidades de " + str(self.medicamento) + " con vencimiento " + str(self.vencimiento)

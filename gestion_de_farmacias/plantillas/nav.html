@@ -100,7 +100,7 @@
                                 </svg> Recetas
                 </a>
             </li>
-            {% endif %} {% if user.rol == 'usuario' %}
+            {% endif %} {% if user.is_authenticated %}
             <li class="nav-item h6 text-center">
                 <a class="nav-link text-light" href="{% url 'mis_recetas' %}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi mx-auto mb-1e d-none d-lg-block" viewBox="0 0 16 16">

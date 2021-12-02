@@ -59,14 +59,18 @@ class InicioView(TemplateView):
 # =====================
 def inicio(request):
 
-    # print("el request.user.rol.nombre dice: " + str(request.user.rol.nombre) )
-    # json_personas= json.dumps(lista_personas)
-    # json_personas= json.dumps([11,12,13,14,15])
-    json_personas = [11, 12, 13, 14, 15]
-
     diccionario_de_contexto = {"usuario": "Fulano Detail"}
 
     return render(request, "inicio.html", diccionario_de_contexto)
+
+
+# =====================
+#  SIN STOCK ===========
+# =====================
+def sin_stock(request):
+
+    return render(request, "sin_stock.html")
+
 
 
 # =================================================
@@ -409,27 +413,28 @@ def carga_farmacias(request):
         departamento=farmacia['departamento'],
         )
         farmacia_nueva.save()
+        print(farmacia_nueva)
 
     return redirect('farmacias')
 
 FARMACIAS = [
 
-{'nombre':'Farmacia General'  , 'departamento':'', 'direccion':   '', 'localidad':''},
-{'nombre':'Montevideo Central'  , 'departamento':'Montevideo', 'direccion':   '18 de julio 1234', 'localidad':'  Montevideo'},
-{'nombre':'Montevideo Curva de Maroñas' , 'departamento':'Montevideo', 'direccion':   '8 de octubre 1234', 'localidad':' Montevideo'},
-{'nombre':'Montevideo Pocitos'  , 'departamento':'Montevideo', 'direccion':   'Tezanos 1234', 'localidad':'  Montevideo'},
-{'nombre':'Montevideo Cerro'  , 'departamento':'Montevideo', 'direccion':   'Rusia 1234', 'localidad':'  Montevideo'},
-{'nombre':'Montevideo Prado'  , 'departamento':'Montevideo', 'direccion':   'Millan 1234', 'localidad':' Montevideo'},
-{'nombre':'Canelones Zona Sur'  , 'departamento':'Canelones', 'direccion':  'Las violetas 2345', 'localidad':' Pando'},
-{'nombre':'San Jose Oeste'  , 'departamento':'San Jose', 'direccion':   'Miraflores 3456', 'localidad':' Libertad'},
-{'nombre':'Maldonado Central' , 'departamento':'Maldonado', 'direccion':  'Dr Puey 3456', 'localidad':'  Maldonado'},
-{'nombre':'Canelones Central' , 'departamento':'Canelones', 'direccion':  'Edison 5645', 'localidad':' Canelones'},
-{'nombre':'Maldonado  Norte'  , 'departamento':'Maldonado', 'direccion':  'Los ceibos 2345', 'localidad':' Aigua'},
-{'nombre':'San Jose Central'  , 'departamento':'San Jose', 'direccion':   'Avda Gutierrez', 'localidad':' 4567', 'localidad':' San Jose'},
-{'nombre':'Durazno Central' , 'departamento':'Durazno', 'direccion':  'Juan Carlos Reyles 6785', 'localidad':' Durazno'},
-{'nombre':'Durazno Este'  , 'departamento':'Durazno', 'direccion':  'Los abetos 5678', 'localidad':' Sarandi del Yi'},
-{'nombre':'Artigas Central' , 'departamento':'Artigas', 'direccion':  'Manuel Lavalleja 3456', 'localidad':' Artigas'},
-{'nombre':'Artigas Norte' , 'departamento':'Artigas', 'direccion':  'Brandzen 6789', 'localidad':' Bella Union'},
+{'nombre':'Farmacia General', 'departamento':'Montevideo', 'direccion':'Deposito', 'localidad':'Ciudad Vieja'},
+{'nombre':'Montevideo Central', 'departamento':'Montevideo', 'direccion':   '18 de julio 1234', 'localidad':'  Montevideo'},
+{'nombre':'Montevideo Curva de Maroñas', 'departamento':'Montevideo', 'direccion':   '8 de octubre 1234', 'localidad':' Montevideo'},
+{'nombre':'Montevideo Pocitos', 'departamento':'Montevideo', 'direccion':   'Tezanos 1234', 'localidad':'  Montevideo'},
+{'nombre':'Montevideo Cerro', 'departamento':'Montevideo', 'direccion':   'Rusia 1234', 'localidad':'  Montevideo'},
+{'nombre':'Montevideo Prado', 'departamento':'Montevideo', 'direccion':   'Millan 1234', 'localidad':' Montevideo'},
+{'nombre':'Canelones Zona Sur', 'departamento':'Canelones', 'direccion':  'Las violetas 2345', 'localidad':' Pando'},
+{'nombre':'San Jose Oeste', 'departamento':'San Jose', 'direccion':   'Miraflores 3456', 'localidad':' Libertad'},
+{'nombre':'Maldonado Central', 'departamento':'Maldonado', 'direccion':  'Dr Puey 3456', 'localidad':'  Maldonado'},
+{'nombre':'Canelones Central', 'departamento':'Canelones', 'direccion':  'Edison 5645', 'localidad':' Canelones'},
+{'nombre':'Maldonado  Norte', 'departamento':'Maldonado', 'direccion':  'Los ceibos 2345', 'localidad':' Aigua'},
+{'nombre':'San Jose Central', 'departamento':'San Jose', 'direccion':   'Avda Gutierrez', 'localidad':' 4567', 'localidad':' San Jose'},
+{'nombre':'Durazno Central', 'departamento':'Durazno', 'direccion':  'Juan Carlos Reyles 6785', 'localidad':' Durazno'},
+{'nombre':'Durazno Este', 'departamento':'Durazno', 'direccion':  'Los abetos 5678', 'localidad':' Sarandi del Yi'},
+{'nombre':'Artigas Central', 'departamento':'Artigas', 'direccion':  'Manuel Lavalleja 3456', 'localidad':' Artigas'},
+{'nombre':'Artigas Norte', 'departamento':'Artigas', 'direccion':  'Brandzen 6789', 'localidad':' Bella Union'},
 ]
 
 
@@ -460,12 +465,56 @@ def carga_usuarios(request):
 
         usuario_nuevo.save()
 
-    print("paso por la funcion carga_usuaros")
+    #print("paso por la funcion carga_usuaros")
 
     return redirect('lista_de_usuarios')
 
 
 USUARIOS = [
+    {
+        "cedula_de_identidad": 32256383,
+        "rol": 2,
+        "usuario": "LeonardoBallesta",
+        "nombre": "Leonardo",
+        "apellido": "Ballesta",
+        "fecha_de_nacimiento": "1967-08-11",
+        "email": "leonardo@gmail.com",
+        "telefono": 99546286,
+        "direccion": "384 Randolph Street, Eagletown, Utah, 8901"
+    },
+    {
+        "cedula_de_identidad": 41026383,
+        "rol": 1,
+        "usuario": "RafaelBurgueño",
+        "nombre": "Rafael",
+        "apellido": "Burgueño",
+        "fecha_de_nacimiento": "1985-10-01",
+        "email": "rafael@gmail.com",
+        "telefono": 94741095,
+        "direccion": "384 Randolph Street, Eagletown, Utah, 8901"
+    },
+    {
+        "cedula_de_identidad": 40076383,
+        "rol": 0,
+        "usuario": "MarceloDoti",
+        "nombre": "Marcelo",
+        "apellido": "Doti",
+        "fecha_de_nacimiento": "1980-11-05",
+        "email": "marcelo@gmail.com",
+        "telefono": 95007985,
+        "direccion": "384 Randolph Street, Eagletown, Utah, 8901"
+    },
+    {
+        "cedula_de_identidad": 56576383,
+        "rol": 3,
+        "usuario": "AndresIglesias",
+        "nombre": "Andrés",
+        "apellido": "Iglesias",
+        "fecha_de_nacimiento": "1990-11-05",
+        "email": "andres@gmail.com",
+        "telefono": 95247985,
+        "direccion": "384 Randolph Street, Eagletown, Utah, 8901"
+    },
     {
         "cedula_de_identidad": 26576383,
         "rol": 0,

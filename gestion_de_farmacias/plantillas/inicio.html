@@ -18,10 +18,11 @@
             <ul>
                 <p>Principal beneficiario del sistema para poder saber que recetas y medicamentos tiene para retirar.</p>
                 <ul>
-                    <li>Consultar informacion de <a class="text-primary" href="{% url 'medicamentos' %}">medicamentos.</a></li>
-                    <li>Consulta de <a class="text-primary" href="{% url 'farmacias' %}">farmacias.</a></li>
-                    <li>Ver un listado de las <a class="text-primary" href="{% url 'mis_recetas' %}">recetas</a> propias.</li>
-                    <li><a class="text-primary" href="{% url 'mi_usuario' %}">Editar</a> sus datos personales o cambiar la contraseña. </li>
+
+                    <li>Consultar informacion de medicamentos.</li>
+                    <li>Consulta de farmacias.</li>
+                    <li>Ver un listado de las recetas propias.</li>
+                    <li>Editar sus datos personales o cambiar la contraseña. </li>
                 </ul>
             </ul>
         </div>
@@ -32,12 +33,14 @@
             <ul>
                 <p>Usuario del sistema, cuyo rol principal se centra en entregar medicamentos mediante el ingreso al perfil del usuario.</p>
                 <ul>
-                    <li>Consultar informacion de <a class="text-primary" href="{% url 'medicamentos' %}">medicamentos.</a></li>
-                    <li>Consulta de <a class="text-primary" href="{% url 'farmacias' %}">farmacias.</a></li>
-                    <li>Desde el sistema se podrá administrar el <a class="text-primary" href="{% url 'mi_stock' %}">stock</a> de la farmacia a la que el usuario pertenece.</li>
-                    <li>Consultar informacion de <a class="text-primary" href="{% url 'lista_de_usuarios' %}">usuarios.</a></li>
-                    <li>Ver trazabilidad de <a class="text-primary" href="{% url 'recetas' %}">recetas.</a></li>
-                    <li> Permite realizar consultas sobre vencimientos, cantidades, ubicación, despacho, medicamentos alternativos.</li>
+
+                    <li>Consultar informacion de medicamentos.</li>
+                    <li>Consulta de farmacias.</li>
+                    <li>Desde el sistema se podrá administrar el stock de la farmacia a la que el usuario pertenece.</li>
+                    <li>Consultar informacion de usuarios.</li>
+                    <li>Ver trazabilidad de recetas.</li>
+                    <li>Permite realizar consultas sobre vencimientos, cantidades, ubicación, despacho, medicamentos alternativos.</li>
+
                 </ul>
             </ul>
         </div>
@@ -48,11 +51,12 @@
             <ul>
                 <p>Usuario del sistema, que hace referencia a la persona que genera recetas de medicamentos. Además, tiene acceso a módulos de registro de recetas, ver medicamentos disponibles.</p>
                 <ul>
-                    <li>Consultar informacion de <a class="text-primary" href="{% url 'medicamentos' %}">medicamentos.</a></li>
-                    <li>Consulta de <a class="text-primary" href="{% url 'farmacias' %}">farmacias.</a></li>
-                    <li><a class="text-primary" href="/recetas/#crear_receta">Crear</a> recetas.</li>
-                    <li>Acceder a un listado de <a class="text-primary" href="{% url 'mis_pacientes' %}">pacientes</a> a los cuales ha otorgado recetas.</li>
-                    <li>Listado de <a class="text-primary" href="{% url 'recetas' %}">recetas.</a></li>
+
+                    <li>Consultar informacion de medicamentos.</li>
+                    <li>Consulta de farmacias.</li>
+                    <li>Crear recetas.</li>
+                    <li>Acceder a un listado de pacientes a los cuales ha otorgado recetas.</li>
+                    <li>Listado de recetas.</li>
 
                 </ul>
                 <ul>
@@ -64,10 +68,12 @@
             <ul>
                 <p>Actor que tiene como rol principal el ingreso, actualización y reporte de los medicamentos del sistema. Este usuario no tendrá acceso a otras funcionalidades del sistema.</p>
                 <ul>
-                    <li>Consultar informacion de <a class="text-primary" href="{% url 'medicamentos' %}">medicamentos.</a></li>
-                    <li>Consulta de <a class="text-primary" href="{% url 'farmacias' %}">farmacias.</a></li>
-                    <li>Consultar informacion de <a class="text-primary" href="{% url 'stock' %}">stock</a> nacional de medicamentos.</li>
-                    <li>Permite <a class="text-primary" href="/stock/#formulario">crear</a> ragistros de stock.</li>
+
+                    <li>Consultar informacion de medicamentos.</li>
+                    <li>Consulta de farmacias.</li>
+                    <li>Consultar informacion de stock nacional de medicamentos.</li>
+                    <li>Permite crear ragistros de stock en el deposito nacional.</li>
+
                 </ul>
             </ul>
         </div>
@@ -78,9 +84,10 @@
             <ul>
                 <p>Actor que tiene como rol principal el ingreso, actualización y reporte de los medicamentos del sistema. Este usuario no tendrá acceso a otras funcionalidades del sistema.</p>
                 <ul>
-                    <li>Consultar informacion de <a class="text-primary" href="{% url 'medicamentos' %}">medicamentos.</a></li>
-                    <li>Consulta de <a class="text-primary" href="{% url 'farmacias' %}">farmacias.</a></li>
-                    <li>Consultar informacion de <a class="text-primary" href="{% url 'stock' %}">stock</a> nacional de medicamentos.</li>
+
+                    <li>Consultar informacion de medicamentos.</li>
+                    <li>Consulta de farmacias.</li>
+                    <li>Consultar informacion de stock nacional de medicamentos.</li>
                 </ul>
             </ul>
         </div>
@@ -91,7 +98,7 @@
             <ul>
                 <p>Únicamente él tiene acceso total a todo el sistema, puede realizar cambios en los roles de los funcionarios, ingresar nuevas farmacias, etc.</p>
                 <ul>
-                    <li>Consultar informacion de <a class="text-primary" href="{% url 'stock' %}">stock nacional de medicamentos.</a></li>
+                    <li>Consultar informacion de stock nacional de medicamentos.</li>
                     <li> Permite realizar consultas sobre vencimientos, cantidades, ubicación, despacho, medicamentos alternativos.</li>
                 </ul>
             </ul>

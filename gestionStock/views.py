@@ -112,7 +112,13 @@ class Stock(View):
             #STOCK ACUMULADO
             #este algoritmo va a ser muy ineficiente XD
 #===============================================================
-        mi_farmacia = Farmacias.objects.filter(funcionarios=self.request.user.cedula_de_identidad)[0]
+        mi_farmacia =get_object_or_404(Farmacias, funcionarios=self.request.user.cedula_de_identidad)
+        #mis_farmacias = Farmacias.objects.filter(funcionarios=self.request.user.cedula_de_identidad)
+        #if len(mis_farmacias) == 0:
+        #    return {"mensaje":"No esta autorizado a ver el stock."}
+        
+        #mi_farmacia = mis_farmacias[0]
+        
         queryset_stock_total_mi_farmacia = Lotes.objects.filter(ubicacion_id=mi_farmacia.id)
 
         stock_acumulado = []
@@ -320,6 +326,42 @@ class MiStock(ListView):
         # verificamos si el formulario esta bien
         if formulario_nuevo_stock.is_valid():
             if mi_farmacia.id != farmacia_general.id:
+                
+                #este algoritmo va a revisar si hay stock del medicamento en la farmacia Central
+                #si no hay : primero evita que se generen registros negativos
+                queryset_lotes_del_medicamento_en_deposito = Lotes.objects.filter(medicamento=medicamento)
+                #queryset_lotes_del_medicamento_en_deposito = get_list_or_404(Lotes, medicamento=medicamento)
+                
+                if len(queryset_lotes_del_medicamento_en_deposito)<1:
+                    #return reverse_lazy('login') + '?registro_exitoso'
+                    #return reverse_lazy('mi_stock') + '?sin_stock'
+                    #================================================
+                    #=================TODO ==========================
+                    # avisar al funcionario de 
+                    # farmacia que no puede hacer el stock porque no hay 
+                    # stock en la farmacia general======================
+                    #================================================
+                    return redirect('sin_stock')
+                    #por ahora solo redirecciona de regreso a mi_stock
+
+                else:
+                    stock_en_deposito = 0
+                    for registro in queryset_lotes_del_medicamento_en_deposito:
+                        stock_en_deposito += registro.stock
+                    
+                    if stock_en_deposito <= int(request.POST.get('stock')):
+                        #================================================
+                        #=================TODO ==========================
+                        # avisar al funcionario de 
+                        # farmacia que no puede hacer el stock porque no hay 
+                        # stock en la farmacia general======================
+                        #================================================
+                        return redirect('sin_stock')
+
+
+
+
+
                 Lotes.objects.create(
                     medicamento=medicamento,
                     principio_activo=medicamento.principio_activo,
@@ -348,8 +390,16 @@ class MiStock(ListView):
             formulario_nuevo_stock.save()
 
             return redirect('mi_stock')
-        
+        #else :
+            #context = self.get_context_data()
+            #context["formulario_nuevo_stock"] = formulario_nuevo_stock
+            #return render(request, 'mi_stock.html', context)
+            #return redirect('mi_stock')
+
         #return redirect('mi_stock')
+        #context= {}
+        #context["formulario_nuevo_stock"] = formulario_nuevo_stock
+        #return render(request,'mi_stock.html', context)
 
 
 

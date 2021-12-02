@@ -8,6 +8,14 @@
 {% include "nav.html" %}
 <div class="m-3 mt-5">
 
+    {% if 'sin_stock' in request.GET  and not form.non_field_errors %}
+<div class="container">
+    <div class="alert alert-success">
+        <strong>Atencion</strong> No hay stock en farmacia central.
+    </div>
+</div>
+{% endif %}
+
     {% if mi_farmacia %}
 
     <div class="">

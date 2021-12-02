@@ -1,6 +1,9 @@
 from django import forms
 
 from django.forms import widgets
+#from datetime import datetime
+#import time
+#from datetime import date
 
 from gestionStock.models import Medicamentos, Lotes
 
@@ -19,6 +22,19 @@ class Formulario_nuevo_stock(forms.ModelForm):
                 model = Lotes
                 fields = ['medicamento','stock','vencimiento']
 
+        # intento hacer la verificacion de la fechas 
+        """
+        def clean_vencimiento(self):
+                today = date.today()
+                vencimiento = self.cleaned_data['vencimiento']
+                if vencimiento < str(today):
+                        print("la fecha esta vencida")
+                        raise forms.ValidationError("La fecha de vencimiento no puede ser anterior a hoy!")
+                if vencimiento > str(today):
+                        print("la fecha NO esta vencida")
+                        #raise forms.ValidationError("La fecha de vencimiento no puede ser anterior a hoy!")
+                return vencimiento
+        """
 
         #===============================================
         # aca se definen las clases de bootstrap que se le 

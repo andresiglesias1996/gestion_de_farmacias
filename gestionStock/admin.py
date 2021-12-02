@@ -16,7 +16,8 @@ class FarmaciasAdmin(admin.ModelAdmin):
 class MedicamentosAdmin(admin.ModelAdmin):
         # asi se determinan los filtros que se le pueden aplicar a la derecha de los registros
         list_filter=("categoria",)
-
+        #columnas que se muestran
+        list_display=("id","nombre_comercial","principio_activo")
 
 class LotesAdmin(admin.ModelAdmin):
         #columnas que se muestran
