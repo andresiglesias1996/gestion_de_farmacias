@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+<!-- Contenido estatico de la pagina -->
+
+<!--Titulo de la pagina o pestaña-->
+{% block title %} Editar Farmacia {% endblock %} {% block content %}
+<!--Nav bar-->
+{% include "nav.html" %}
+<div class="m-3 mt-5" >
+<div class="container">
+
+<div class="form-group col-md-12">
+
+    {% if form.errors %}
+    <p style="color:red;">Por favor revisa los campos</p>
+    {% endif %}
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Editar Farmacia</h3>
+        </div>
+
+        <form method="POST">{% csrf_token %}
+            <div class="card-body">
+                {{form.as_p}}
+            </div>
+            <div class="card-footer">
+                <input class="btn btn-primary btn-block" type="submit" value="Editar">
+            </div>
+        </form>
+
+    </div>
+</div>
+</div>
+    <script type="text/javascript">
+        // esto corrije el tipo del campo imput 'id_vencimiento' en el formulario para crear recetas
+        // por alguna razon no quiere cambiar el type a date
+        window.onload = function() {
+            document.getElementById('id_vencimiento').type = 'date';
+            //document.getElementById('id_fecha_de_nacimiento').type = 'date';
+        }
+    </script>
+
+    {% endblock content %}

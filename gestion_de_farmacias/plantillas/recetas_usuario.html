@@ -57,7 +57,7 @@
                     <th>Principio activo </th>
                     <th>Paciente </th>
                     <th>Medico </th>
-                    <th>Descripcion </th>
+                    <th>Descripción </th>
                     <th>Vencimiento </th>
                     {% if user.rol == "farmacia" %}
                     <th>Gestionar</th>
@@ -87,7 +87,7 @@
                         <td>{{ receta.descripcion }}</td>
                         <td>{{ receta.vencimiento }}</td>
                         {% if receta.estado == "RES" and user.rol == "farmacia" %}
-                        <td><a class="btn btn-primary" href="/gestionar_receta/{{ receta.id }}">Gestionar</a></td>
+                        <td><a class="btn btn-sm btn-outline-dark" href="/gestionar_receta/{{ receta.id }}">Gestionar</a></td>
                         {% else %}
                         <td>
                             <p></p>

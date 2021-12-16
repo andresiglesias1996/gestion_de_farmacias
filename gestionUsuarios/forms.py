@@ -165,6 +165,26 @@ class FormularioEditarUsuario_2(forms.ModelForm):
                 self.fields['fecha_de_nacimiento'].widget.attrs.update({'class': 'form-control','type':'date'})
                 self.fields['telefono'].widget.attrs.update({'class': 'form-control'})
 
+# =======================================================================
+# Formulario Editar Rol ===========================================================
+# =======================================================================
+# este formulario lo usamos en la pagina mi_usuario
+# nos permite editar Rol como administrador 
+class FormularioEditarRol(forms.ModelForm):
+
+        class Meta:
+                model = Usuarios
+                fields = ['rol']
+
+        def __init__(self, *args, **kwargs):
+                super().__init__(*args, **kwargs)
+                self.fields['rol'].widget.attrs.update({'class': 'form-control'})
+                #self.fields['nombre'].widget.attrs.update({'class': 'form-control'})
+                #self.fields['apellido'].widget.attrs.update({'class': 'form-control'})
+                #self.fields['email'].widget.attrs.update({'class': 'form-control'})
+                #self.fields['sexo'].widget.attrs.update({'class': 'form-control'})
+                #self.fields['fecha_de_nacimiento'].widget.attrs.update({'class': 'form-control','type':'date'})
+                #self.fields['telefono'].widget.attrs.update({'class': 'form-control'})
 
 def obtener_principios_activos():
 

@@ -23,7 +23,7 @@
         		<form method="POST">{% csrf_token %}
             			<div class="card-body form-group">
 					{% if form.errors %}
-					<p style="color:red;">Por favor revisa los campos</p>
+					<p class="alert-danger">Por favor revisa los campos</p>
 					{% endif %}
 
                 			{{form.as_p}}

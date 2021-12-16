@@ -8,6 +8,22 @@
 {% include "nav.html" %}
 
 <div class="m-3">
+
+    {% if 'registro_exitoso' in request.GET  and not form.non_field_errors %}
+		<div class="container">
+            <div class="alert alert-success">
+                <strong>Exito!</strong> Farmacia creada correctamente.
+            </div>
+        </div>
+	{% endif %}
+    
+
+    {% if user.rol == 'administrador' %}
+    <div class="p-3">
+        <a class="btn btn-outline-primary float-right" href="{% url 'crear_farmacia' %}">+ Crear Farmacia</a>
+    </div>
+        {% endif %} 
+
     <h3>Farmacias</h3>
 
     {% comment %} BUSCADOR {% endcomment %} {% comment %}
@@ -31,6 +47,7 @@
                     <th>Localidad</th>
                     <th>Nombre </th>
                     <th>Direccion</th>
+                    <th></th>
 
                 </tr>
             </thead>
@@ -42,6 +59,15 @@
                     <td>{{ farmacia.localidad }}</td>
                     <td>{{ farmacia.nombre }}</td>
                     <td>{{ farmacia.direccion }}</td>
+                    <td>
+                        {% if user.rol ==  'administrador' %}
+
+                          <a class="btn btn-sm btn-outline-dark" href="/editar_farmacia/{{ farmacia.id }}">Editar</a>
+                  
+                                
+                                
+                        {% endif %}
+                    </td>
                     {% comment %}
                     <td>{{ farmacia.forma }}</td>
                     farmacia.forma? {% endcomment %}

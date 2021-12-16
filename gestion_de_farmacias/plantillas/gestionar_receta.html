@@ -15,7 +15,7 @@
     {% endif %}
 {# {% if receta.estado == "RES" %} #}
     {% if receta %}
-    <h3>{{receta}} </h3>
+    <h3 class="mb-5">{{receta}} </h3>
     {% if opciones_de_medicamentos %}
         <h4>Existen  {{ opciones_de_medicamentos |length }} medicamentos para satisfacer la receta.</h4>
 
@@ -66,7 +66,7 @@
                                 <input type="hidden" name="cedula_del_paciente" value="{{ paciente.cedula_de_identidad }}">
                                 <input type="hidden" name="id_receta" value="{{ receta.id }}">
                                 <input type="hidden" name="id_medicamento" value="{{ medicamento.id }}">
-                                <input type="submit" value="Despachar" class="btn btn-primary"> 
+                                <input type="submit" value="Despachar" class="btn btn-sm btn-outline-dark"> 
                             </form>
 
                         {% endif %}

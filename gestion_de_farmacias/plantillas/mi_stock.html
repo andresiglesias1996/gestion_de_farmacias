@@ -7,19 +7,19 @@
 <!--Nav bar-->
 {% include "nav.html" %}
 <div class="m-3 mt-5">
-
+{% if user.rol == "farmacia" %}
     {% if 'sin_stock' in request.GET  and not form.non_field_errors %}
-<div class="container">
+
     <div class="alert alert-success">
         <strong>Atencion</strong> No hay stock en farmacia central.
     </div>
-</div>
+
 {% endif %}
 
     {% if mi_farmacia %}
 
     <div class="">
-        <a class="btn btn-success float-right" href="#formulario">+ Stock</a>
+        <a class="btn btn-outline-primary float-right" href="#formulario">+ Stock</a>
         <h3>Farmacia {{mi_farmacia.nombre}}</h3>
     </div>
 
@@ -83,7 +83,7 @@
                     {% endcomment %}
                     <th>Medicamento</th>
                     <th>Principio activo</th>
-                    <th>Funcionario</th>
+                    <th>Receta de destino</th>
                     <th>Vencimiento</th>
 
                     <th>Codigo</th>
@@ -107,11 +107,21 @@
 
                     <td>{{lote.medicamento}}</td>
                     <td>{{lote.principio_activo}}</td>
-                    <td>{{lote.funcionario}}</td>
+                    <td>
+                        {% if lote.receta_de_destino %} 
+                        {{lote.receta_de_destino}}
+                        {% else %}
+                        En Stock
+                        {% endif %}
+                    </td>
                     <td>{{lote.vencimiento}}</td>
 
                     <td>{{lote.id}}</td>
-                    <td><a class="btn btn-sm btn-primary" href="/editar_stock/{{ lote.id }}">editar...</a></td>
+                    {% if not lote.receta_de_destino %}
+                    <td><a class="btn btn-sm btn-outline-dark" href="/editar_stock/{{ lote.id }}">editar...</a></td>
+                    {% else %}
+                    <td></td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>
@@ -155,6 +165,11 @@
     {% else %}
     <div class="alert alert-warning">
         <strong>Atencion!</strong> Su usuario no esta asignado a ninguna farmacia.
+    </div>
+    {% endif %}
+    {% else %}
+    <div class="alert alert-warning">
+        <strong>Atencion!</strong> Acceso no autorizado.
     </div>
     {% endif %}
 

@@ -1,7 +1,9 @@
 body {
     /*uso el rojo para testear que los estilos se carguen*/
     /*blanco */
-    background-color: #f8f9fa;
+    /*background-color: #f8f9fa;*/
+    /*background-color: #f8f8f8;*/
+    background-color: #B6CDB4;
     /*rojo*/
     /*background-color: #ff9090;*/
     /*      wwww       */
@@ -14,18 +16,18 @@ body {
     background-color: #00469C;
 }
 
-.colora {
+/*.colora {
     color: #00469C!important;
     ;
-}
+}*/
 
-a {
+/*a {
     color: #fff!important;
-}
+}*/
 
-.btn {
+/*.btn {
     background-color: #00469C;
-}
+}*/
 
 
 /*.imglogo {
@@ -35,6 +37,21 @@ a {
 footer {
     color: #fff!important;
 }
+
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+
+.imgnormalizada img {
+    width: auto;
+    height: 400px;
+    max-height: 266px;
+  }
+
 
 
 /*las siguientes lines se usan para sacar las flechitas de 

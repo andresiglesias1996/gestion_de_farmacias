@@ -40,7 +40,7 @@
             
 
             <div class="card">
-                <div class="card-header">
+                <div class="card-body">
                     <form method="POST"> {% csrf_token %}
 
                         <div class="form-group">
@@ -53,19 +53,23 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Iniciar sesion</button>
-
+                        
                     </form>
                 </div>
 
-                <div class="text-center">
-                    <p class="p-0 m-0"><a class="colora" href="{% url 'recuperar_password' %}">¿Perdiste tu contraseña?</a></p>
-                    <p class="p-0 m-0"><a class="colora" href="/registrar_usuario/">¿No tienes Cuenta? Registrate</a></p>
+                <div class="card-footer">
+                    <div class="text-center"> <!--      <p class="p-0 m-0"      -->
+                        <a class="btn bg-light btn-sm btn-block" href="{% url 'recuperar_password' %}">¿Perdiste tu contraseña?</a>
+                        <a class="btn bg-light btn-sm btn-block" href="/registrar_usuario/">¿No tienes Cuenta? Registrate</a>
+                    </div>
                 </div>
+                    
+                
             </div>
 
         </main>
     </div>
-</div>
+
 
 
 {% endblock content %}

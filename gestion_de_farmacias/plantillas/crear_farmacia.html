@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+<!-- Contenido estatico de la pagina -->
+
+<!--Titulo de la pagina o pestaña-->
+{% block title %}Crear Farmacia{% endblock %} {% block content %}
+
+
+
+
+{% include "nav.html" %}
+<div class="container mt-5" >
+
+	{% if user.rol == 'administrador' %}
+
+	<div class="col-md-12">
+		<div class="card">
+            		<div class="card-header">
+       	 			<h3>Crear una farmacia</h3>
+    			</div>
+			
+			<form method="POST"> {% csrf_token %} 
+				<div class="card-body form-group">
+    					{% if formulario_nueva_farmacia.errors %}
+    						<p class="alert-danger">Por favor revisa los campos</p>
+    					{% endif %}
+
+                			{{form.as_p}}
+            			</div>
+            
+				<div class="card-footer">
+                			<input class="btn btn-primary btn-lg btn-block" type="submit" value="Crear">
+				</div>
+    			</form>
+
+		</div>
+
+       </div>
+
+       {% else %}
+		<div class="alert alert-warning">
+			<strong>Atencion!</strong> Acceso no esta autorizado.
+		</div>
+{% endif %}
+</div>
+
+{% endblock content %}

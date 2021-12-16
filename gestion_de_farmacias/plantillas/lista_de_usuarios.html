@@ -7,6 +7,7 @@
 <!--Nav bar-->
 {% include "nav.html" %}
 <div class="m-3">
+    {% if user.rol == "farmacia" or user.rol == "administrador" or user.rol == "medico" %}
     {% if user.rol == 'medico' %}
     <h3>Mis Pacientes</h3>
     {%else%}
@@ -27,7 +28,7 @@
     </div>
     {% endcomment %}
 
-    <div class="table-responsive">
+    <div class="">
         <table id="tabla_de_usuarios" class="table table-hover">
 
             <thead class="thead-darkk">
@@ -50,7 +51,10 @@
                     <td>{{ usuario.usuario }}</td>
                     <td>{{ usuario.rol }}</td>
                     <td>
-                        <a class="btn btn-sm btn-outline-primary" href="/recetas_usuario/{{ usuario.cedula_de_identidad }}">Ver usuario</a>
+                        <a class="btn btn-sm btn-outline-dark" href="/recetas_usuario/{{ usuario.cedula_de_identidad }}">Ver usuario</a>
+                        {% if user.rol ==  'administrador' %}
+                        <a class="btn btn-sm btn-outline-dark" href="/editar_usuario/{{ usuario.cedula_de_identidad }}">Editar Rol</a>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
@@ -91,6 +95,12 @@
             {% endif %}
         </ul>
     </nav>
+    {% endif %}
+
+    {% else %}
+    <div class="alert alert-warning">
+        <strong>Atencion!</strong> Acceso no autorizado.
+    </div>
     {% endif %}
 
 </div>

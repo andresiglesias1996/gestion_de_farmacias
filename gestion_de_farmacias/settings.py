@@ -98,7 +98,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_farmacia_asse',
-       
+        #'NAME': 'farmaciageneral',
         'USER': 'user_Gestion_de_FarmaciasASSE',
         
         'PASSWORD': 'password_FarmaciaASSE',

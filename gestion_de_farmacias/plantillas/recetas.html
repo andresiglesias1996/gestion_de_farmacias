@@ -8,6 +8,7 @@
 {% include "nav.html" %}
 
 <div class="m-3 mt-5">
+{% if user.rol == 'farmacia' or user.rol == 'medico' or user.rol == 'administrador' %}
 
     {% if user.rol == 'medico'%}
     <div class="container">
@@ -52,6 +53,7 @@
                     <th>Tipo</th>
                     <th>Estado</th>
                     <th>Principio activo</th>
+                    <th>Médico</th>
                     <th>Paciente</th>
                     <th>Descripcion</th>
                     {% if user.rol == 'farmacia'%}
@@ -65,11 +67,12 @@
             </thead>
 
             <tbody>
-                {% for receta in recetas_list %} {% if receta.estado == "RES" %}
-                <tr class="table-warning">
+                {% for receta in recetas_list %} 
+                    {% if receta.estado == "RES" %}
+                        <tr class="table-warning">
                     {% else %}
-                    <tr>
-                        {% endif %}
+                            <tr>
+                    {% endif %}
                         <td>{{ receta.created_at }}</td>
                         <td>
                             {% if receta.cronico %}
@@ -78,14 +81,15 @@
                         </td>
                         <td>{{ receta.estado }}</td>
                         <td>{{ receta.principio_activo }}</td>
+                        <td>{{ receta.medico }}</td>
                         <td>{{ receta.paciente }}</td>
                         <td>{{ receta.descripcion }}</td>
                         {% comment %} {% if user.rol == 'medico'%}
-                        <td><a class="btn btn-sm btn-primary" href="/editar_receta/{{ receta.id }}">Editar</a></td>
+                        <td><a class="btn btn-sm btn-outline-primary" href="/editar_receta/{{ receta.id }}">Editar</a></td>
                         {% endif %} {% endcomment %} {% if receta.estado == "RES" and user.rol == 'farmacia'%}
                         <td><a class="btn btn-sm btn-outline-primary" href="/gestionar_receta/{{ receta.id }}">Gestionar</a></td>
-                        {% else %} {% if user.rol == 'medico'%}
-                        <td><a class="btn btn-sm btn-primary" href="/editar_receta/{{ receta.id }}">Editar</a></td>
+                        {% else %} {% if user.rol == 'medico' and receta.medico == user %}
+                        <td><a class="btn btn-sm btn-outline-primary" href="/editar_receta/{{ receta.id }}">Editar</a></td>
                         {% else %}
                         <td>
                             <p></p>
@@ -103,8 +107,11 @@
         {% endif %}
 
     </div>
-
-
+{% else %}
+    <div class="alert alert-warning">
+		<strong>Atencion!</strong> Acceso no esta autorizado.
+    	</div>
+{% endif %}
 
 </div>
 

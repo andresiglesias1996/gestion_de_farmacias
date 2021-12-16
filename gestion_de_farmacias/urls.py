@@ -19,8 +19,8 @@ from django.contrib.auth.views import LoginView, logout_then_login
 
 #from gestion_de_farmacias.views import login, inicio
 from gestion_de_farmacias import views
-from gestionUsuarios.views import  RecetasUsuario, MisRecetas, RegistrarUsuario, EditarUsuario, ListaDeUsuarios, ListarRecetas, EditarReceta, ActulizarMiUsuario,MiUsuario, MisPacientes
-from gestionStock.views import InfoDelMedicamento,GestionarReceta, ListarFarmacias,ListarMedicamentos, MiStock, Stock, EditarStock
+from gestionUsuarios.views import EditarRol, RecetasUsuario, MisRecetas, RegistrarUsuario, EditarUsuario, ListaDeUsuarios, ListarRecetas, EditarReceta, ActulizarMiUsuario,MiUsuario, MisPacientes
+from gestionStock.views import EditarFarmacia, CrearFarmacia ,InfoDelMedicamento,GestionarReceta, ListarFarmacias,ListarMedicamentos, MiStock, Stock, EditarStock
 
 
 urlpatterns = [
@@ -44,7 +44,8 @@ urlpatterns = [
     #path('buscar_medicamento/', buscar_medicamento, name="buscar_medicamento"),
     path('farmacias/', ListarFarmacias.as_view(), name="farmacias"),
     path('info_del_medicamento/<int:pk>/', InfoDelMedicamento.as_view(), name="info_del_medicamento"),
-
+    path('crear_farmacia/', CrearFarmacia.as_view(), name="crear_farmacia"),
+    path('editar_farmacia/<int:pk>/', EditarFarmacia.as_view(), name="editar_farmacia"),
     path('stock/', Stock.as_view(), name="stock"),
     #path('crear_stock/', views.LoteCreate.as_view(), name="cerar_stock"),
     path('editar_stock/<int:pk>', EditarStock.as_view(), name="editar_stock"),
@@ -64,6 +65,7 @@ urlpatterns = [
 
     path('lista_de_usuarios/', ListaDeUsuarios.as_view(), name="lista_de_usuarios"),
     path('registrar_usuario/', RegistrarUsuario.as_view(), name="registrar_usuario"),
+    path('editar_usuario/<int:pk>/', EditarRol.as_view(), name="editar_usuario"),
     #path('editar_usuario/', EditarUsuario.as_view(), name="editar_usuario"),
     #path('actualizar_mi_usuario/', ActulizarMiUsuario.as_view(), name="actualizar_mi_usuario"),
     path('mi_usuario/', EditarUsuario.as_view(), name="mi_usuario"),
@@ -74,5 +76,7 @@ urlpatterns = [
     path('carga_medicamentos/', views.carga_medicamentos, name="carga_medicamentos"),
     path('carga_usuarios/', views.carga_usuarios, name="carga_usuarios"),
     path('carga_farmacias/',views.carga_farmacias, name="carga_farmacias"),
+    path('carga_stock/',views.carga_stock, name="carga_stock"),
+    path('carga_recetas/',views.carga_recetas, name="carga_recetas"),
     
 ]

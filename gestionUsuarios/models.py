@@ -74,7 +74,8 @@ class Usuarios(AbstractBaseUser):
                 ('usuario', 'usuario'),
                 ('farmacia', 'farmacia'),
                 ('medico', 'medico'),
-                ('stock','stock')
+                ('stock','stock'),
+                ('administrador', 'administrador')
         ]
 
         cedula_de_identidad = models.IntegerField(primary_key=True,verbose_name="c.i." , help_text='Para todo usuario es el numero de c.i.')

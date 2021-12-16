@@ -7,144 +7,146 @@
 {% include "nav.html" %}
 
 <div class="m-3 mt-5">
+{% if no_esta_autorizado or  user.rol != 'stock' %}
+	<div class="alert alert-warning">
+		<strong>Atencion!</strong> No esta autorizado para ver el stock.
+    	</div>
+{% else %}
+    	<div>
+        	<a class="btn btn-success float-right m-3" href="#formulario">Agregar Stock</a>
+        	<h3>Almacen Nacional De Medicamentos</h3>
+    	</div>
 
-    <div>
-        <a class="btn btn-success float-right m-3" href="#formulario">Agregar Stock</a>
-        <h3>Almacen Nacional De Medicamentos</h3>
-    </div>
-
-    <hr class="mt-5 mb-5">
+    	<hr class="mt-5 mb-5">
     
-    <h3>Stock acumulado.</h3>
-    <div class="table-responsive">
-        {% if stock_acumulado %}
-        <table id="tabla_de_stock_acumulado" class="table table-hover">
-            <thead class="thead-darkk">
-                <tr>
-                    <th>Cantidad</th>
-                    <th>Stock</th>
-                    <th>Medicamento</th>
-                    <th>Principio activo</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for lote in stock_acumulado %} {% comment %}
-                <h4>{{lote.medicamento}}</h4>
-                <p>{{lote.stock}}</p>
-                {% endcomment %}
+    	<h3>Stock acumulado.</h3>
+    	<div class="table-responsive">
+        	{% if stock_acumulado %}
+        		<table id="tabla_de_stock_acumulado" class="table table-hover">
+            			<thead class="thead-darkk">
+					<tr>
+						<th>Cantidad</th>
+						<th>Stock</th>
+						<th>Medicamento</th>
+						<th>Principio activo</th>
+					</tr>
+            			</thead>
+            			
+				<tbody>
+					{% for lote in stock_acumulado %} 
+					{% comment %}
+					<h4>{{lote.medicamento}}</h4>
+					<p>{{lote.stock}}</p>
+					{% endcomment %}
+			
+					<tr {% if lote.stock < 50 %}class="table-danger" {% endif %} {% if lote.stock < 100 %}class="table-warning" {% else %}class="table-successs" {% endif %}>
+					    <td>
+						{{lote.stock}}
+					    </td>
+					    <td>
+						{% if lote.stock < 50 %} <span class="badge badge-danger">muy bajo</span>
+						    {% else %} {% if lote.stock < 100 %} <span class="badge badge-warning">bajo </span>
+							{% else %}
+							<span class="badge badge-success">ok</span> {% endif %} {% endif %}
+					    </td>
+					    <td>{{lote.medicamento.nombre_comercial}}</td>
+					    <td>{{lote.medicamento.principio_activo}}</td>
+					</tr>
+					{% endfor %}
+				    </tbody>
+        		</table>
+        	{% else %}
+			<div class="alert alert-warning">
+				<strong>Atencion!</strong> La farmacia no tiene registros de stock.
+			</div>
+        	{% endif %}
+    	</div>
 
-                <tr {% if lote.stock < 50 %}class="table-danger" {% endif %} {% if lote.stock < 100 %}class="table-warning" {% else %}class="table-successs" {% endif %}>
-                    <td>
-                        {{lote.stock}}
-                    </td>
-                    <td>
-                        {% if lote.stock < 50 %} <span class="badge badge-danger">muy bajo</span>
-                            {% else %} {% if lote.stock < 100 %} <span class="badge badge-warning">bajo </span>
-                                {% else %}
-                                <span class="badge badge-success">ok</span> {% endif %} {% endif %}
-                    </td>
-                    <td>{{lote.medicamento.nombre_comercial}}</td>
-                    <td>{{lote.medicamento.principio_activo}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-        <div class="alert alert-warning">
-            <strong>Atencion!</strong> La farmacia no tiene registros de stock.
-        </div>
-        {% endif %}
-    </div>
+    	<hr class="mt-5 mb-5">
 
-    <hr class="mt-5 mb-5">
+    	<h3>Registros de stock del almacen nacional.</h3>
+    	<div class="table-responsive">
+        	{% if lotes_list %}
+        		<table id="tabla_de_stock_nacional" class="table table-hover">
+        			<thead class="thead-darkk">
+					<tr>
+						<th>Ingreso</th>
+						<th>Codigo</th>
+						<th>Ubicacion</th>
+						<th>Cantidad</th>
 
-    <h3>Registros de stock del almacen nacional.</h3>
-    <div class="table-responsive">
-        {% if lotes_list %}
-        <table id="tabla_de_stock_nacional" class="table table-hover">
-            <thead class="thead-darkk">
-                <tr>
-                    <th>Ingreso</th>
-                    <th>Codigo</th>
-                    <th>Ubicacion</th>
-                    <th>Cantidad</th>
+						{% comment %}
+						<th></th>
+						{% endcomment %}
 
-                    {% comment %}
-                    <th></th>
-                    {% endcomment %}
+						<th>Medicamento</th>
+						<th>Funcionario</th>
+						<th>Vencimiento</th>
+						<th></th>
+        				</tr>
+    				</thead>
+            
+			   	<tbody>
 
-                    <th>Medicamento</th>
-                    <th>Funcionario</th>
-                    <th>Vencimiento</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
+                			{% for lote in lotes_list %}
+                				<tr>
+							<td>{{lote.ingreso}}</td>
+							<td>{{lote.id}}</td>
+							<td>{{lote.ubicacion}}</td>
+							<td>{{lote.stock}}</td>
+							{% comment %}
+							<td>
+								{% if lote.stock
+								< 50 %} <span class="badge badge-danger">¡muy bajo stock!</span>
+								{% else %} {% if lote.stock
+								< 100 %} <span class="badge badge-warning">¡bajo stock!</span>
+								{% endif %} {% endif %}
+							</td>
+							{% endcomment %}
+							<td>{{lote.medicamento}}</td>
+							<td>{{lote.funcionario}}</td>
+							<td>{{lote.vencimiento}}</td>
+                    					<td><a class="btn btn-sm btn-primary" href="/editar_stock/{{ lote.id }}">editar...</a></td>
+                				</tr>
+        				{% endfor %}
+    				</tbody>
+			</table>
+		{% else %}
+			<div class="alert alert-warning">
+				<strong>Atencion!</strong> La farmacia no tiene registros de stock.
+			</div>
+        	{% endif %}
+    	</div>
 
-                {% for lote in lotes_list %}
-                <tr>
+    	<hr class="mt-5 mb-5">
 
-                    <td>{{lote.ingreso}}</td>
-                    <td>{{lote.id}}</td>
-                    <td>{{lote.ubicacion}}</td>
-                    <td>{{lote.stock}}</td>
+    	<div class="container mt-5">
+		<div id="formulario" class="col-md-12">
+    			<div class="card">
+				<div class="card-header">
+					<h3>Registrar stock</h3>
+				</div>
 
+				{% if formulario_nuevo_stock.errors %}
+					<div class="alert alert-danger" role="alert">
+						<p class="">Por favor revisa los campos</p>
+					</div>
+                       		{% endif %} 
 
-                    {% comment %}
-                    <td>
-                        {% if lote.stock
-                        < 50 %} <span class="badge badge-danger">¡muy bajo stock!</span>
-                            {% else %} {% if lote.stock
-                            < 100 %} <span class="badge badge-warning">¡bajo stock!</span>
-                                {% endif %} {% endif %}
-                    </td>
-                    {% endcomment %}
-
-                    <td>{{lote.medicamento}}</td>
-                    <td>{{lote.funcionario}}</td>
-                    <td>{{lote.vencimiento}}</td>
-                    <td><a class="btn btn-sm btn-primary" href="/editar_stock/{{ lote.id }}">editar...</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-        <div class="alert alert-warning">
-            <strong>Atencion!</strong> La farmacia no tiene registros de stock.
-        </div>
-        {% endif %}
-    </div>
-
-
-    <hr class="mt-5 mb-5">
-
-    <div class="container mt-5">
-        <div id="formulario" class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Registrar stock</h3>
-                </div>
-
-                <form method="POST">
-                    {% csrf_token %}
-                    <div class="card-body form-group">
-                        {% if formulario_nuevo_stock.errors %}
-                        <div class="alert alert-danger" role="alert">
-                            <p class="">Por favor revisa los campos</p>
-                        </div>
-                        {% endif %} {{formulario_nuevo_stock.as_p}}
-                    </div>
-                    <div class="card-footer">
-                        <input class="btn btn-primary btn-lg btn-block" type="submit" value="Registrar" />
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+        			<form method="POST">
+                    			{% csrf_token %}
+                    			<div class="card-body form-group">
+                        			{{formulario_nuevo_stock.as_p}}
+                			</div>
+					<div class="card-footer">
+						<input class="btn btn-primary btn-lg btn-block" type="submit" value="Registrar" />
+					</div>
+                		</form>
+            		</div>
+        	</div>
+	</div>
+{% endif %}
 </div>
-
-
-
 
 
 {% endblock content %}

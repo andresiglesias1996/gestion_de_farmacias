@@ -10,7 +10,7 @@ from gestionStock.models import Medicamentos, Lotes, Farmacias
 from gestionUsuarios.models import Usuarios, Recetas
 
 # FORMULARIOS
-from gestionStock.forms import Formulario_nuevo_medicamento, Formulario_nuevo_stock, Formulario_nuevo_stock_con_farmacias
+from gestionStock.forms import Formulario_nueva_farmacia ,Formulario_nuevo_medicamento, Formulario_nuevo_stock, Formulario_nuevo_stock_con_farmacias
 
 #from django.core.urlresolvers import reverse_lazy
 from django.urls import reverse_lazy
@@ -111,36 +111,39 @@ class Stock(View):
         #===============================================================
             #STOCK ACUMULADO
             #este algoritmo va a ser muy ineficiente XD
-#===============================================================
-        mi_farmacia =get_object_or_404(Farmacias, funcionarios=self.request.user.cedula_de_identidad)
-        #mis_farmacias = Farmacias.objects.filter(funcionarios=self.request.user.cedula_de_identidad)
-        #if len(mis_farmacias) == 0:
-        #    return {"mensaje":"No esta autorizado a ver el stock."}
+        #===============================================================
+        #mi_farmacia =get_object_or_404(Farmacias, funcionarios=self.request.user.cedula_de_identidad)
+        mis_farmacias = Farmacias.objects.filter(funcionarios=self.request.user.cedula_de_identidad)
+        #print(mis_farmacias)
+        if len(mis_farmacias) < 1:
+            #print("el usuario no esta en ninguna farmacia")
+            #print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+            diccionario_de_contexto["no_esta_autorizado"] = "No esta autorizado a ver el stock."
+        else:
+            mi_farmacia = mis_farmacias[0]
         
-        #mi_farmacia = mis_farmacias[0]
-        
-        queryset_stock_total_mi_farmacia = Lotes.objects.filter(ubicacion_id=mi_farmacia.id)
+            queryset_stock_total_mi_farmacia = Lotes.objects.filter(ubicacion_id=mi_farmacia.id)
 
-        stock_acumulado = []
+            stock_acumulado = []
 
-        for cada_registro_de_stock_de_mi_farmacia in queryset_stock_total_mi_farmacia:
+            for cada_registro_de_stock_de_mi_farmacia in queryset_stock_total_mi_farmacia:
                 
-            stock_acumulado_del_medicamento = 0
+                stock_acumulado_del_medicamento = 0
 
-            registros_stock_duplicados = queryset_stock_total_mi_farmacia.filter(medicamento=cada_registro_de_stock_de_mi_farmacia.medicamento.id)
+                registros_stock_duplicados = queryset_stock_total_mi_farmacia.filter(medicamento=cada_registro_de_stock_de_mi_farmacia.medicamento.id)
                 
                 
-            #este for suma los valores y los pone en la variablestock_acumulado_de_medicamentos
-            for registro in registros_stock_duplicados:
-                stock_acumulado_del_medicamento += registro.stock
+                #este for suma los valores y los pone en la variablestock_acumulado_de_medicamentos
+                for registro in registros_stock_duplicados:
+                    stock_acumulado_del_medicamento += registro.stock
                 
-            if not stock_acumulado.__contains__({"medicamento":cada_registro_de_stock_de_mi_farmacia.medicamento,"stock":stock_acumulado_del_medicamento}):
-                stock_acumulado.append({"medicamento":cada_registro_de_stock_de_mi_farmacia.medicamento,"stock":stock_acumulado_del_medicamento})
+                if not stock_acumulado.__contains__({"medicamento":cada_registro_de_stock_de_mi_farmacia.medicamento,"stock":stock_acumulado_del_medicamento}):
+                    stock_acumulado.append({"medicamento":cada_registro_de_stock_de_mi_farmacia.medicamento,"stock":stock_acumulado_del_medicamento})
             
                 
 
-            #context['stock_acumulado']= queryset_stock_total.filter(medicamento=96)
-            diccionario_de_contexto['stock_acumulado']= stock_acumulado
+                #context['stock_acumulado']= queryset_stock_total.filter(medicamento=96)
+                diccionario_de_contexto['stock_acumulado']= stock_acumulado
         
         return diccionario_de_contexto
     
@@ -450,7 +453,16 @@ class GestionarReceta(TemplateView):
             stock_disponible =False
             registro_de_stock_del_medicamento= queryset_con_stock.filter(medicamento=medicamento.id)
             if len(registro_de_stock_del_medicamento) > 0:
-                if registro_de_stock_del_medicamento[0].stock > 0:
+                
+                cantidad_acumulada_del_medicamento_en_mi_farmacia = 0
+                for registro in registro_de_stock_del_medicamento:
+                    cantidad_acumulada_del_medicamento_en_mi_farmacia += registro.stock
+
+                #print("VVVVVVVVVVVVVVcantidadacumulada del medicamentoVVVVVVVVVVVVVVVVVVV")
+                #print(cantidad_acumulada_del_medicamento_en_mi_farmacia)
+
+
+                if cantidad_acumulada_del_medicamento_en_mi_farmacia > 0:
                     stock_disponible = True
 
             opciones_con_info_de_stock.append([medicamento, stock_disponible])
@@ -574,9 +586,9 @@ class InfoDelMedicamento(TemplateView):
         medicamento=Medicamentos.objects.get(id=id_medicamento)
         context['medicamento'] = medicamento
 
+        farmacia_general = Farmacias.objects.get(nombre="Farmacia General")
 
-
-        queryset_registros_de_stock = Lotes.objects.filter(medicamento=id_medicamento)
+        queryset_registros_de_stock = Lotes.objects.filter(medicamento=id_medicamento).exclude(ubicacion=farmacia_general)
         farmacias_con_stock = []
         for registro in queryset_registros_de_stock:
             farmacias_con_stock.append( registro.ubicacion )
@@ -600,3 +612,20 @@ class InfoDelMedicamento(TemplateView):
 
         return context
 
+class CrearFarmacia(CreateView):
+        model = Farmacias
+        form_class = Formulario_nueva_farmacia
+
+        template_name = 'crear_farmacia.html'
+        #success_url = reverse_lazy('login')
+    
+        def get_success_url(self):
+                return reverse_lazy('farmacias') + '?registro_exitoso'
+
+class EditarFarmacia(UpdateView):
+    model = Farmacias
+    form_class = Formulario_nueva_farmacia
+    template_name = 'editar_farmacia.html'
+
+    def get_success_url(self):
+        return reverse_lazy('farmacias') + '?registro_exitoso'

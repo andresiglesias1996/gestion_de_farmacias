@@ -9,7 +9,7 @@ from gestionUsuarios.models import Usuarios, Recetas
 
 from gestionStock.models import Farmacias, Lotes, Medicamentos
 
-from gestionUsuarios.forms import FormularioCrearUsuario, Formulario_nueva_receta, FormularioEditarUsuario, FormularioEditarUsuario_2, Formulario_receta_usuario
+from gestionUsuarios.forms import FormularioEditarRol, FormularioCrearUsuario, Formulario_nueva_receta, FormularioEditarUsuario, FormularioEditarUsuario_2, Formulario_receta_usuario
 
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required, permission_required
@@ -108,6 +108,20 @@ class EditarUsuario(UpdateView):
         def get_success_url(self):
             return reverse_lazy('mi_usuario') + '?editado_correctamente'
 
+@method_decorator(login_required, name='dispatch')
+class EditarRol(UpdateView):
+        model = Usuarios
+        form_class = FormularioEditarRol
+
+        template_name = 'editar_usuario.html'
+        #success_url = reverse_lazy('mi_usuario')
+
+        #def get_object(self):
+            #usuario = Usuarios.objects.get(cedula_de_identidad=self.request.user.cedula_de_identidad)
+            #return usuario
+
+        def get_success_url(self):
+            return reverse_lazy('lista_de_usuarios') + '?editado_correctamente'
 
 # =======================================================================
 # Editar Usuario | no se usa, esta desactivada =================
